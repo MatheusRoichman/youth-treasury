@@ -18,10 +18,18 @@ import { Input } from "@/components/ui/input";
 import { updateSettings } from "@/lib/actions/settings";
 
 const schema = z.object({
-  churchName: z.string().min(2, "Nome da igreja deve ter pelo menos 2 caracteres"),
-  departmentName: z.string().min(2, "Nome do departamento deve ter pelo menos 2 caracteres"),
-  treasurerName: z.string().min(2, "Nome do tesoureiro deve ter pelo menos 2 caracteres"),
-  memberContributionAmount: z.number().min(0, "Valor deve ser maior ou igual a zero"),
+  churchName: z
+    .string()
+    .min(2, "Nome da igreja deve ter pelo menos 2 caracteres"),
+  departmentName: z
+    .string()
+    .min(2, "Nome do departamento deve ter pelo menos 2 caracteres"),
+  treasurerName: z
+    .string()
+    .min(2, "Nome do tesoureiro deve ter pelo menos 2 caracteres"),
+  memberContributionAmount: z
+    .number()
+    .min(0, "Valor deve ser maior ou igual a zero"),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -51,8 +59,12 @@ export function SettingsForm({ defaultValues }: Props) {
         {/* Church info */}
         <div className="rounded-xl border bg-white p-6 shadow-sm space-y-5">
           <div>
-            <h3 className="text-sm font-semibold text-gray-900">Dados da Igreja</h3>
-            <p className="text-xs text-gray-400 mt-0.5">Informações exibidas no sistema</p>
+            <h3 className="text-sm font-semibold text-gray-900">
+              Dados da Igreja
+            </h3>
+            <p className="text-xs text-gray-400 mt-0.5">
+              Informações exibidas no sistema
+            </p>
           </div>
 
           <FormField
@@ -88,7 +100,9 @@ export function SettingsForm({ defaultValues }: Props) {
         <div className="rounded-xl border bg-white p-6 shadow-sm space-y-5">
           <div>
             <h3 className="text-sm font-semibold text-gray-900">Tesoureiro</h3>
-            <p className="text-xs text-gray-400 mt-0.5">Responsável pela gestão financeira</p>
+            <p className="text-xs text-gray-400 mt-0.5">
+              Responsável pela gestão financeira
+            </p>
           </div>
 
           <FormField
@@ -109,8 +123,12 @@ export function SettingsForm({ defaultValues }: Props) {
         {/* Contributions */}
         <div className="rounded-xl border bg-white p-6 shadow-sm space-y-5">
           <div>
-            <h3 className="text-sm font-semibold text-gray-900">Contribuições</h3>
-            <p className="text-xs text-gray-400 mt-0.5">Padrões aplicados ao abrir novos meses</p>
+            <h3 className="text-sm font-semibold text-gray-900">
+              Contribuições
+            </h3>
+            <p className="text-xs text-gray-400 mt-0.5">
+              Padrões aplicados ao abrir novos meses
+            </p>
           </div>
 
           <FormField
@@ -140,7 +158,9 @@ export function SettingsForm({ defaultValues }: Props) {
 
         <div className="flex justify-end">
           <Button type="submit" disabled={form.formState.isSubmitting}>
-            {form.formState.isSubmitting ? "Salvando..." : "Salvar Configurações"}
+            {form.formState.isSubmitting
+              ? "Salvando..."
+              : "Salvar Configurações"}
           </Button>
         </div>
       </form>

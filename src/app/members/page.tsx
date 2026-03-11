@@ -25,9 +25,7 @@ export default async function MembersPage() {
               </p>
             </div>
           </div>
-          <MemberDialog
-            trigger={<Button>Novo Membro</Button>}
-          />
+          <MemberDialog trigger={<Button>Novo Membro</Button>} />
         </div>
 
         <MembersTable initialMembers={members} />

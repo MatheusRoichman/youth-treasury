@@ -1,7 +1,8 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
+
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -74,7 +75,9 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
       : await createMember(values);
 
     if (result.success) {
-      toast.success(member ? "Membro atualizado!" : "Membro criado com sucesso!");
+      toast.success(
+        member ? "Membro atualizado!" : "Membro criado com sucesso!",
+      );
       setOpen(false);
       onSuccess?.();
     } else {

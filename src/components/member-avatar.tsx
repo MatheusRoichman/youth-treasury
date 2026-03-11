@@ -12,7 +12,11 @@ const sizes = {
   lg: "h-11 w-11 text-base",
 };
 
-export function MemberAvatar({ name, initials, size = "md" }: MemberAvatarProps) {
+export function MemberAvatar({
+  name,
+  initials,
+  size = "md",
+}: MemberAvatarProps) {
   const color = hashColor(name);
   return (
     <span

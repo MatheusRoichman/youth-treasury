@@ -67,14 +67,19 @@ export default async function DashboardPage() {
           {/* Entradas */}
           <div className="rounded-xl border bg-white p-5 shadow-sm flex items-start justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-500">Entradas do Mês</p>
+              <p className="text-sm font-medium text-gray-500">
+                Entradas do Mês
+              </p>
               <p className="mt-1 text-2xl font-bold text-gray-900">
                 {formatCurrency(summary.totalIn)}
               </p>
               {inChange !== null && (
-                <p className={`mt-1 flex items-center gap-1 text-xs font-semibold ${inChange >= 0 ? "text-green-500" : "text-red-500"}`}>
+                <p
+                  className={`mt-1 flex items-center gap-1 text-xs font-semibold ${inChange >= 0 ? "text-green-500" : "text-red-500"}`}
+                >
                   <TrendingUp className="h-3 w-3" />
-                  {inChange >= 0 ? "+" : ""}{inChange.toFixed(0)}% vs mês anterior
+                  {inChange >= 0 ? "+" : ""}
+                  {inChange.toFixed(0)}% vs mês anterior
                 </p>
               )}
             </div>
@@ -91,9 +96,12 @@ export default async function DashboardPage() {
                 {formatCurrency(summary.totalOut)}
               </p>
               {outChange !== null && (
-                <p className={`mt-1 flex items-center gap-1 text-xs font-semibold ${outChange <= 0 ? "text-green-500" : "text-red-500"}`}>
+                <p
+                  className={`mt-1 flex items-center gap-1 text-xs font-semibold ${outChange <= 0 ? "text-green-500" : "text-red-500"}`}
+                >
                   <TrendingDown className="h-3 w-3" />
-                  {outChange >= 0 ? "+" : ""}{outChange.toFixed(0)}% vs mês anterior
+                  {outChange >= 0 ? "+" : ""}
+                  {outChange.toFixed(0)}% vs mês anterior
                 </p>
               )}
             </div>

@@ -96,9 +96,7 @@ export function RecentActivities({ initialData }: Props) {
               </td>
               <td className="px-4 py-3">
                 <Badge
-                  variant={
-                    tx.type === "CONTRIBUTION" ? "success" : "danger"
-                  }
+                  variant={tx.type === "CONTRIBUTION" ? "success" : "danger"}
                 >
                   {tx.type === "CONTRIBUTION" ? "Contribuição" : "Despesa"}
                 </Badge>
@@ -108,9 +106,7 @@ export function RecentActivities({ initialData }: Props) {
               </td>
               <td
                 className={`px-6 py-3 text-right font-semibold ${
-                  tx.type === "CONTRIBUTION"
-                    ? "text-green-600"
-                    : "text-red-500"
+                  tx.type === "CONTRIBUTION" ? "text-green-600" : "text-red-500"
                 }`}
               >
                 {tx.type === "CONTRIBUTION" ? "+" : "-"}

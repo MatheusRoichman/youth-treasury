@@ -19,7 +19,10 @@ function deriveInitials(name: string): string {
 export async function createMember(formData: unknown) {
   const parsed = memberSchema.safeParse(formData);
   if (!parsed.success) {
-    return { success: false, error: parsed.error.issues[0]?.message ?? "Dados inválidos" };
+    return {
+      success: false,
+      error: parsed.error.issues[0]?.message ?? "Dados inválidos",
+    };
   }
 
   try {
@@ -42,7 +45,10 @@ export async function createMember(formData: unknown) {
 export async function updateMember(id: string, formData: unknown) {
   const parsed = memberSchema.safeParse(formData);
   if (!parsed.success) {
-    return { success: false, error: parsed.error.issues[0]?.message ?? "Dados inválidos" };
+    return {
+      success: false,
+      error: parsed.error.issues[0]?.message ?? "Dados inválidos",
+    };
   }
 
   try {

@@ -12,7 +12,9 @@ export default async function SettingsPage() {
           <Settings className="h-6 w-6 text-primary" />
           <div>
             <h2 className="text-xl font-bold text-gray-900">Configurações</h2>
-            <p className="text-sm text-gray-500">Gerencie as informações do sistema</p>
+            <p className="text-sm text-gray-500">
+              Gerencie as informações do sistema
+            </p>
           </div>
         </div>
 

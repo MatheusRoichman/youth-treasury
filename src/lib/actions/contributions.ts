@@ -2,8 +2,8 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { prisma } from "@/lib/prisma";
 import { getSettings } from "@/lib/db/settings";
+import { prisma } from "@/lib/prisma";
 
 export async function markContributionAsPaid(contributionId: string) {
   try {
@@ -29,7 +29,9 @@ export async function markContributionAsPaid(contributionId: string) {
           description: "Mensalidade",
           memberId: contribution.memberId,
           cycleId: contribution.cycleId,
-          amount: contribution.amount ?? (await getSettings()).memberContributionAmount,
+          amount:
+            contribution.amount ??
+            (await getSettings()).memberContributionAmount,
           date: new Date(),
         },
       });
@@ -63,14 +65,27 @@ const openMonthSchema = z.object({
 });
 
 const monthNames = [
-  "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-  "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro",
+  "Janeiro",
+  "Fevereiro",
+  "Março",
+  "Abril",
+  "Maio",
+  "Junho",
+  "Julho",
+  "Agosto",
+  "Setembro",
+  "Outubro",
+  "Novembro",
+  "Dezembro",
 ];
 
 export async function openNewMonth(formData: unknown) {
   const parsed = openMonthSchema.safeParse(formData);
   if (!parsed.success) {
-    return { success: false, error: parsed.error.issues[0]?.message ?? "Dados inválidos" };
+    return {
+      success: false,
+      error: parsed.error.issues[0]?.message ?? "Dados inválidos",
+    };
   }
 
   const { month, year, goalAmount } = parsed.data;

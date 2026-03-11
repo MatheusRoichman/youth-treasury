@@ -1,18 +1,19 @@
 "use client";
 
-import * as LabelPrimitive from "@radix-ui/react-label";
-import { Slot } from "@radix-ui/react-slot";
 import * as React from "react";
+
+import type * as LabelPrimitive from "@radix-ui/react-label";
+import { Slot } from "@radix-ui/react-slot";
 import {
   Controller,
-  FormProvider,
-  useFormContext,
   type ControllerProps,
   type FieldPath,
   type FieldValues,
+  FormProvider,
+  useFormContext,
 } from "react-hook-form";
-import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
 
 const Form = FormProvider;
 
@@ -41,7 +42,8 @@ const useFormField = () => {
   const itemContext = React.useContext(FormItemContext);
   const { getFieldState, formState } = useFormContext();
   const fieldState = getFieldState(fieldContext.name, formState);
-  if (!fieldContext) throw new Error("useFormField must be used within <FormField>");
+  if (!fieldContext)
+    throw new Error("useFormField must be used within <FormField>");
   return {
     id: itemContext.id,
     name: fieldContext.name,
@@ -57,16 +59,17 @@ const FormItemContext = React.createContext<FormItemContextValue>(
   {} as FormItemContextValue,
 );
 
-const FormItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => {
-    const id = React.useId();
-    return (
-      <FormItemContext.Provider value={{ id }}>
-        <div ref={ref} className={cn("space-y-2", className)} {...props} />
-      </FormItemContext.Provider>
-    );
-  },
-);
+const FormItem = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => {
+  const id = React.useId();
+  return (
+    <FormItemContext.Provider value={{ id }}>
+      <div ref={ref} className={cn("space-y-2", className)} {...props} />
+    </FormItemContext.Provider>
+  );
+});
 FormItem.displayName = "FormItem";
 
 const FormLabel = React.forwardRef<
@@ -89,7 +92,8 @@ const FormControl = React.forwardRef<
   React.ElementRef<typeof Slot>,
   React.ComponentPropsWithoutRef<typeof Slot>
 >(({ ...props }, ref) => {
-  const { error, formItemId, formDescriptionId, formMessageId } = useFormField();
+  const { error, formItemId, formDescriptionId, formMessageId } =
+    useFormField();
   return (
     <Slot
       ref={ref}

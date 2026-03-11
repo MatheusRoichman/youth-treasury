@@ -25,6 +25,8 @@ export interface CycleDTO {
 }
 
 export async function fetchActiveCycle(): Promise<CycleDTO | null> {
-  const { data } = await http.get<CycleDTO | null>("/contributions/active-cycle");
+  const { data } = await http.get<CycleDTO | null>(
+    "/contributions/active-cycle",
+  );
   return data;
 }

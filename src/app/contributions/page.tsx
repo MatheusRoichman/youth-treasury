@@ -1,6 +1,6 @@
 import { CalendarDays } from "lucide-react";
-import { OpenMonthDialog } from "@/components/contributions/open-month-dialog";
 import { ContributionsTable } from "@/components/contributions/contributions-table";
+import { OpenMonthDialog } from "@/components/contributions/open-month-dialog";
 import { Badge } from "@/components/ui/badge";
 import { getActiveCycleWithContributions } from "@/lib/db/contributions";
 import { getSettings } from "@/lib/db/settings";

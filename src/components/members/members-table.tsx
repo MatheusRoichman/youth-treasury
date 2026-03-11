@@ -1,8 +1,9 @@
 "use client";
 
+import { useMemo, useState } from "react";
+
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { MoreHorizontal } from "lucide-react";
-import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { MemberAvatar } from "@/components/member-avatar";
 import { MemberDialog } from "@/components/members/member-dialog";
@@ -122,9 +123,7 @@ export function MembersTable({ initialMembers }: Props) {
                     <MemberDialog
                       member={member}
                       trigger={
-                        <DropdownMenuItem
-                          onSelect={(e) => e.preventDefault()}
-                        >
+                        <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                           Editar
                         </DropdownMenuItem>
                       }

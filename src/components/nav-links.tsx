@@ -1,8 +1,8 @@
 "use client";
 
+import { BarChart3, CreditCard, Users } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BarChart3, CreditCard, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -17,7 +17,8 @@ export function NavLinks() {
   return (
     <nav className="flex-1 space-y-1 px-3">
       {navLinks.map(({ href, label, icon: Icon }) => {
-        const active = href === "/" ? pathname === "/" : pathname.startsWith(href);
+        const active =
+          href === "/" ? pathname === "/" : pathname.startsWith(href);
         return (
           <Link
             key={href}

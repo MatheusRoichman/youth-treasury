@@ -5,16 +5,27 @@ import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 
 const settingsSchema = z.object({
-  churchName: z.string().min(2, "Nome da igreja deve ter pelo menos 2 caracteres"),
-  departmentName: z.string().min(2, "Nome do departamento deve ter pelo menos 2 caracteres"),
-  treasurerName: z.string().min(2, "Nome do tesoureiro deve ter pelo menos 2 caracteres"),
-  memberContributionAmount: z.number().min(0, "Valor deve ser maior ou igual a zero"),
+  churchName: z
+    .string()
+    .min(2, "Nome da igreja deve ter pelo menos 2 caracteres"),
+  departmentName: z
+    .string()
+    .min(2, "Nome do departamento deve ter pelo menos 2 caracteres"),
+  treasurerName: z
+    .string()
+    .min(2, "Nome do tesoureiro deve ter pelo menos 2 caracteres"),
+  memberContributionAmount: z
+    .number()
+    .min(0, "Valor deve ser maior ou igual a zero"),
 });
 
 export async function updateSettings(formData: unknown) {
   const parsed = settingsSchema.safeParse(formData);
   if (!parsed.success) {
-    return { success: false, error: parsed.error.issues[0]?.message ?? "Dados inválidos" };
+    return {
+      success: false,
+      error: parsed.error.issues[0]?.message ?? "Dados inválidos",
+    };
   }
 
   try {

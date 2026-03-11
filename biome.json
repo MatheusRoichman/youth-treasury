@@ -30,7 +30,24 @@
   "assist": {
     "actions": {
       "source": {
-        "organizeImports": "on"
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "groups": [
+              ["react"],
+              ":BLANK_LINE:",
+              [":EXTERNAL:"],
+              ":BLANK_LINE:",
+              ["@/lib/"],
+              ":BLANK_LINE:",
+              ["@/components/ui/"],
+              ":BLANK_LINE:",
+              ["@/components/"],
+              ":BLANK_LINE:",
+              [":RELATIVE:"]
+            ]
+          }
+        }
       }
     }
   }

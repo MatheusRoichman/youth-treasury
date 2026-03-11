@@ -22,7 +22,9 @@ export async function Sidebar() {
           <Building2 className="h-5 w-5 text-white" />
         </div>
         <div>
-          <p className="text-sm font-bold leading-tight text-gray-900">Tesouraria Jovem</p>
+          <p className="text-sm font-bold leading-tight text-gray-900">
+            Tesouraria Jovem
+          </p>
           <p className="text-xs text-gray-400">Gestão Financeira</p>
         </div>
       </div>
@@ -39,7 +41,9 @@ export async function Sidebar() {
             <p className="truncate text-sm font-semibold leading-tight text-gray-900">
               {settings.churchName}
             </p>
-            <p className="truncate text-xs text-gray-400">{settings.departmentName}</p>
+            <p className="truncate text-xs text-gray-400">
+              {settings.departmentName}
+            </p>
           </div>
         </div>
       </div>

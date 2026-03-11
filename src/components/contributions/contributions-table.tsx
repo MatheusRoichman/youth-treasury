@@ -1,8 +1,9 @@
 "use client";
 
+import { useMemo, useState } from "react";
+
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Info, MoreVertical, Pencil, Search } from "lucide-react";
-import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { MemberAvatar } from "@/components/member-avatar";
 import { Badge } from "@/components/ui/badge";
@@ -265,9 +266,7 @@ export function ContributionsTable({ initialCycle, defaultGoal }: Props) {
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
-                        <DropdownMenuItem
-                          onClick={() => markPaid.mutate(c.id)}
-                        >
+                        <DropdownMenuItem onClick={() => markPaid.mutate(c.id)}>
                           Editar
                         </DropdownMenuItem>
                       </DropdownMenuContent>
@@ -282,11 +281,8 @@ export function ContributionsTable({ initialCycle, defaultGoal }: Props) {
         <div className="flex items-center justify-between border-t px-6 py-3 text-sm text-gray-500">
           <span>
             Exibindo{" "}
-            {Math.min(
-              filtered.length,
-              page * PAGE_SIZE + paginated.length,
-            )}{" "}
-            de {filtered.length} membros ativos
+            {Math.min(filtered.length, page * PAGE_SIZE + paginated.length)} de{" "}
+            {filtered.length} membros ativos
           </span>
           <div className="flex gap-1.5">
             <Button

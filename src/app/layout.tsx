@@ -22,9 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body
-        className={`${geistSans.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} antialiased`}>
         <Providers>
           <div className="flex h-screen overflow-hidden bg-gray-50">
             <Sidebar />

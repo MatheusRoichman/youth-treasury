@@ -47,7 +47,10 @@ export async function getActiveCycle() {
   return prisma.monthlyCycle.findFirst({ where: { isActive: true } });
 }
 
-export async function getPreviousCycle(currentMonth: number, currentYear: number) {
+export async function getPreviousCycle(
+  currentMonth: number,
+  currentYear: number,
+) {
   const prevMonth = currentMonth === 1 ? 12 : currentMonth - 1;
   const prevYear = currentMonth === 1 ? currentYear - 1 : currentYear;
   return prisma.monthlyCycle.findUnique({
