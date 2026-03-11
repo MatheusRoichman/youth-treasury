@@ -1,13 +1,13 @@
-"use server";
+'use server';
 
-import { revalidatePath } from "next/cache";
-import { z } from "zod";
-import { prisma } from "@/lib/prisma";
+import { revalidatePath } from 'next/cache';
+import { z } from 'zod';
+import { prisma } from '@/lib/prisma';
 
 const memberSchema = z.object({
-  name: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
+  name: z.string().min(2, 'Nome deve ter pelo menos 2 caracteres'),
   phone: z.string().optional(),
-  email: z.string().email("E-mail inválido").optional().or(z.literal("")),
+  email: z.string().email('E-mail inválido').optional().or(z.literal('')),
 });
 
 function deriveInitials(name: string): string {
@@ -21,7 +21,7 @@ export async function createMember(formData: unknown) {
   if (!parsed.success) {
     return {
       success: false,
-      error: parsed.error.issues[0]?.message ?? "Dados inválidos",
+      error: parsed.error.issues[0]?.message ?? 'Dados inválidos',
     };
   }
 
@@ -32,13 +32,13 @@ export async function createMember(formData: unknown) {
         initials: deriveInitials(parsed.data.name),
         phone: parsed.data.phone || null,
         email: parsed.data.email || null,
-        status: "ACTIVE",
+        status: 'ACTIVE',
       },
     });
-    revalidatePath("/members");
+    revalidatePath('/members');
     return { success: true, data: member };
   } catch {
-    return { success: false, error: "Erro ao criar membro" };
+    return { success: false, error: 'Erro ao criar membro' };
   }
 }
 
@@ -47,7 +47,7 @@ export async function updateMember(id: string, formData: unknown) {
   if (!parsed.success) {
     return {
       success: false,
-      error: parsed.error.issues[0]?.message ?? "Dados inválidos",
+      error: parsed.error.issues[0]?.message ?? 'Dados inválidos',
     };
   }
 
@@ -61,10 +61,10 @@ export async function updateMember(id: string, formData: unknown) {
         email: parsed.data.email || null,
       },
     });
-    revalidatePath("/members");
+    revalidatePath('/members');
     return { success: true, data: member };
   } catch {
-    return { success: false, error: "Erro ao atualizar membro" };
+    return { success: false, error: 'Erro ao atualizar membro' };
   }
 }
 
@@ -72,11 +72,11 @@ export async function deactivateMember(id: string) {
   try {
     await prisma.member.update({
       where: { id },
-      data: { status: "INACTIVE" },
+      data: { status: 'INACTIVE' },
     });
-    revalidatePath("/members");
+    revalidatePath('/members');
     return { success: true };
   } catch {
-    return { success: false, error: "Erro ao desativar membro" };
+    return { success: false, error: 'Erro ao desativar membro' };
   }
 }

@@ -1,16 +1,16 @@
-"use server";
+'use server';
 
-import { revalidatePath } from "next/cache";
-import { z } from "zod";
-import { getSettings } from "@/lib/db/settings";
-import { prisma } from "@/lib/prisma";
+import { revalidatePath } from 'next/cache';
+import { z } from 'zod';
+import { getSettings } from '@/lib/db/settings';
+import { prisma } from '@/lib/prisma';
 
 export async function markContributionAsPaid(contributionId: string) {
   try {
     await prisma.contribution.update({
       where: { id: contributionId },
       data: {
-        status: "PAID",
+        status: 'PAID',
         paidAt: new Date(),
         amount: (await getSettings()).memberContributionAmount,
       },
@@ -24,9 +24,9 @@ export async function markContributionAsPaid(contributionId: string) {
     if (contribution) {
       await prisma.transaction.create({
         data: {
-          type: "CONTRIBUTION",
-          category: "MONTHLY_FEE",
-          description: "Mensalidade",
+          type: 'CONTRIBUTION',
+          category: 'MONTHLY_FEE',
+          description: 'Mensalidade',
           memberId: contribution.memberId,
           cycleId: contribution.cycleId,
           amount:
@@ -37,11 +37,11 @@ export async function markContributionAsPaid(contributionId: string) {
       });
     }
 
-    revalidatePath("/contributions");
-    revalidatePath("/");
+    revalidatePath('/contributions');
+    revalidatePath('/');
     return { success: true };
   } catch {
-    return { success: false, error: "Erro ao registrar pagamento" };
+    return { success: false, error: 'Erro ao registrar pagamento' };
   }
 }
 
@@ -49,34 +49,34 @@ export async function exemptContribution(contributionId: string) {
   try {
     await prisma.contribution.update({
       where: { id: contributionId },
-      data: { status: "EXEMPT", paidAt: null, amount: null },
+      data: { status: 'EXEMPT', paidAt: null, amount: null },
     });
-    revalidatePath("/contributions");
+    revalidatePath('/contributions');
     return { success: true };
   } catch {
-    return { success: false, error: "Erro ao isentar contribuição" };
+    return { success: false, error: 'Erro ao isentar contribuição' };
   }
 }
 
 const openMonthSchema = z.object({
   month: z.coerce.number().min(1).max(12),
   year: z.coerce.number().min(2020).max(2100),
-  goalAmount: z.coerce.number().positive("Meta deve ser positiva"),
+  goalAmount: z.coerce.number().positive('Meta deve ser positiva'),
 });
 
 const monthNames = [
-  "Janeiro",
-  "Fevereiro",
-  "Março",
-  "Abril",
-  "Maio",
-  "Junho",
-  "Julho",
-  "Agosto",
-  "Setembro",
-  "Outubro",
-  "Novembro",
-  "Dezembro",
+  'Janeiro',
+  'Fevereiro',
+  'Março',
+  'Abril',
+  'Maio',
+  'Junho',
+  'Julho',
+  'Agosto',
+  'Setembro',
+  'Outubro',
+  'Novembro',
+  'Dezembro',
 ];
 
 export async function openNewMonth(formData: unknown) {
@@ -84,7 +84,7 @@ export async function openNewMonth(formData: unknown) {
   if (!parsed.success) {
     return {
       success: false,
-      error: parsed.error.issues[0]?.message ?? "Dados inválidos",
+      error: parsed.error.issues[0]?.message ?? 'Dados inválidos',
     };
   }
 
@@ -110,25 +110,25 @@ export async function openNewMonth(formData: unknown) {
 
     // Create PENDING contributions for all active members
     const activeMembers = await prisma.member.findMany({
-      where: { status: "ACTIVE" },
+      where: { status: 'ACTIVE' },
     });
 
     await prisma.contribution.createMany({
       data: activeMembers.map((m) => ({
         memberId: m.id,
         cycleId: cycle.id,
-        status: "PENDING" as const,
+        status: 'PENDING' as const,
       })),
     });
 
-    revalidatePath("/contributions");
-    revalidatePath("/");
+    revalidatePath('/contributions');
+    revalidatePath('/');
     return { success: true, data: cycle };
   } catch (e: unknown) {
-    const msg = e instanceof Error ? e.message : "";
-    if (msg.includes("Unique constraint")) {
-      return { success: false, error: "Já existe um ciclo para este mês/ano" };
+    const msg = e instanceof Error ? e.message : '';
+    if (msg.includes('Unique constraint')) {
+      return { success: false, error: 'Já existe um ciclo para este mês/ano' };
     }
-    return { success: false, error: "Erro ao abrir novo mês" };
+    return { success: false, error: 'Erro ao abrir novo mês' };
   }
 }

@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { useMemo, useState } from "react";
+import { useMemo, useState } from 'react';
 
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Info, MoreVertical, Pencil, Search } from "lucide-react";
-import { toast } from "sonner";
-import { MemberAvatar } from "@/components/member-avatar";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { Info, MoreVertical, Pencil, Search } from 'lucide-react';
+import { toast } from 'sonner';
+import { MemberAvatar } from '@/components/member-avatar';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { Progress } from "@/components/ui/progress";
-import { Skeleton } from "@/components/ui/skeleton";
+} from '@/components/ui/dropdown-menu';
+import { Input } from '@/components/ui/input';
+import { Progress } from '@/components/ui/progress';
+import { Skeleton } from '@/components/ui/skeleton';
 import {
   Table,
   TableBody,
@@ -24,17 +24,17 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from '@/components/ui/table';
 import {
   exemptContribution,
   markContributionAsPaid,
-} from "@/lib/actions/contributions";
-import { contributionKeys } from "@/lib/queries/contributions";
+} from '@/lib/actions/contributions';
+import { contributionKeys } from '@/lib/queries/contributions';
 import {
   type CycleDTO,
   fetchActiveCycle,
-} from "@/lib/services/contributions/fetch-active-cycle";
-import { formatCurrency, formatDate } from "@/lib/utils";
+} from '@/lib/services/contributions/fetch-active-cycle';
+import { formatCurrency, formatDate } from '@/lib/utils';
 
 interface Props {
   initialCycle: CycleDTO;
@@ -42,22 +42,22 @@ interface Props {
 }
 
 const STATUS_LABELS: Record<string, string> = {
-  PAID: "Pago",
-  PENDING: "Pendente",
-  EXEMPT: "Isento",
+  PAID: 'Pago',
+  PENDING: 'Pendente',
+  EXEMPT: 'Isento',
 };
 
-const STATUS_VARIANTS: Record<string, "success" | "warning" | "neutral"> = {
-  PAID: "success",
-  PENDING: "warning",
-  EXEMPT: "neutral",
+const STATUS_VARIANTS: Record<string, 'success' | 'warning' | 'neutral'> = {
+  PAID: 'success',
+  PENDING: 'warning',
+  EXEMPT: 'neutral',
 };
 
 const PAGE_SIZE = 8;
 
 export function ContributionsTable({ initialCycle, defaultGoal }: Props) {
   const queryClient = useQueryClient();
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [page, setPage] = useState(0);
 
   const { data: cycleData, isLoading } = useQuery<CycleDTO | null>({
@@ -70,19 +70,19 @@ export function ContributionsTable({ initialCycle, defaultGoal }: Props) {
   const markPaid = useMutation({
     mutationFn: markContributionAsPaid,
     onSuccess: () => {
-      toast.success("Contribuição marcada como paga!");
+      toast.success('Contribuição marcada como paga!');
       queryClient.invalidateQueries({ queryKey: contributionKeys.all });
     },
-    onError: () => toast.error("Erro ao registrar pagamento"),
+    onError: () => toast.error('Erro ao registrar pagamento'),
   });
 
   const exempt = useMutation({
     mutationFn: exemptContribution,
     onSuccess: () => {
-      toast.success("Membro isento com sucesso!");
+      toast.success('Membro isento com sucesso!');
       queryClient.invalidateQueries({ queryKey: contributionKeys.all });
     },
-    onError: () => toast.error("Erro ao isentar membro"),
+    onError: () => toast.error('Erro ao isentar membro'),
   });
 
   const filtered = useMemo(
@@ -97,7 +97,7 @@ export function ContributionsTable({ initialCycle, defaultGoal }: Props) {
   const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
 
   const totalPaid = cycle.contributions
-    .filter((c) => c.status === "PAID")
+    .filter((c) => c.status === 'PAID')
     .reduce((sum, c) => sum + Number(c.amount ?? 0), 0);
 
   const goalAmount = Number(cycle.goalAmount ?? defaultGoal);
@@ -228,7 +228,7 @@ export function ContributionsTable({ initialCycle, defaultGoal }: Props) {
                   )}
                 </TableCell>
                 <TableCell className="text-right">
-                  {c.status === "PENDING" ? (
+                  {c.status === 'PENDING' ? (
                     <div className="flex items-center justify-end gap-2">
                       <Button
                         size="sm"
@@ -246,7 +246,7 @@ export function ContributionsTable({ initialCycle, defaultGoal }: Props) {
                         Isentar
                       </Button>
                     </div>
-                  ) : c.status === "EXEMPT" ? (
+                  ) : c.status === 'EXEMPT' ? (
                     <Button
                       variant="ghost"
                       size="icon"
@@ -280,8 +280,8 @@ export function ContributionsTable({ initialCycle, defaultGoal }: Props) {
 
         <div className="flex items-center justify-between border-t px-6 py-3 text-sm text-gray-500">
           <span>
-            Exibindo{" "}
-            {Math.min(filtered.length, page * PAGE_SIZE + paginated.length)} de{" "}
+            Exibindo{' '}
+            {Math.min(filtered.length, page * PAGE_SIZE + paginated.length)} de{' '}
             {filtered.length} membros ativos
           </span>
           <div className="flex gap-1.5">

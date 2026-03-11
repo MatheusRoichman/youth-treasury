@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
-import { getMembers } from "@/lib/db/members";
+import { NextResponse } from 'next/server';
+import { getMembers } from '@/lib/db/members';
 
 export async function GET() {
   const members = await getMembers();

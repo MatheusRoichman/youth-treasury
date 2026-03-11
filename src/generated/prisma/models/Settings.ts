@@ -7,9 +7,9 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/client";
-import type * as $Enums from "../enums";
-import type * as Prisma from "../internal/prismaNamespace";
+import type * as runtime from '@prisma/client/runtime/client';
+import type * as $Enums from '../enums';
+import type * as Prisma from '../internal/prismaNamespace';
 
 /**
  * Model Settings
@@ -165,7 +165,7 @@ export type SettingsAggregateArgs<
 };
 
 export type GetSettingsAggregateType<T extends SettingsAggregateArgs> = {
-  [P in keyof T & keyof AggregateSettings]: P extends "_count" | "count"
+  [P in keyof T & keyof AggregateSettings]: P extends '_count' | 'count'
     ? T[P] extends true
       ? number
       : Prisma.GetScalarType<T[P], AggregateSettings[P]>
@@ -208,8 +208,8 @@ export type SettingsGroupByOutputType = {
 type GetSettingsGroupByPayload<T extends SettingsGroupByArgs> =
   Prisma.PrismaPromise<
     Array<
-      Prisma.PickEnumerable<SettingsGroupByOutputType, T["by"]> & {
-        [P in keyof T & keyof SettingsGroupByOutputType]: P extends "_count"
+      Prisma.PickEnumerable<SettingsGroupByOutputType, T['by']> & {
+        [P in keyof T & keyof SettingsGroupByOutputType]: P extends '_count'
           ? T[P] extends boolean
             ? number
             : Prisma.GetScalarType<T[P], SettingsGroupByOutputType[P]>
@@ -222,17 +222,17 @@ export type SettingsWhereInput = {
   AND?: Prisma.SettingsWhereInput | Prisma.SettingsWhereInput[];
   OR?: Prisma.SettingsWhereInput[];
   NOT?: Prisma.SettingsWhereInput | Prisma.SettingsWhereInput[];
-  id?: Prisma.StringFilter<"Settings"> | string;
-  churchName?: Prisma.StringFilter<"Settings"> | string;
-  departmentName?: Prisma.StringFilter<"Settings"> | string;
-  treasurerName?: Prisma.StringFilter<"Settings"> | string;
+  id?: Prisma.StringFilter<'Settings'> | string;
+  churchName?: Prisma.StringFilter<'Settings'> | string;
+  departmentName?: Prisma.StringFilter<'Settings'> | string;
+  treasurerName?: Prisma.StringFilter<'Settings'> | string;
   memberContributionAmount?:
-    | Prisma.DecimalFilter<"Settings">
+    | Prisma.DecimalFilter<'Settings'>
     | runtime.Decimal
     | runtime.DecimalJsLike
     | number
     | string;
-  updatedAt?: Prisma.DateTimeFilter<"Settings"> | Date | string;
+  updatedAt?: Prisma.DateTimeFilter<'Settings'> | Date | string;
 };
 
 export type SettingsOrderByWithRelationInput = {
@@ -250,18 +250,18 @@ export type SettingsWhereUniqueInput = Prisma.AtLeast<
     AND?: Prisma.SettingsWhereInput | Prisma.SettingsWhereInput[];
     OR?: Prisma.SettingsWhereInput[];
     NOT?: Prisma.SettingsWhereInput | Prisma.SettingsWhereInput[];
-    churchName?: Prisma.StringFilter<"Settings"> | string;
-    departmentName?: Prisma.StringFilter<"Settings"> | string;
-    treasurerName?: Prisma.StringFilter<"Settings"> | string;
+    churchName?: Prisma.StringFilter<'Settings'> | string;
+    departmentName?: Prisma.StringFilter<'Settings'> | string;
+    treasurerName?: Prisma.StringFilter<'Settings'> | string;
     memberContributionAmount?:
-      | Prisma.DecimalFilter<"Settings">
+      | Prisma.DecimalFilter<'Settings'>
       | runtime.Decimal
       | runtime.DecimalJsLike
       | number
       | string;
-    updatedAt?: Prisma.DateTimeFilter<"Settings"> | Date | string;
+    updatedAt?: Prisma.DateTimeFilter<'Settings'> | Date | string;
   },
-  "id"
+  'id'
 >;
 
 export type SettingsOrderByWithAggregationInput = {
@@ -286,17 +286,17 @@ export type SettingsScalarWhereWithAggregatesInput = {
   NOT?:
     | Prisma.SettingsScalarWhereWithAggregatesInput
     | Prisma.SettingsScalarWhereWithAggregatesInput[];
-  id?: Prisma.StringWithAggregatesFilter<"Settings"> | string;
-  churchName?: Prisma.StringWithAggregatesFilter<"Settings"> | string;
-  departmentName?: Prisma.StringWithAggregatesFilter<"Settings"> | string;
-  treasurerName?: Prisma.StringWithAggregatesFilter<"Settings"> | string;
+  id?: Prisma.StringWithAggregatesFilter<'Settings'> | string;
+  churchName?: Prisma.StringWithAggregatesFilter<'Settings'> | string;
+  departmentName?: Prisma.StringWithAggregatesFilter<'Settings'> | string;
+  treasurerName?: Prisma.StringWithAggregatesFilter<'Settings'> | string;
   memberContributionAmount?:
-    | Prisma.DecimalWithAggregatesFilter<"Settings">
+    | Prisma.DecimalWithAggregatesFilter<'Settings'>
     | runtime.Decimal
     | runtime.DecimalJsLike
     | number
     | string;
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Settings"> | Date | string;
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<'Settings'> | Date | string;
 };
 
 export type SettingsCreateInput = {
@@ -441,7 +441,7 @@ export type SettingsSelect<
     memberContributionAmount?: boolean;
     updatedAt?: boolean;
   },
-  ExtArgs["result"]["settings"]
+  ExtArgs['result']['settings']
 >;
 
 export type SettingsSelectCreateManyAndReturn<
@@ -456,7 +456,7 @@ export type SettingsSelectCreateManyAndReturn<
     memberContributionAmount?: boolean;
     updatedAt?: boolean;
   },
-  ExtArgs["result"]["settings"]
+  ExtArgs['result']['settings']
 >;
 
 export type SettingsSelectUpdateManyAndReturn<
@@ -471,7 +471,7 @@ export type SettingsSelectUpdateManyAndReturn<
     memberContributionAmount?: boolean;
     updatedAt?: boolean;
   },
-  ExtArgs["result"]["settings"]
+  ExtArgs['result']['settings']
 >;
 
 export type SettingsSelectScalar = {
@@ -487,20 +487,20 @@ export type SettingsOmit<
   ExtArgs extends
     runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetOmit<
-  | "id"
-  | "churchName"
-  | "departmentName"
-  | "treasurerName"
-  | "memberContributionAmount"
-  | "updatedAt",
-  ExtArgs["result"]["settings"]
+  | 'id'
+  | 'churchName'
+  | 'departmentName'
+  | 'treasurerName'
+  | 'memberContributionAmount'
+  | 'updatedAt',
+  ExtArgs['result']['settings']
 >;
 
 export type $SettingsPayload<
   ExtArgs extends
     runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
-  name: "Settings";
+  name: 'Settings';
   objects: {};
   scalars: runtime.Types.Extensions.GetPayloadResult<
     {
@@ -511,7 +511,7 @@ export type $SettingsPayload<
       memberContributionAmount: runtime.Decimal;
       updatedAt: Date;
     },
-    ExtArgs["result"]["settings"]
+    ExtArgs['result']['settings']
   >;
   composites: {};
 };
@@ -523,7 +523,7 @@ export type SettingsGetPayload<
 export type SettingsCountArgs<
   ExtArgs extends
     runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
-> = Omit<SettingsFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+> = Omit<SettingsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
   select?: SettingsCountAggregateInputType | true;
 };
 
@@ -533,8 +533,8 @@ export interface SettingsDelegate<
   GlobalOmitOptions = {},
 > {
   [K: symbol]: {
-    types: Prisma.TypeMap<ExtArgs>["model"]["Settings"];
-    meta: { name: "Settings" };
+    types: Prisma.TypeMap<ExtArgs>['model']['Settings'];
+    meta: { name: 'Settings' };
   };
   /**
    * Find zero or one Settings that matches the filter.
@@ -553,7 +553,7 @@ export interface SettingsDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$SettingsPayload<ExtArgs>,
       T,
-      "findUnique",
+      'findUnique',
       GlobalOmitOptions
     > | null,
     null,
@@ -579,7 +579,7 @@ export interface SettingsDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$SettingsPayload<ExtArgs>,
       T,
-      "findUniqueOrThrow",
+      'findUniqueOrThrow',
       GlobalOmitOptions
     >,
     never,
@@ -606,7 +606,7 @@ export interface SettingsDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$SettingsPayload<ExtArgs>,
       T,
-      "findFirst",
+      'findFirst',
       GlobalOmitOptions
     > | null,
     null,
@@ -634,7 +634,7 @@ export interface SettingsDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$SettingsPayload<ExtArgs>,
       T,
-      "findFirstOrThrow",
+      'findFirstOrThrow',
       GlobalOmitOptions
     >,
     never,
@@ -664,7 +664,7 @@ export interface SettingsDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$SettingsPayload<ExtArgs>,
       T,
-      "findMany",
+      'findMany',
       GlobalOmitOptions
     >
   >;
@@ -687,7 +687,7 @@ export interface SettingsDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$SettingsPayload<ExtArgs>,
       T,
-      "create",
+      'create',
       GlobalOmitOptions
     >,
     never,
@@ -739,7 +739,7 @@ export interface SettingsDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$SettingsPayload<ExtArgs>,
       T,
-      "createManyAndReturn",
+      'createManyAndReturn',
       GlobalOmitOptions
     >
   >;
@@ -762,7 +762,7 @@ export interface SettingsDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$SettingsPayload<ExtArgs>,
       T,
-      "delete",
+      'delete',
       GlobalOmitOptions
     >,
     never,
@@ -791,7 +791,7 @@ export interface SettingsDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$SettingsPayload<ExtArgs>,
       T,
-      "update",
+      'update',
       GlobalOmitOptions
     >,
     never,
@@ -870,7 +870,7 @@ export interface SettingsDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$SettingsPayload<ExtArgs>,
       T,
-      "updateManyAndReturn",
+      'updateManyAndReturn',
       GlobalOmitOptions
     >
   >;
@@ -898,7 +898,7 @@ export interface SettingsDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$SettingsPayload<ExtArgs>,
       T,
-      "upsert",
+      'upsert',
       GlobalOmitOptions
     >,
     never,
@@ -922,10 +922,10 @@ export interface SettingsDelegate<
   count<T extends SettingsCountArgs>(
     args?: Prisma.Subset<T, SettingsCountArgs>,
   ): Prisma.PrismaPromise<
-    T extends runtime.Types.Utils.Record<"select", any>
-      ? T["select"] extends true
+    T extends runtime.Types.Utils.Record<'select', any>
+      ? T['select'] extends true
         ? number
-        : Prisma.GetScalarType<T["select"], SettingsCountAggregateOutputType>
+        : Prisma.GetScalarType<T['select'], SettingsCountAggregateOutputType>
       : number
   >;
 
@@ -978,20 +978,20 @@ export interface SettingsDelegate<
   groupBy<
     T extends SettingsGroupByArgs,
     HasSelectOrTake extends Prisma.Or<
-      Prisma.Extends<"skip", Prisma.Keys<T>>,
-      Prisma.Extends<"take", Prisma.Keys<T>>
+      Prisma.Extends<'skip', Prisma.Keys<T>>,
+      Prisma.Extends<'take', Prisma.Keys<T>>
     >,
     OrderByArg extends Prisma.True extends HasSelectOrTake
-      ? { orderBy: SettingsGroupByArgs["orderBy"] }
-      : { orderBy?: SettingsGroupByArgs["orderBy"] },
+      ? { orderBy: SettingsGroupByArgs['orderBy'] }
+      : { orderBy?: SettingsGroupByArgs['orderBy'] },
     OrderFields extends Prisma.ExcludeUnderscoreKeys<
-      Prisma.Keys<Prisma.MaybeTupleToUnion<T["orderBy"]>>
+      Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>
     >,
-    ByFields extends Prisma.MaybeTupleToUnion<T["by"]>,
+    ByFields extends Prisma.MaybeTupleToUnion<T['by']>,
     ByValid extends Prisma.Has<ByFields, OrderFields>,
-    HavingFields extends Prisma.GetHavingFields<T["having"]>,
+    HavingFields extends Prisma.GetHavingFields<T['having']>,
     HavingValid extends Prisma.Has<ByFields, HavingFields>,
-    ByEmpty extends T["by"] extends never[] ? Prisma.True : Prisma.False,
+    ByEmpty extends T['by'] extends never[] ? Prisma.True : Prisma.False,
     InputErrors extends ByEmpty extends Prisma.True
       ? `Error: "by" must not be empty.`
       : HavingValid extends Prisma.False
@@ -1002,13 +1002,13 @@ export interface SettingsDelegate<
                 ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
                 : [
                     Error,
-                    "Field ",
+                    'Field ',
                     P,
                     ` in "having" needs to be provided in "by"`,
                   ];
           }[HavingFields]
-        : "take" extends Prisma.Keys<T>
-          ? "orderBy" extends Prisma.Keys<T>
+        : 'take' extends Prisma.Keys<T>
+          ? 'orderBy' extends Prisma.Keys<T>
             ? ByValid extends Prisma.True
               ? {}
               : {
@@ -1017,8 +1017,8 @@ export interface SettingsDelegate<
                     : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                 }[OrderFields]
             : 'Error: If you provide "take", you also need to provide "orderBy"'
-          : "skip" extends Prisma.Keys<T>
-            ? "orderBy" extends Prisma.Keys<T>
+          : 'skip' extends Prisma.Keys<T>
+            ? 'orderBy' extends Prisma.Keys<T>
               ? ByValid extends Prisma.True
                 ? {}
                 : {
@@ -1059,7 +1059,7 @@ export interface Prisma__SettingsClient<
     runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > extends Prisma.PrismaPromise<T> {
-  readonly [Symbol.toStringTag]: "PrismaPromise";
+  readonly [Symbol.toStringTag]: 'PrismaPromise';
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1102,12 +1102,12 @@ export interface Prisma__SettingsClient<
  * Fields of the Settings model
  */
 export interface SettingsFieldRefs {
-  readonly id: Prisma.FieldRef<"Settings", "String">;
-  readonly churchName: Prisma.FieldRef<"Settings", "String">;
-  readonly departmentName: Prisma.FieldRef<"Settings", "String">;
-  readonly treasurerName: Prisma.FieldRef<"Settings", "String">;
-  readonly memberContributionAmount: Prisma.FieldRef<"Settings", "Decimal">;
-  readonly updatedAt: Prisma.FieldRef<"Settings", "DateTime">;
+  readonly id: Prisma.FieldRef<'Settings', 'String'>;
+  readonly churchName: Prisma.FieldRef<'Settings', 'String'>;
+  readonly departmentName: Prisma.FieldRef<'Settings', 'String'>;
+  readonly treasurerName: Prisma.FieldRef<'Settings', 'String'>;
+  readonly memberContributionAmount: Prisma.FieldRef<'Settings', 'Decimal'>;
+  readonly updatedAt: Prisma.FieldRef<'Settings', 'DateTime'>;
 }
 
 // Custom InputTypes

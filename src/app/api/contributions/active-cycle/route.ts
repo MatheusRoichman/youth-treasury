@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
-import { getActiveCycleWithContributions } from "@/lib/db/contributions";
+import { NextResponse } from 'next/server';
+import { getActiveCycleWithContributions } from '@/lib/db/contributions';
 
 export async function GET() {
   const cycle = await getActiveCycleWithContributions();

@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { useMemo, useState } from "react";
+import { useMemo, useState } from 'react';
 
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { MoreHorizontal } from "lucide-react";
-import { toast } from "sonner";
-import { MemberAvatar } from "@/components/member-avatar";
-import { MemberDialog } from "@/components/members/member-dialog";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { MoreHorizontal } from 'lucide-react';
+import { toast } from 'sonner';
+import { MemberAvatar } from '@/components/member-avatar';
+import { MemberDialog } from '@/components/members/member-dialog';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Skeleton } from "@/components/ui/skeleton";
+} from '@/components/ui/dropdown-menu';
+import { Skeleton } from '@/components/ui/skeleton';
 import {
   Table,
   TableBody,
@@ -24,13 +24,13 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { deactivateMember } from "@/lib/actions/members";
-import { memberKeys } from "@/lib/queries/members";
+} from '@/components/ui/table';
+import { deactivateMember } from '@/lib/actions/members';
+import { memberKeys } from '@/lib/queries/members';
 import {
   fetchMembers,
   type MemberDTO,
-} from "@/lib/services/members/fetch-members";
+} from '@/lib/services/members/fetch-members';
 
 interface Props {
   initialMembers: MemberDTO[];
@@ -49,15 +49,15 @@ export function MembersTable({ initialMembers }: Props) {
   const deactivate = useMutation({
     mutationFn: deactivateMember,
     onSuccess: () => {
-      toast.success("Membro desativado com sucesso!");
+      toast.success('Membro desativado com sucesso!');
       queryClient.invalidateQueries({ queryKey: memberKeys.all });
       setDeactivatingId(null);
     },
-    onError: () => toast.error("Erro ao desativar membro"),
+    onError: () => toast.error('Erro ao desativar membro'),
   });
 
   const sortedMembers = useMemo(
-    () => [...members].sort((a, b) => a.name.localeCompare(b.name, "pt-BR")),
+    () => [...members].sort((a, b) => a.name.localeCompare(b.name, 'pt-BR')),
     [members],
   );
 
@@ -100,16 +100,16 @@ export function MembersTable({ initialMembers }: Props) {
                 </div>
               </TableCell>
               <TableCell className="text-sm text-gray-500">
-                {member.phone ?? "—"}
+                {member.phone ?? '—'}
               </TableCell>
               <TableCell className="text-sm text-gray-500">
-                {member.email ?? "—"}
+                {member.email ?? '—'}
               </TableCell>
               <TableCell>
                 <Badge
-                  variant={member.status === "ACTIVE" ? "success" : "neutral"}
+                  variant={member.status === 'ACTIVE' ? 'success' : 'neutral'}
                 >
-                  {member.status === "ACTIVE" ? "Ativo" : "Inativo"}
+                  {member.status === 'ACTIVE' ? 'Ativo' : 'Inativo'}
                 </Badge>
               </TableCell>
               <TableCell className="text-right">
@@ -128,7 +128,7 @@ export function MembersTable({ initialMembers }: Props) {
                         </DropdownMenuItem>
                       }
                     />
-                    {member.status === "ACTIVE" && (
+                    {member.status === 'ACTIVE' && (
                       <>
                         <DropdownMenuSeparator />
                         {deactivatingId === member.id ? (

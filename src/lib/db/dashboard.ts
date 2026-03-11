@@ -1,13 +1,13 @@
-import { prisma } from "@/lib/prisma";
+import { prisma } from '@/lib/prisma';
 
 export async function getCurrentBalance() {
   const [contributions, expenses] = await Promise.all([
     prisma.transaction.aggregate({
-      where: { type: "CONTRIBUTION" },
+      where: { type: 'CONTRIBUTION' },
       _sum: { amount: true },
     }),
     prisma.transaction.aggregate({
-      where: { type: "EXPENSE" },
+      where: { type: 'EXPENSE' },
       _sum: { amount: true },
     }),
   ]);
@@ -20,11 +20,11 @@ export async function getCurrentBalance() {
 export async function getMonthlySummary(cycleId: string) {
   const [inAmount, outAmount] = await Promise.all([
     prisma.transaction.aggregate({
-      where: { cycleId, type: "CONTRIBUTION" },
+      where: { cycleId, type: 'CONTRIBUTION' },
       _sum: { amount: true },
     }),
     prisma.transaction.aggregate({
-      where: { cycleId, type: "EXPENSE" },
+      where: { cycleId, type: 'EXPENSE' },
       _sum: { amount: true },
     }),
   ]);
@@ -37,7 +37,7 @@ export async function getMonthlySummary(cycleId: string) {
 
 export async function getRecentTransactions(limit = 10) {
   return prisma.transaction.findMany({
-    orderBy: { date: "desc" },
+    orderBy: { date: 'desc' },
     take: limit,
     include: { member: true },
   });

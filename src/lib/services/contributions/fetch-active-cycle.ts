@@ -1,4 +1,4 @@
-import { http } from "../http";
+import { http } from '../http';
 
 export interface MemberDTO {
   id: string;
@@ -8,7 +8,7 @@ export interface MemberDTO {
 
 export interface ContributionDTO {
   id: string;
-  status: "PENDING" | "PAID" | "EXEMPT";
+  status: 'PENDING' | 'PAID' | 'EXEMPT';
   amount: string | null;
   paidAt: string | null;
   createdAt: string;
@@ -26,7 +26,7 @@ export interface CycleDTO {
 
 export async function fetchActiveCycle(): Promise<CycleDTO | null> {
   const { data } = await http.get<CycleDTO | null>(
-    "/contributions/active-cycle",
+    '/contributions/active-cycle',
   );
   return data;
 }

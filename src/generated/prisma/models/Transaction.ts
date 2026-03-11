@@ -7,9 +7,9 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/client";
-import type * as $Enums from "../enums";
-import type * as Prisma from "../internal/prismaNamespace";
+import type * as runtime from '@prisma/client/runtime/client';
+import type * as $Enums from '../enums';
+import type * as Prisma from '../internal/prismaNamespace';
 
 /**
  * Model Transaction
@@ -189,7 +189,7 @@ export type TransactionAggregateArgs<
 };
 
 export type GetTransactionAggregateType<T extends TransactionAggregateArgs> = {
-  [P in keyof T & keyof AggregateTransaction]: P extends "_count" | "count"
+  [P in keyof T & keyof AggregateTransaction]: P extends '_count' | 'count'
     ? T[P] extends true
       ? number
       : Prisma.GetScalarType<T[P], AggregateTransaction[P]>
@@ -236,8 +236,8 @@ export type TransactionGroupByOutputType = {
 type GetTransactionGroupByPayload<T extends TransactionGroupByArgs> =
   Prisma.PrismaPromise<
     Array<
-      Prisma.PickEnumerable<TransactionGroupByOutputType, T["by"]> & {
-        [P in keyof T & keyof TransactionGroupByOutputType]: P extends "_count"
+      Prisma.PickEnumerable<TransactionGroupByOutputType, T['by']> & {
+        [P in keyof T & keyof TransactionGroupByOutputType]: P extends '_count'
           ? T[P] extends boolean
             ? number
             : Prisma.GetScalarType<T[P], TransactionGroupByOutputType[P]>
@@ -250,25 +250,25 @@ export type TransactionWhereInput = {
   AND?: Prisma.TransactionWhereInput | Prisma.TransactionWhereInput[];
   OR?: Prisma.TransactionWhereInput[];
   NOT?: Prisma.TransactionWhereInput | Prisma.TransactionWhereInput[];
-  id?: Prisma.StringFilter<"Transaction"> | string;
+  id?: Prisma.StringFilter<'Transaction'> | string;
   type?:
-    | Prisma.EnumTransactionTypeFilter<"Transaction">
+    | Prisma.EnumTransactionTypeFilter<'Transaction'>
     | $Enums.TransactionType;
   category?:
-    | Prisma.EnumTransactionCategoryFilter<"Transaction">
+    | Prisma.EnumTransactionCategoryFilter<'Transaction'>
     | $Enums.TransactionCategory;
-  description?: Prisma.StringFilter<"Transaction"> | string;
-  vendorName?: Prisma.StringNullableFilter<"Transaction"> | string | null;
+  description?: Prisma.StringFilter<'Transaction'> | string;
+  vendorName?: Prisma.StringNullableFilter<'Transaction'> | string | null;
   amount?:
-    | Prisma.DecimalFilter<"Transaction">
+    | Prisma.DecimalFilter<'Transaction'>
     | runtime.Decimal
     | runtime.DecimalJsLike
     | number
     | string;
-  date?: Prisma.DateTimeFilter<"Transaction"> | Date | string;
-  createdAt?: Prisma.DateTimeFilter<"Transaction"> | Date | string;
-  memberId?: Prisma.StringNullableFilter<"Transaction"> | string | null;
-  cycleId?: Prisma.StringNullableFilter<"Transaction"> | string | null;
+  date?: Prisma.DateTimeFilter<'Transaction'> | Date | string;
+  createdAt?: Prisma.DateTimeFilter<'Transaction'> | Date | string;
+  memberId?: Prisma.StringNullableFilter<'Transaction'> | string | null;
+  cycleId?: Prisma.StringNullableFilter<'Transaction'> | string | null;
   member?: Prisma.XOR<
     Prisma.MemberNullableScalarRelationFilter,
     Prisma.MemberWhereInput
@@ -301,23 +301,23 @@ export type TransactionWhereUniqueInput = Prisma.AtLeast<
     OR?: Prisma.TransactionWhereInput[];
     NOT?: Prisma.TransactionWhereInput | Prisma.TransactionWhereInput[];
     type?:
-      | Prisma.EnumTransactionTypeFilter<"Transaction">
+      | Prisma.EnumTransactionTypeFilter<'Transaction'>
       | $Enums.TransactionType;
     category?:
-      | Prisma.EnumTransactionCategoryFilter<"Transaction">
+      | Prisma.EnumTransactionCategoryFilter<'Transaction'>
       | $Enums.TransactionCategory;
-    description?: Prisma.StringFilter<"Transaction"> | string;
-    vendorName?: Prisma.StringNullableFilter<"Transaction"> | string | null;
+    description?: Prisma.StringFilter<'Transaction'> | string;
+    vendorName?: Prisma.StringNullableFilter<'Transaction'> | string | null;
     amount?:
-      | Prisma.DecimalFilter<"Transaction">
+      | Prisma.DecimalFilter<'Transaction'>
       | runtime.Decimal
       | runtime.DecimalJsLike
       | number
       | string;
-    date?: Prisma.DateTimeFilter<"Transaction"> | Date | string;
-    createdAt?: Prisma.DateTimeFilter<"Transaction"> | Date | string;
-    memberId?: Prisma.StringNullableFilter<"Transaction"> | string | null;
-    cycleId?: Prisma.StringNullableFilter<"Transaction"> | string | null;
+    date?: Prisma.DateTimeFilter<'Transaction'> | Date | string;
+    createdAt?: Prisma.DateTimeFilter<'Transaction'> | Date | string;
+    memberId?: Prisma.StringNullableFilter<'Transaction'> | string | null;
+    cycleId?: Prisma.StringNullableFilter<'Transaction'> | string | null;
     member?: Prisma.XOR<
       Prisma.MemberNullableScalarRelationFilter,
       Prisma.MemberWhereInput
@@ -327,7 +327,7 @@ export type TransactionWhereUniqueInput = Prisma.AtLeast<
       Prisma.MonthlyCycleWhereInput
     > | null;
   },
-  "id"
+  'id'
 >;
 
 export type TransactionOrderByWithAggregationInput = {
@@ -356,35 +356,35 @@ export type TransactionScalarWhereWithAggregatesInput = {
   NOT?:
     | Prisma.TransactionScalarWhereWithAggregatesInput
     | Prisma.TransactionScalarWhereWithAggregatesInput[];
-  id?: Prisma.StringWithAggregatesFilter<"Transaction"> | string;
+  id?: Prisma.StringWithAggregatesFilter<'Transaction'> | string;
   type?:
-    | Prisma.EnumTransactionTypeWithAggregatesFilter<"Transaction">
+    | Prisma.EnumTransactionTypeWithAggregatesFilter<'Transaction'>
     | $Enums.TransactionType;
   category?:
-    | Prisma.EnumTransactionCategoryWithAggregatesFilter<"Transaction">
+    | Prisma.EnumTransactionCategoryWithAggregatesFilter<'Transaction'>
     | $Enums.TransactionCategory;
-  description?: Prisma.StringWithAggregatesFilter<"Transaction"> | string;
+  description?: Prisma.StringWithAggregatesFilter<'Transaction'> | string;
   vendorName?:
-    | Prisma.StringNullableWithAggregatesFilter<"Transaction">
+    | Prisma.StringNullableWithAggregatesFilter<'Transaction'>
     | string
     | null;
   amount?:
-    | Prisma.DecimalWithAggregatesFilter<"Transaction">
+    | Prisma.DecimalWithAggregatesFilter<'Transaction'>
     | runtime.Decimal
     | runtime.DecimalJsLike
     | number
     | string;
-  date?: Prisma.DateTimeWithAggregatesFilter<"Transaction"> | Date | string;
+  date?: Prisma.DateTimeWithAggregatesFilter<'Transaction'> | Date | string;
   createdAt?:
-    | Prisma.DateTimeWithAggregatesFilter<"Transaction">
+    | Prisma.DateTimeWithAggregatesFilter<'Transaction'>
     | Date
     | string;
   memberId?:
-    | Prisma.StringNullableWithAggregatesFilter<"Transaction">
+    | Prisma.StringNullableWithAggregatesFilter<'Transaction'>
     | string
     | null;
   cycleId?:
-    | Prisma.StringNullableWithAggregatesFilter<"Transaction">
+    | Prisma.StringNullableWithAggregatesFilter<'Transaction'>
     | string
     | null;
 };
@@ -874,25 +874,25 @@ export type TransactionScalarWhereInput = {
   NOT?:
     | Prisma.TransactionScalarWhereInput
     | Prisma.TransactionScalarWhereInput[];
-  id?: Prisma.StringFilter<"Transaction"> | string;
+  id?: Prisma.StringFilter<'Transaction'> | string;
   type?:
-    | Prisma.EnumTransactionTypeFilter<"Transaction">
+    | Prisma.EnumTransactionTypeFilter<'Transaction'>
     | $Enums.TransactionType;
   category?:
-    | Prisma.EnumTransactionCategoryFilter<"Transaction">
+    | Prisma.EnumTransactionCategoryFilter<'Transaction'>
     | $Enums.TransactionCategory;
-  description?: Prisma.StringFilter<"Transaction"> | string;
-  vendorName?: Prisma.StringNullableFilter<"Transaction"> | string | null;
+  description?: Prisma.StringFilter<'Transaction'> | string;
+  vendorName?: Prisma.StringNullableFilter<'Transaction'> | string | null;
   amount?:
-    | Prisma.DecimalFilter<"Transaction">
+    | Prisma.DecimalFilter<'Transaction'>
     | runtime.Decimal
     | runtime.DecimalJsLike
     | number
     | string;
-  date?: Prisma.DateTimeFilter<"Transaction"> | Date | string;
-  createdAt?: Prisma.DateTimeFilter<"Transaction"> | Date | string;
-  memberId?: Prisma.StringNullableFilter<"Transaction"> | string | null;
-  cycleId?: Prisma.StringNullableFilter<"Transaction"> | string | null;
+  date?: Prisma.DateTimeFilter<'Transaction'> | Date | string;
+  createdAt?: Prisma.DateTimeFilter<'Transaction'> | Date | string;
+  memberId?: Prisma.StringNullableFilter<'Transaction'> | string | null;
+  cycleId?: Prisma.StringNullableFilter<'Transaction'> | string | null;
 };
 
 export type TransactionCreateWithoutCycleInput = {
@@ -1130,7 +1130,7 @@ export type TransactionSelect<
     member?: boolean | Prisma.Transaction$memberArgs<ExtArgs>;
     cycle?: boolean | Prisma.Transaction$cycleArgs<ExtArgs>;
   },
-  ExtArgs["result"]["transaction"]
+  ExtArgs['result']['transaction']
 >;
 
 export type TransactionSelectCreateManyAndReturn<
@@ -1151,7 +1151,7 @@ export type TransactionSelectCreateManyAndReturn<
     member?: boolean | Prisma.Transaction$memberArgs<ExtArgs>;
     cycle?: boolean | Prisma.Transaction$cycleArgs<ExtArgs>;
   },
-  ExtArgs["result"]["transaction"]
+  ExtArgs['result']['transaction']
 >;
 
 export type TransactionSelectUpdateManyAndReturn<
@@ -1172,7 +1172,7 @@ export type TransactionSelectUpdateManyAndReturn<
     member?: boolean | Prisma.Transaction$memberArgs<ExtArgs>;
     cycle?: boolean | Prisma.Transaction$cycleArgs<ExtArgs>;
   },
-  ExtArgs["result"]["transaction"]
+  ExtArgs['result']['transaction']
 >;
 
 export type TransactionSelectScalar = {
@@ -1192,17 +1192,17 @@ export type TransactionOmit<
   ExtArgs extends
     runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetOmit<
-  | "id"
-  | "type"
-  | "category"
-  | "description"
-  | "vendorName"
-  | "amount"
-  | "date"
-  | "createdAt"
-  | "memberId"
-  | "cycleId",
-  ExtArgs["result"]["transaction"]
+  | 'id'
+  | 'type'
+  | 'category'
+  | 'description'
+  | 'vendorName'
+  | 'amount'
+  | 'date'
+  | 'createdAt'
+  | 'memberId'
+  | 'cycleId',
+  ExtArgs['result']['transaction']
 >;
 export type TransactionInclude<
   ExtArgs extends
@@ -1230,7 +1230,7 @@ export type $TransactionPayload<
   ExtArgs extends
     runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
-  name: "Transaction";
+  name: 'Transaction';
   objects: {
     member: Prisma.$MemberPayload<ExtArgs> | null;
     cycle: Prisma.$MonthlyCyclePayload<ExtArgs> | null;
@@ -1248,7 +1248,7 @@ export type $TransactionPayload<
       memberId: string | null;
       cycleId: string | null;
     },
-    ExtArgs["result"]["transaction"]
+    ExtArgs['result']['transaction']
   >;
   composites: {};
 };
@@ -1262,7 +1262,7 @@ export type TransactionCountArgs<
     runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = Omit<
   TransactionFindManyArgs,
-  "select" | "include" | "distinct" | "omit"
+  'select' | 'include' | 'distinct' | 'omit'
 > & {
   select?: TransactionCountAggregateInputType | true;
 };
@@ -1273,8 +1273,8 @@ export interface TransactionDelegate<
   GlobalOmitOptions = {},
 > {
   [K: symbol]: {
-    types: Prisma.TypeMap<ExtArgs>["model"]["Transaction"];
-    meta: { name: "Transaction" };
+    types: Prisma.TypeMap<ExtArgs>['model']['Transaction'];
+    meta: { name: 'Transaction' };
   };
   /**
    * Find zero or one Transaction that matches the filter.
@@ -1293,7 +1293,7 @@ export interface TransactionDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$TransactionPayload<ExtArgs>,
       T,
-      "findUnique",
+      'findUnique',
       GlobalOmitOptions
     > | null,
     null,
@@ -1319,7 +1319,7 @@ export interface TransactionDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$TransactionPayload<ExtArgs>,
       T,
-      "findUniqueOrThrow",
+      'findUniqueOrThrow',
       GlobalOmitOptions
     >,
     never,
@@ -1346,7 +1346,7 @@ export interface TransactionDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$TransactionPayload<ExtArgs>,
       T,
-      "findFirst",
+      'findFirst',
       GlobalOmitOptions
     > | null,
     null,
@@ -1374,7 +1374,7 @@ export interface TransactionDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$TransactionPayload<ExtArgs>,
       T,
-      "findFirstOrThrow",
+      'findFirstOrThrow',
       GlobalOmitOptions
     >,
     never,
@@ -1404,7 +1404,7 @@ export interface TransactionDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$TransactionPayload<ExtArgs>,
       T,
-      "findMany",
+      'findMany',
       GlobalOmitOptions
     >
   >;
@@ -1427,7 +1427,7 @@ export interface TransactionDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$TransactionPayload<ExtArgs>,
       T,
-      "create",
+      'create',
       GlobalOmitOptions
     >,
     never,
@@ -1479,7 +1479,7 @@ export interface TransactionDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$TransactionPayload<ExtArgs>,
       T,
-      "createManyAndReturn",
+      'createManyAndReturn',
       GlobalOmitOptions
     >
   >;
@@ -1502,7 +1502,7 @@ export interface TransactionDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$TransactionPayload<ExtArgs>,
       T,
-      "delete",
+      'delete',
       GlobalOmitOptions
     >,
     never,
@@ -1531,7 +1531,7 @@ export interface TransactionDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$TransactionPayload<ExtArgs>,
       T,
-      "update",
+      'update',
       GlobalOmitOptions
     >,
     never,
@@ -1610,7 +1610,7 @@ export interface TransactionDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$TransactionPayload<ExtArgs>,
       T,
-      "updateManyAndReturn",
+      'updateManyAndReturn',
       GlobalOmitOptions
     >
   >;
@@ -1638,7 +1638,7 @@ export interface TransactionDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$TransactionPayload<ExtArgs>,
       T,
-      "upsert",
+      'upsert',
       GlobalOmitOptions
     >,
     never,
@@ -1662,10 +1662,10 @@ export interface TransactionDelegate<
   count<T extends TransactionCountArgs>(
     args?: Prisma.Subset<T, TransactionCountArgs>,
   ): Prisma.PrismaPromise<
-    T extends runtime.Types.Utils.Record<"select", any>
-      ? T["select"] extends true
+    T extends runtime.Types.Utils.Record<'select', any>
+      ? T['select'] extends true
         ? number
-        : Prisma.GetScalarType<T["select"], TransactionCountAggregateOutputType>
+        : Prisma.GetScalarType<T['select'], TransactionCountAggregateOutputType>
       : number
   >;
 
@@ -1718,20 +1718,20 @@ export interface TransactionDelegate<
   groupBy<
     T extends TransactionGroupByArgs,
     HasSelectOrTake extends Prisma.Or<
-      Prisma.Extends<"skip", Prisma.Keys<T>>,
-      Prisma.Extends<"take", Prisma.Keys<T>>
+      Prisma.Extends<'skip', Prisma.Keys<T>>,
+      Prisma.Extends<'take', Prisma.Keys<T>>
     >,
     OrderByArg extends Prisma.True extends HasSelectOrTake
-      ? { orderBy: TransactionGroupByArgs["orderBy"] }
-      : { orderBy?: TransactionGroupByArgs["orderBy"] },
+      ? { orderBy: TransactionGroupByArgs['orderBy'] }
+      : { orderBy?: TransactionGroupByArgs['orderBy'] },
     OrderFields extends Prisma.ExcludeUnderscoreKeys<
-      Prisma.Keys<Prisma.MaybeTupleToUnion<T["orderBy"]>>
+      Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>
     >,
-    ByFields extends Prisma.MaybeTupleToUnion<T["by"]>,
+    ByFields extends Prisma.MaybeTupleToUnion<T['by']>,
     ByValid extends Prisma.Has<ByFields, OrderFields>,
-    HavingFields extends Prisma.GetHavingFields<T["having"]>,
+    HavingFields extends Prisma.GetHavingFields<T['having']>,
     HavingValid extends Prisma.Has<ByFields, HavingFields>,
-    ByEmpty extends T["by"] extends never[] ? Prisma.True : Prisma.False,
+    ByEmpty extends T['by'] extends never[] ? Prisma.True : Prisma.False,
     InputErrors extends ByEmpty extends Prisma.True
       ? `Error: "by" must not be empty.`
       : HavingValid extends Prisma.False
@@ -1742,13 +1742,13 @@ export interface TransactionDelegate<
                 ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
                 : [
                     Error,
-                    "Field ",
+                    'Field ',
                     P,
                     ` in "having" needs to be provided in "by"`,
                   ];
           }[HavingFields]
-        : "take" extends Prisma.Keys<T>
-          ? "orderBy" extends Prisma.Keys<T>
+        : 'take' extends Prisma.Keys<T>
+          ? 'orderBy' extends Prisma.Keys<T>
             ? ByValid extends Prisma.True
               ? {}
               : {
@@ -1757,8 +1757,8 @@ export interface TransactionDelegate<
                     : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                 }[OrderFields]
             : 'Error: If you provide "take", you also need to provide "orderBy"'
-          : "skip" extends Prisma.Keys<T>
-            ? "orderBy" extends Prisma.Keys<T>
+          : 'skip' extends Prisma.Keys<T>
+            ? 'orderBy' extends Prisma.Keys<T>
               ? ByValid extends Prisma.True
                 ? {}
                 : {
@@ -1799,14 +1799,14 @@ export interface Prisma__TransactionClient<
     runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > extends Prisma.PrismaPromise<T> {
-  readonly [Symbol.toStringTag]: "PrismaPromise";
+  readonly [Symbol.toStringTag]: 'PrismaPromise';
   member<T extends Prisma.Transaction$memberArgs<ExtArgs> = {}>(
     args?: Prisma.Subset<T, Prisma.Transaction$memberArgs<ExtArgs>>,
   ): Prisma.Prisma__MemberClient<
     runtime.Types.Result.GetResult<
       Prisma.$MemberPayload<ExtArgs>,
       T,
-      "findUniqueOrThrow",
+      'findUniqueOrThrow',
       GlobalOmitOptions
     > | null,
     null,
@@ -1819,7 +1819,7 @@ export interface Prisma__TransactionClient<
     runtime.Types.Result.GetResult<
       Prisma.$MonthlyCyclePayload<ExtArgs>,
       T,
-      "findUniqueOrThrow",
+      'findUniqueOrThrow',
       GlobalOmitOptions
     > | null,
     null,
@@ -1868,16 +1868,16 @@ export interface Prisma__TransactionClient<
  * Fields of the Transaction model
  */
 export interface TransactionFieldRefs {
-  readonly id: Prisma.FieldRef<"Transaction", "String">;
-  readonly type: Prisma.FieldRef<"Transaction", "TransactionType">;
-  readonly category: Prisma.FieldRef<"Transaction", "TransactionCategory">;
-  readonly description: Prisma.FieldRef<"Transaction", "String">;
-  readonly vendorName: Prisma.FieldRef<"Transaction", "String">;
-  readonly amount: Prisma.FieldRef<"Transaction", "Decimal">;
-  readonly date: Prisma.FieldRef<"Transaction", "DateTime">;
-  readonly createdAt: Prisma.FieldRef<"Transaction", "DateTime">;
-  readonly memberId: Prisma.FieldRef<"Transaction", "String">;
-  readonly cycleId: Prisma.FieldRef<"Transaction", "String">;
+  readonly id: Prisma.FieldRef<'Transaction', 'String'>;
+  readonly type: Prisma.FieldRef<'Transaction', 'TransactionType'>;
+  readonly category: Prisma.FieldRef<'Transaction', 'TransactionCategory'>;
+  readonly description: Prisma.FieldRef<'Transaction', 'String'>;
+  readonly vendorName: Prisma.FieldRef<'Transaction', 'String'>;
+  readonly amount: Prisma.FieldRef<'Transaction', 'Decimal'>;
+  readonly date: Prisma.FieldRef<'Transaction', 'DateTime'>;
+  readonly createdAt: Prisma.FieldRef<'Transaction', 'DateTime'>;
+  readonly memberId: Prisma.FieldRef<'Transaction', 'String'>;
+  readonly cycleId: Prisma.FieldRef<'Transaction', 'String'>;
 }
 
 // Custom InputTypes

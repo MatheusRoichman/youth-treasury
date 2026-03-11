@@ -9,34 +9,34 @@
  */
 
 export const MemberStatus = {
-  ACTIVE: "ACTIVE",
-  INACTIVE: "INACTIVE",
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
 } as const;
 
 export type MemberStatus = (typeof MemberStatus)[keyof typeof MemberStatus];
 
 export const ContributionStatus = {
-  PENDING: "PENDING",
-  PAID: "PAID",
-  EXEMPT: "EXEMPT",
+  PENDING: 'PENDING',
+  PAID: 'PAID',
+  EXEMPT: 'EXEMPT',
 } as const;
 
 export type ContributionStatus =
   (typeof ContributionStatus)[keyof typeof ContributionStatus];
 
 export const TransactionType = {
-  CONTRIBUTION: "CONTRIBUTION",
-  EXPENSE: "EXPENSE",
+  CONTRIBUTION: 'CONTRIBUTION',
+  EXPENSE: 'EXPENSE',
 } as const;
 
 export type TransactionType =
   (typeof TransactionType)[keyof typeof TransactionType];
 
 export const TransactionCategory = {
-  MONTHLY_FEE: "MONTHLY_FEE",
-  OFFERING: "OFFERING",
-  EXPENSE: "EXPENSE",
-  OTHER: "OTHER",
+  MONTHLY_FEE: 'MONTHLY_FEE',
+  OFFERING: 'OFFERING',
+  EXPENSE: 'EXPENSE',
+  OTHER: 'OTHER',
 } as const;
 
 export type TransactionCategory =

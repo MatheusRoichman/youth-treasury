@@ -1,8 +1,8 @@
-import { Users } from "lucide-react";
-import { MemberDialog } from "@/components/members/member-dialog";
-import { MembersTable } from "@/components/members/members-table";
-import { Button } from "@/components/ui/button";
-import { getMembers } from "@/lib/db/members";
+import { Users } from 'lucide-react';
+import { MemberDialog } from '@/components/members/member-dialog';
+import { MembersTable } from '@/components/members/members-table';
+import { Button } from '@/components/ui/button';
+import { getMembers } from '@/lib/db/members';
 
 export default async function MembersPage() {
   const membersRaw = await getMembers();
@@ -20,7 +20,7 @@ export default async function MembersPage() {
             <div>
               <h2 className="text-xl font-bold text-gray-900">Membros</h2>
               <p className="text-sm text-gray-500">
-                {members.filter((m) => m.status === "ACTIVE").length} membros
+                {members.filter((m) => m.status === 'ACTIVE').length} membros
                 ativos
               </p>
             </div>

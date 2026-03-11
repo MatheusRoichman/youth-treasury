@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { useQuery } from "@tanstack/react-query";
-import { ShoppingCart } from "lucide-react";
-import Link from "next/link";
-import { MemberAvatar } from "@/components/member-avatar";
-import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
-import { dashboardKeys } from "@/lib/queries/dashboard";
+import { useQuery } from '@tanstack/react-query';
+import { ShoppingCart } from 'lucide-react';
+import Link from 'next/link';
+import { MemberAvatar } from '@/components/member-avatar';
+import { Badge } from '@/components/ui/badge';
+import { Skeleton } from '@/components/ui/skeleton';
+import { dashboardKeys } from '@/lib/queries/dashboard';
 import {
   fetchRecentTransactions,
   type TransactionDTO,
-} from "@/lib/services/dashboard/fetch-recent-transactions";
-import { formatCurrency, formatDate } from "@/lib/utils";
+} from '@/lib/services/dashboard/fetch-recent-transactions';
+import { formatCurrency, formatDate } from '@/lib/utils';
 
 interface Props {
   initialData: TransactionDTO[];
@@ -96,9 +96,9 @@ export function RecentActivities({ initialData }: Props) {
               </td>
               <td className="px-4 py-3">
                 <Badge
-                  variant={tx.type === "CONTRIBUTION" ? "success" : "danger"}
+                  variant={tx.type === 'CONTRIBUTION' ? 'success' : 'danger'}
                 >
-                  {tx.type === "CONTRIBUTION" ? "Contribuição" : "Despesa"}
+                  {tx.type === 'CONTRIBUTION' ? 'Contribuição' : 'Despesa'}
                 </Badge>
               </td>
               <td className="px-4 py-3 text-gray-400">
@@ -106,10 +106,10 @@ export function RecentActivities({ initialData }: Props) {
               </td>
               <td
                 className={`px-6 py-3 text-right font-semibold ${
-                  tx.type === "CONTRIBUTION" ? "text-green-600" : "text-red-500"
+                  tx.type === 'CONTRIBUTION' ? 'text-green-600' : 'text-red-500'
                 }`}
               >
-                {tx.type === "CONTRIBUTION" ? "+" : "-"}
+                {tx.type === 'CONTRIBUTION' ? '+' : '-'}
                 {formatCurrency(Number(tx.amount))}
               </td>
             </tr>

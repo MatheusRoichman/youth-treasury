@@ -7,9 +7,9 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/client";
-import type * as $Enums from "../enums";
-import type * as Prisma from "../internal/prismaNamespace";
+import type * as runtime from '@prisma/client/runtime/client';
+import type * as $Enums from '../enums';
+import type * as Prisma from '../internal/prismaNamespace';
 
 /**
  * Model Contribution
@@ -178,7 +178,7 @@ export type ContributionAggregateArgs<
 
 export type GetContributionAggregateType<T extends ContributionAggregateArgs> =
   {
-    [P in keyof T & keyof AggregateContribution]: P extends "_count" | "count"
+    [P in keyof T & keyof AggregateContribution]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : Prisma.GetScalarType<T[P], AggregateContribution[P]>
@@ -223,8 +223,8 @@ export type ContributionGroupByOutputType = {
 type GetContributionGroupByPayload<T extends ContributionGroupByArgs> =
   Prisma.PrismaPromise<
     Array<
-      Prisma.PickEnumerable<ContributionGroupByOutputType, T["by"]> & {
-        [P in keyof T & keyof ContributionGroupByOutputType]: P extends "_count"
+      Prisma.PickEnumerable<ContributionGroupByOutputType, T['by']> & {
+        [P in keyof T & keyof ContributionGroupByOutputType]: P extends '_count'
           ? T[P] extends boolean
             ? number
             : Prisma.GetScalarType<T[P], ContributionGroupByOutputType[P]>
@@ -237,22 +237,22 @@ export type ContributionWhereInput = {
   AND?: Prisma.ContributionWhereInput | Prisma.ContributionWhereInput[];
   OR?: Prisma.ContributionWhereInput[];
   NOT?: Prisma.ContributionWhereInput | Prisma.ContributionWhereInput[];
-  id?: Prisma.StringFilter<"Contribution"> | string;
+  id?: Prisma.StringFilter<'Contribution'> | string;
   status?:
-    | Prisma.EnumContributionStatusFilter<"Contribution">
+    | Prisma.EnumContributionStatusFilter<'Contribution'>
     | $Enums.ContributionStatus;
   amount?:
-    | Prisma.DecimalNullableFilter<"Contribution">
+    | Prisma.DecimalNullableFilter<'Contribution'>
     | runtime.Decimal
     | runtime.DecimalJsLike
     | number
     | string
     | null;
-  paidAt?: Prisma.DateTimeNullableFilter<"Contribution"> | Date | string | null;
-  notes?: Prisma.StringNullableFilter<"Contribution"> | string | null;
-  createdAt?: Prisma.DateTimeFilter<"Contribution"> | Date | string;
-  memberId?: Prisma.StringFilter<"Contribution"> | string;
-  cycleId?: Prisma.StringFilter<"Contribution"> | string;
+  paidAt?: Prisma.DateTimeNullableFilter<'Contribution'> | Date | string | null;
+  notes?: Prisma.StringNullableFilter<'Contribution'> | string | null;
+  createdAt?: Prisma.DateTimeFilter<'Contribution'> | Date | string;
+  memberId?: Prisma.StringFilter<'Contribution'> | string;
+  cycleId?: Prisma.StringFilter<'Contribution'> | string;
   member?: Prisma.XOR<
     Prisma.MemberScalarRelationFilter,
     Prisma.MemberWhereInput
@@ -284,24 +284,24 @@ export type ContributionWhereUniqueInput = Prisma.AtLeast<
     OR?: Prisma.ContributionWhereInput[];
     NOT?: Prisma.ContributionWhereInput | Prisma.ContributionWhereInput[];
     status?:
-      | Prisma.EnumContributionStatusFilter<"Contribution">
+      | Prisma.EnumContributionStatusFilter<'Contribution'>
       | $Enums.ContributionStatus;
     amount?:
-      | Prisma.DecimalNullableFilter<"Contribution">
+      | Prisma.DecimalNullableFilter<'Contribution'>
       | runtime.Decimal
       | runtime.DecimalJsLike
       | number
       | string
       | null;
     paidAt?:
-      | Prisma.DateTimeNullableFilter<"Contribution">
+      | Prisma.DateTimeNullableFilter<'Contribution'>
       | Date
       | string
       | null;
-    notes?: Prisma.StringNullableFilter<"Contribution"> | string | null;
-    createdAt?: Prisma.DateTimeFilter<"Contribution"> | Date | string;
-    memberId?: Prisma.StringFilter<"Contribution"> | string;
-    cycleId?: Prisma.StringFilter<"Contribution"> | string;
+    notes?: Prisma.StringNullableFilter<'Contribution'> | string | null;
+    createdAt?: Prisma.DateTimeFilter<'Contribution'> | Date | string;
+    memberId?: Prisma.StringFilter<'Contribution'> | string;
+    cycleId?: Prisma.StringFilter<'Contribution'> | string;
     member?: Prisma.XOR<
       Prisma.MemberScalarRelationFilter,
       Prisma.MemberWhereInput
@@ -311,7 +311,7 @@ export type ContributionWhereUniqueInput = Prisma.AtLeast<
       Prisma.MonthlyCycleWhereInput
     >;
   },
-  "id" | "memberId_cycleId"
+  'id' | 'memberId_cycleId'
 >;
 
 export type ContributionOrderByWithAggregationInput = {
@@ -338,32 +338,32 @@ export type ContributionScalarWhereWithAggregatesInput = {
   NOT?:
     | Prisma.ContributionScalarWhereWithAggregatesInput
     | Prisma.ContributionScalarWhereWithAggregatesInput[];
-  id?: Prisma.StringWithAggregatesFilter<"Contribution"> | string;
+  id?: Prisma.StringWithAggregatesFilter<'Contribution'> | string;
   status?:
-    | Prisma.EnumContributionStatusWithAggregatesFilter<"Contribution">
+    | Prisma.EnumContributionStatusWithAggregatesFilter<'Contribution'>
     | $Enums.ContributionStatus;
   amount?:
-    | Prisma.DecimalNullableWithAggregatesFilter<"Contribution">
+    | Prisma.DecimalNullableWithAggregatesFilter<'Contribution'>
     | runtime.Decimal
     | runtime.DecimalJsLike
     | number
     | string
     | null;
   paidAt?:
-    | Prisma.DateTimeNullableWithAggregatesFilter<"Contribution">
+    | Prisma.DateTimeNullableWithAggregatesFilter<'Contribution'>
     | Date
     | string
     | null;
   notes?:
-    | Prisma.StringNullableWithAggregatesFilter<"Contribution">
+    | Prisma.StringNullableWithAggregatesFilter<'Contribution'>
     | string
     | null;
   createdAt?:
-    | Prisma.DateTimeWithAggregatesFilter<"Contribution">
+    | Prisma.DateTimeWithAggregatesFilter<'Contribution'>
     | Date
     | string;
-  memberId?: Prisma.StringWithAggregatesFilter<"Contribution"> | string;
-  cycleId?: Prisma.StringWithAggregatesFilter<"Contribution"> | string;
+  memberId?: Prisma.StringWithAggregatesFilter<'Contribution'> | string;
+  cycleId?: Prisma.StringWithAggregatesFilter<'Contribution'> | string;
 };
 
 export type ContributionCreateInput = {
@@ -852,22 +852,22 @@ export type ContributionScalarWhereInput = {
   NOT?:
     | Prisma.ContributionScalarWhereInput
     | Prisma.ContributionScalarWhereInput[];
-  id?: Prisma.StringFilter<"Contribution"> | string;
+  id?: Prisma.StringFilter<'Contribution'> | string;
   status?:
-    | Prisma.EnumContributionStatusFilter<"Contribution">
+    | Prisma.EnumContributionStatusFilter<'Contribution'>
     | $Enums.ContributionStatus;
   amount?:
-    | Prisma.DecimalNullableFilter<"Contribution">
+    | Prisma.DecimalNullableFilter<'Contribution'>
     | runtime.Decimal
     | runtime.DecimalJsLike
     | number
     | string
     | null;
-  paidAt?: Prisma.DateTimeNullableFilter<"Contribution"> | Date | string | null;
-  notes?: Prisma.StringNullableFilter<"Contribution"> | string | null;
-  createdAt?: Prisma.DateTimeFilter<"Contribution"> | Date | string;
-  memberId?: Prisma.StringFilter<"Contribution"> | string;
-  cycleId?: Prisma.StringFilter<"Contribution"> | string;
+  paidAt?: Prisma.DateTimeNullableFilter<'Contribution'> | Date | string | null;
+  notes?: Prisma.StringNullableFilter<'Contribution'> | string | null;
+  createdAt?: Prisma.DateTimeFilter<'Contribution'> | Date | string;
+  memberId?: Prisma.StringFilter<'Contribution'> | string;
+  cycleId?: Prisma.StringFilter<'Contribution'> | string;
 };
 
 export type ContributionCreateWithoutCycleInput = {
@@ -1101,7 +1101,7 @@ export type ContributionSelect<
     member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>;
     cycle?: boolean | Prisma.MonthlyCycleDefaultArgs<ExtArgs>;
   },
-  ExtArgs["result"]["contribution"]
+  ExtArgs['result']['contribution']
 >;
 
 export type ContributionSelectCreateManyAndReturn<
@@ -1120,7 +1120,7 @@ export type ContributionSelectCreateManyAndReturn<
     member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>;
     cycle?: boolean | Prisma.MonthlyCycleDefaultArgs<ExtArgs>;
   },
-  ExtArgs["result"]["contribution"]
+  ExtArgs['result']['contribution']
 >;
 
 export type ContributionSelectUpdateManyAndReturn<
@@ -1139,7 +1139,7 @@ export type ContributionSelectUpdateManyAndReturn<
     member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>;
     cycle?: boolean | Prisma.MonthlyCycleDefaultArgs<ExtArgs>;
   },
-  ExtArgs["result"]["contribution"]
+  ExtArgs['result']['contribution']
 >;
 
 export type ContributionSelectScalar = {
@@ -1157,15 +1157,15 @@ export type ContributionOmit<
   ExtArgs extends
     runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetOmit<
-  | "id"
-  | "status"
-  | "amount"
-  | "paidAt"
-  | "notes"
-  | "createdAt"
-  | "memberId"
-  | "cycleId",
-  ExtArgs["result"]["contribution"]
+  | 'id'
+  | 'status'
+  | 'amount'
+  | 'paidAt'
+  | 'notes'
+  | 'createdAt'
+  | 'memberId'
+  | 'cycleId',
+  ExtArgs['result']['contribution']
 >;
 export type ContributionInclude<
   ExtArgs extends
@@ -1193,7 +1193,7 @@ export type $ContributionPayload<
   ExtArgs extends
     runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
-  name: "Contribution";
+  name: 'Contribution';
   objects: {
     member: Prisma.$MemberPayload<ExtArgs>;
     cycle: Prisma.$MonthlyCyclePayload<ExtArgs>;
@@ -1209,7 +1209,7 @@ export type $ContributionPayload<
       memberId: string;
       cycleId: string;
     },
-    ExtArgs["result"]["contribution"]
+    ExtArgs['result']['contribution']
   >;
   composites: {};
 };
@@ -1223,7 +1223,7 @@ export type ContributionCountArgs<
     runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = Omit<
   ContributionFindManyArgs,
-  "select" | "include" | "distinct" | "omit"
+  'select' | 'include' | 'distinct' | 'omit'
 > & {
   select?: ContributionCountAggregateInputType | true;
 };
@@ -1234,8 +1234,8 @@ export interface ContributionDelegate<
   GlobalOmitOptions = {},
 > {
   [K: symbol]: {
-    types: Prisma.TypeMap<ExtArgs>["model"]["Contribution"];
-    meta: { name: "Contribution" };
+    types: Prisma.TypeMap<ExtArgs>['model']['Contribution'];
+    meta: { name: 'Contribution' };
   };
   /**
    * Find zero or one Contribution that matches the filter.
@@ -1254,7 +1254,7 @@ export interface ContributionDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$ContributionPayload<ExtArgs>,
       T,
-      "findUnique",
+      'findUnique',
       GlobalOmitOptions
     > | null,
     null,
@@ -1280,7 +1280,7 @@ export interface ContributionDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$ContributionPayload<ExtArgs>,
       T,
-      "findUniqueOrThrow",
+      'findUniqueOrThrow',
       GlobalOmitOptions
     >,
     never,
@@ -1307,7 +1307,7 @@ export interface ContributionDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$ContributionPayload<ExtArgs>,
       T,
-      "findFirst",
+      'findFirst',
       GlobalOmitOptions
     > | null,
     null,
@@ -1335,7 +1335,7 @@ export interface ContributionDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$ContributionPayload<ExtArgs>,
       T,
-      "findFirstOrThrow",
+      'findFirstOrThrow',
       GlobalOmitOptions
     >,
     never,
@@ -1365,7 +1365,7 @@ export interface ContributionDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$ContributionPayload<ExtArgs>,
       T,
-      "findMany",
+      'findMany',
       GlobalOmitOptions
     >
   >;
@@ -1388,7 +1388,7 @@ export interface ContributionDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$ContributionPayload<ExtArgs>,
       T,
-      "create",
+      'create',
       GlobalOmitOptions
     >,
     never,
@@ -1440,7 +1440,7 @@ export interface ContributionDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$ContributionPayload<ExtArgs>,
       T,
-      "createManyAndReturn",
+      'createManyAndReturn',
       GlobalOmitOptions
     >
   >;
@@ -1463,7 +1463,7 @@ export interface ContributionDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$ContributionPayload<ExtArgs>,
       T,
-      "delete",
+      'delete',
       GlobalOmitOptions
     >,
     never,
@@ -1492,7 +1492,7 @@ export interface ContributionDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$ContributionPayload<ExtArgs>,
       T,
-      "update",
+      'update',
       GlobalOmitOptions
     >,
     never,
@@ -1571,7 +1571,7 @@ export interface ContributionDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$ContributionPayload<ExtArgs>,
       T,
-      "updateManyAndReturn",
+      'updateManyAndReturn',
       GlobalOmitOptions
     >
   >;
@@ -1599,7 +1599,7 @@ export interface ContributionDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$ContributionPayload<ExtArgs>,
       T,
-      "upsert",
+      'upsert',
       GlobalOmitOptions
     >,
     never,
@@ -1623,11 +1623,11 @@ export interface ContributionDelegate<
   count<T extends ContributionCountArgs>(
     args?: Prisma.Subset<T, ContributionCountArgs>,
   ): Prisma.PrismaPromise<
-    T extends runtime.Types.Utils.Record<"select", any>
-      ? T["select"] extends true
+    T extends runtime.Types.Utils.Record<'select', any>
+      ? T['select'] extends true
         ? number
         : Prisma.GetScalarType<
-            T["select"],
+            T['select'],
             ContributionCountAggregateOutputType
           >
       : number
@@ -1682,20 +1682,20 @@ export interface ContributionDelegate<
   groupBy<
     T extends ContributionGroupByArgs,
     HasSelectOrTake extends Prisma.Or<
-      Prisma.Extends<"skip", Prisma.Keys<T>>,
-      Prisma.Extends<"take", Prisma.Keys<T>>
+      Prisma.Extends<'skip', Prisma.Keys<T>>,
+      Prisma.Extends<'take', Prisma.Keys<T>>
     >,
     OrderByArg extends Prisma.True extends HasSelectOrTake
-      ? { orderBy: ContributionGroupByArgs["orderBy"] }
-      : { orderBy?: ContributionGroupByArgs["orderBy"] },
+      ? { orderBy: ContributionGroupByArgs['orderBy'] }
+      : { orderBy?: ContributionGroupByArgs['orderBy'] },
     OrderFields extends Prisma.ExcludeUnderscoreKeys<
-      Prisma.Keys<Prisma.MaybeTupleToUnion<T["orderBy"]>>
+      Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>
     >,
-    ByFields extends Prisma.MaybeTupleToUnion<T["by"]>,
+    ByFields extends Prisma.MaybeTupleToUnion<T['by']>,
     ByValid extends Prisma.Has<ByFields, OrderFields>,
-    HavingFields extends Prisma.GetHavingFields<T["having"]>,
+    HavingFields extends Prisma.GetHavingFields<T['having']>,
     HavingValid extends Prisma.Has<ByFields, HavingFields>,
-    ByEmpty extends T["by"] extends never[] ? Prisma.True : Prisma.False,
+    ByEmpty extends T['by'] extends never[] ? Prisma.True : Prisma.False,
     InputErrors extends ByEmpty extends Prisma.True
       ? `Error: "by" must not be empty.`
       : HavingValid extends Prisma.False
@@ -1706,13 +1706,13 @@ export interface ContributionDelegate<
                 ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
                 : [
                     Error,
-                    "Field ",
+                    'Field ',
                     P,
                     ` in "having" needs to be provided in "by"`,
                   ];
           }[HavingFields]
-        : "take" extends Prisma.Keys<T>
-          ? "orderBy" extends Prisma.Keys<T>
+        : 'take' extends Prisma.Keys<T>
+          ? 'orderBy' extends Prisma.Keys<T>
             ? ByValid extends Prisma.True
               ? {}
               : {
@@ -1721,8 +1721,8 @@ export interface ContributionDelegate<
                     : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                 }[OrderFields]
             : 'Error: If you provide "take", you also need to provide "orderBy"'
-          : "skip" extends Prisma.Keys<T>
-            ? "orderBy" extends Prisma.Keys<T>
+          : 'skip' extends Prisma.Keys<T>
+            ? 'orderBy' extends Prisma.Keys<T>
               ? ByValid extends Prisma.True
                 ? {}
                 : {
@@ -1763,14 +1763,14 @@ export interface Prisma__ContributionClient<
     runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > extends Prisma.PrismaPromise<T> {
-  readonly [Symbol.toStringTag]: "PrismaPromise";
+  readonly [Symbol.toStringTag]: 'PrismaPromise';
   member<T extends Prisma.MemberDefaultArgs<ExtArgs> = {}>(
     args?: Prisma.Subset<T, Prisma.MemberDefaultArgs<ExtArgs>>,
   ): Prisma.Prisma__MemberClient<
     | runtime.Types.Result.GetResult<
         Prisma.$MemberPayload<ExtArgs>,
         T,
-        "findUniqueOrThrow",
+        'findUniqueOrThrow',
         GlobalOmitOptions
       >
     | Null,
@@ -1784,7 +1784,7 @@ export interface Prisma__ContributionClient<
     | runtime.Types.Result.GetResult<
         Prisma.$MonthlyCyclePayload<ExtArgs>,
         T,
-        "findUniqueOrThrow",
+        'findUniqueOrThrow',
         GlobalOmitOptions
       >
     | Null,
@@ -1834,14 +1834,14 @@ export interface Prisma__ContributionClient<
  * Fields of the Contribution model
  */
 export interface ContributionFieldRefs {
-  readonly id: Prisma.FieldRef<"Contribution", "String">;
-  readonly status: Prisma.FieldRef<"Contribution", "ContributionStatus">;
-  readonly amount: Prisma.FieldRef<"Contribution", "Decimal">;
-  readonly paidAt: Prisma.FieldRef<"Contribution", "DateTime">;
-  readonly notes: Prisma.FieldRef<"Contribution", "String">;
-  readonly createdAt: Prisma.FieldRef<"Contribution", "DateTime">;
-  readonly memberId: Prisma.FieldRef<"Contribution", "String">;
-  readonly cycleId: Prisma.FieldRef<"Contribution", "String">;
+  readonly id: Prisma.FieldRef<'Contribution', 'String'>;
+  readonly status: Prisma.FieldRef<'Contribution', 'ContributionStatus'>;
+  readonly amount: Prisma.FieldRef<'Contribution', 'Decimal'>;
+  readonly paidAt: Prisma.FieldRef<'Contribution', 'DateTime'>;
+  readonly notes: Prisma.FieldRef<'Contribution', 'String'>;
+  readonly createdAt: Prisma.FieldRef<'Contribution', 'DateTime'>;
+  readonly memberId: Prisma.FieldRef<'Contribution', 'String'>;
+  readonly cycleId: Prisma.FieldRef<'Contribution', 'String'>;
 }
 
 // Custom InputTypes

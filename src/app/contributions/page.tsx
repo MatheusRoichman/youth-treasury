@@ -1,9 +1,9 @@
-import { CalendarDays } from "lucide-react";
-import { ContributionsTable } from "@/components/contributions/contributions-table";
-import { OpenMonthDialog } from "@/components/contributions/open-month-dialog";
-import { Badge } from "@/components/ui/badge";
-import { getActiveCycleWithContributions } from "@/lib/db/contributions";
-import { getSettings } from "@/lib/db/settings";
+import { CalendarDays } from 'lucide-react';
+import { ContributionsTable } from '@/components/contributions/contributions-table';
+import { OpenMonthDialog } from '@/components/contributions/open-month-dialog';
+import { Badge } from '@/components/ui/badge';
+import { getActiveCycleWithContributions } from '@/lib/db/contributions';
+import { getSettings } from '@/lib/db/settings';
 
 export default async function ContributionsPage() {
   const [cycleRaw, settings] = await Promise.all([
@@ -35,7 +35,7 @@ export default async function ContributionsPage() {
           <div>
             <div className="flex items-center gap-3">
               <h2 className="text-2xl font-bold text-gray-900">
-                {cycle ? `Mensalidade ${cycle.label}` : "Contribuições"}
+                {cycle ? `Mensalidade ${cycle.label}` : 'Contribuições'}
               </h2>
               {cycle?.isActive && (
                 <Badge className="text-xs tracking-wide">MÊS ATIVO</Badge>

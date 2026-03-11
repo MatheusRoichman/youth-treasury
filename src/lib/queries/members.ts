@@ -1,4 +1,4 @@
 export const memberKeys = {
-  all: ["members"] as const,
-  list: () => [...memberKeys.all, "list"] as const,
+  all: ['members'] as const,
+  list: () => [...memberKeys.all, 'list'] as const,
 };

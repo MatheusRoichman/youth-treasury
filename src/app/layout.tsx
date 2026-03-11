@@ -1,18 +1,18 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Sidebar } from "@/components/sidebar";
-import { Toaster } from "@/components/ui/sonner";
-import { Providers } from "@/lib/providers";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Geist } from 'next/font/google';
+import { Sidebar } from '@/components/sidebar';
+import { Toaster } from '@/components/ui/sonner';
+import { Providers } from '@/lib/providers';
+import './globals.css';
 
 const geistSans = Geist({
-  variable: "--font-sans",
-  subsets: ["latin"],
+  variable: '--font-sans',
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: "Tesouraria Jovem",
-  description: "Gestão financeira do departamento de jovens",
+  title: 'Tesouraria Jovem',
+  description: 'Gestão financeira do departamento de jovens',
 };
 
 export default function RootLayout({

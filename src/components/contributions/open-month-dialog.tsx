@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { z } from 'zod';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -14,7 +14,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -22,38 +22,38 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { openNewMonth } from "@/lib/actions/contributions";
+} from '@/components/ui/select';
+import { openNewMonth } from '@/lib/actions/contributions';
 
 const schema = z.object({
   month: z.number().min(1).max(12),
   year: z.number().min(2020).max(2100),
-  goalAmount: z.number().positive("Meta deve ser positiva"),
+  goalAmount: z.number().positive('Meta deve ser positiva'),
 });
 
 type FormValues = z.infer<typeof schema>;
 
 const MONTHS = [
-  "Janeiro",
-  "Fevereiro",
-  "Março",
-  "Abril",
-  "Maio",
-  "Junho",
-  "Julho",
-  "Agosto",
-  "Setembro",
-  "Outubro",
-  "Novembro",
-  "Dezembro",
+  'Janeiro',
+  'Fevereiro',
+  'Março',
+  'Abril',
+  'Maio',
+  'Junho',
+  'Julho',
+  'Agosto',
+  'Setembro',
+  'Outubro',
+  'Novembro',
+  'Dezembro',
 ];
 
 interface Props {
@@ -77,11 +77,11 @@ export function OpenMonthDialog({ defaultGoal, trigger }: Props) {
   async function onSubmit(values: FormValues) {
     const result = await openNewMonth(values);
     if (result.success) {
-      toast.success("Novo mês aberto com sucesso!");
+      toast.success('Novo mês aberto com sucesso!');
       setOpen(false);
       form.reset();
     } else {
-      toast.error(result.error ?? "Erro ao abrir mês");
+      toast.error(result.error ?? 'Erro ao abrir mês');
     }
   }
 
@@ -168,7 +168,7 @@ export function OpenMonthDialog({ defaultGoal, trigger }: Props) {
                 Cancelar
               </Button>
               <Button type="submit" disabled={form.formState.isSubmitting}>
-                {form.formState.isSubmitting ? "Abrindo..." : "Abrir Mês"}
+                {form.formState.isSubmitting ? 'Abrindo...' : 'Abrir Mês'}
               </Button>
             </DialogFooter>
           </form>

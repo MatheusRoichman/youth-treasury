@@ -1,13 +1,13 @@
-import { Info, TrendingDown, TrendingUp } from "lucide-react";
-import { RecentActivities } from "@/components/dashboard/recent-activities";
+import { Info, TrendingDown, TrendingUp } from 'lucide-react';
+import { RecentActivities } from '@/components/dashboard/recent-activities';
 import {
   getActiveCycle,
   getCurrentBalance,
   getMonthlySummary,
   getPreviousCycle,
   getRecentTransactions,
-} from "@/lib/db/dashboard";
-import { formatCurrency } from "@/lib/utils";
+} from '@/lib/db/dashboard';
+import { formatCurrency } from '@/lib/utils';
 
 export default async function DashboardPage() {
   const [balance, activeCycle, recentTransactions] = await Promise.all([
@@ -75,10 +75,10 @@ export default async function DashboardPage() {
               </p>
               {inChange !== null && (
                 <p
-                  className={`mt-1 flex items-center gap-1 text-xs font-semibold ${inChange >= 0 ? "text-green-500" : "text-red-500"}`}
+                  className={`mt-1 flex items-center gap-1 text-xs font-semibold ${inChange >= 0 ? 'text-green-500' : 'text-red-500'}`}
                 >
                   <TrendingUp className="h-3 w-3" />
-                  {inChange >= 0 ? "+" : ""}
+                  {inChange >= 0 ? '+' : ''}
                   {inChange.toFixed(0)}% vs mês anterior
                 </p>
               )}
@@ -97,10 +97,10 @@ export default async function DashboardPage() {
               </p>
               {outChange !== null && (
                 <p
-                  className={`mt-1 flex items-center gap-1 text-xs font-semibold ${outChange <= 0 ? "text-green-500" : "text-red-500"}`}
+                  className={`mt-1 flex items-center gap-1 text-xs font-semibold ${outChange <= 0 ? 'text-green-500' : 'text-red-500'}`}
                 >
                   <TrendingDown className="h-3 w-3" />
-                  {outChange >= 0 ? "+" : ""}
+                  {outChange >= 0 ? '+' : ''}
                   {outChange.toFixed(0)}% vs mês anterior
                 </p>
               )}

@@ -12,11 +12,11 @@
  * 🟢 You can import this file directly.
  */
 
-import * as Prisma from "./internal/prismaNamespaceBrowser";
+import * as Prisma from './internal/prismaNamespaceBrowser';
 export { Prisma };
 
-export * as $Enums from "./enums";
-export * from "./enums";
+export * as $Enums from './enums';
+export * from './enums';
 /**
  * Model Member
  *

@@ -1,8 +1,8 @@
-import { http } from "../http";
+import { http } from '../http';
 
 export interface TransactionDTO {
   id: string;
-  type: "CONTRIBUTION" | "EXPENSE";
+  type: 'CONTRIBUTION' | 'EXPENSE';
   description: string;
   amount: string;
   date: string;
@@ -12,6 +12,6 @@ export interface TransactionDTO {
 }
 
 export async function fetchRecentTransactions(): Promise<TransactionDTO[]> {
-  const { data } = await http.get<TransactionDTO[]>("/dashboard/recent");
+  const { data } = await http.get<TransactionDTO[]>('/dashboard/recent');
   return data;
 }

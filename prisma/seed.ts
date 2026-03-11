@@ -1,15 +1,15 @@
-import path from "node:path";
-import { PrismaPg } from "@prisma/adapter-pg";
-import { config } from "dotenv";
-import { Pool } from "pg";
+import path from 'node:path';
+import { PrismaPg } from '@prisma/adapter-pg';
+import { config } from 'dotenv';
+import { Pool } from 'pg';
 import {
   type ContributionStatus,
   PrismaClient,
   TransactionCategory,
   TransactionType,
-} from "../src/generated/prisma/client";
+} from '../src/generated/prisma/client';
 
-config({ path: path.join(process.cwd(), ".env") });
+config({ path: path.join(process.cwd(), '.env') });
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 const adapter = new PrismaPg(pool);
@@ -23,25 +23,25 @@ function deriveInitials(name: string): string {
 }
 
 const MEMBERS = [
-  "Ana Carolina Silva",
-  "Bruno Henrique Oliveira",
-  "Carla Fernanda Santos",
-  "Diego Augusto Lima",
-  "Eduarda Cristina Pereira",
-  "Felipe Rodrigues Alves",
-  "Gabriela Moura Costa",
-  "Henrique José Barbosa",
-  "Isabela Nascimento Ferreira",
-  "João Paulo Ribeiro",
-  "Larissa Beatriz Carvalho",
-  "Marcelo Andrade Souza",
-  "Natália Gomes Martins",
-  "Pedro Lucas Araújo",
-  "Rafaela Cristina Mendes",
+  'Ana Carolina Silva',
+  'Bruno Henrique Oliveira',
+  'Carla Fernanda Santos',
+  'Diego Augusto Lima',
+  'Eduarda Cristina Pereira',
+  'Felipe Rodrigues Alves',
+  'Gabriela Moura Costa',
+  'Henrique José Barbosa',
+  'Isabela Nascimento Ferreira',
+  'João Paulo Ribeiro',
+  'Larissa Beatriz Carvalho',
+  'Marcelo Andrade Souza',
+  'Natália Gomes Martins',
+  'Pedro Lucas Araújo',
+  'Rafaela Cristina Mendes',
 ];
 
 async function main() {
-  console.log("🌱 Seeding database...");
+  console.log('🌱 Seeding database...');
 
   await prisma.transaction.deleteMany();
   await prisma.contribution.deleteMany();
@@ -51,10 +51,10 @@ async function main() {
 
   await prisma.settings.create({
     data: {
-      id: "singleton",
-      churchName: "Igreja Renovação",
-      departmentName: "Departamento de Jovens",
-      treasurerName: "Carlos Eduardo",
+      id: 'singleton',
+      churchName: 'Igreja Renovação',
+      departmentName: 'Departamento de Jovens',
+      treasurerName: 'Carlos Eduardo',
       memberContributionAmount: 50,
     },
   });
@@ -65,9 +65,9 @@ async function main() {
         data: {
           name,
           initials: deriveInitials(name),
-          status: "ACTIVE",
+          status: 'ACTIVE',
           phone: `(11) 9${String(Math.floor(Math.random() * 90000000) + 10000000)}`,
-          email: `${name.split(" ")[0].toLowerCase()}.${name.split(" ")[name.split(" ").length - 1].toLowerCase()}@email.com`,
+          email: `${name.split(' ')[0].toLowerCase()}.${name.split(' ')[name.split(' ').length - 1].toLowerCase()}@email.com`,
         },
       }),
     ),
@@ -77,18 +77,18 @@ async function main() {
   const month = now.getMonth() + 1;
   const year = now.getFullYear();
   const monthNames = [
-    "Janeiro",
-    "Fevereiro",
-    "Março",
-    "Abril",
-    "Maio",
-    "Junho",
-    "Julho",
-    "Agosto",
-    "Setembro",
-    "Outubro",
-    "Novembro",
-    "Dezembro",
+    'Janeiro',
+    'Fevereiro',
+    'Março',
+    'Abril',
+    'Maio',
+    'Junho',
+    'Julho',
+    'Agosto',
+    'Setembro',
+    'Outubro',
+    'Novembro',
+    'Dezembro',
   ];
 
   const activeCycle = await prisma.monthlyCycle.create({
@@ -114,21 +114,21 @@ async function main() {
   });
 
   const contributionStatuses: ContributionStatus[] = [
-    "PAID",
-    "PAID",
-    "PAID",
-    "PAID",
-    "PAID",
-    "PAID",
-    "PAID",
-    "PAID",
-    "PAID",
-    "PENDING",
-    "PENDING",
-    "PENDING",
-    "PENDING",
-    "EXEMPT",
-    "EXEMPT",
+    'PAID',
+    'PAID',
+    'PAID',
+    'PAID',
+    'PAID',
+    'PAID',
+    'PAID',
+    'PAID',
+    'PAID',
+    'PENDING',
+    'PENDING',
+    'PENDING',
+    'PENDING',
+    'EXEMPT',
+    'EXEMPT',
   ];
 
   for (let i = 0; i < members.length; i++) {
@@ -138,9 +138,9 @@ async function main() {
         memberId: members[i].id,
         cycleId: activeCycle.id,
         status,
-        amount: status === "PAID" ? 50 : null,
+        amount: status === 'PAID' ? 50 : null,
         paidAt:
-          status === "PAID"
+          status === 'PAID'
             ? new Date(year, month - 1, Math.floor(Math.random() * 15) + 1)
             : null,
       },
@@ -152,7 +152,7 @@ async function main() {
       data: {
         memberId: member.id,
         cycleId: prevCycle.id,
-        status: "PAID",
+        status: 'PAID',
         amount: 50,
         paidAt: new Date(
           prevYear,
@@ -171,7 +171,7 @@ async function main() {
       data: {
         type: TransactionType.CONTRIBUTION,
         category: TransactionCategory.MONTHLY_FEE,
-        description: "Mensalidade",
+        description: 'Mensalidade',
         memberId: member.id,
         cycleId: activeCycle.id,
         amount: 50,
@@ -182,34 +182,34 @@ async function main() {
 
   const expenses = [
     {
-      description: "Lanche do ensaio",
+      description: 'Lanche do ensaio',
       amount: 85.5,
       date: dayInMonth(3),
-      vendor: "Padaria Central",
+      vendor: 'Padaria Central',
     },
     {
-      description: "Material de louvor",
+      description: 'Material de louvor',
       amount: 120,
       date: dayInMonth(7),
-      vendor: "Som e Louvor LTDA",
+      vendor: 'Som e Louvor LTDA',
     },
     {
-      description: "Decoração da célula",
+      description: 'Decoração da célula',
       amount: 45.9,
       date: dayInMonth(12),
-      vendor: "Papelaria Criativa",
+      vendor: 'Papelaria Criativa',
     },
     {
-      description: "Passagem de ônibus",
+      description: 'Passagem de ônibus',
       amount: 38,
       date: dayInMonth(15),
       vendor: null,
     },
     {
-      description: "Impressão de partituras",
+      description: 'Impressão de partituras',
       amount: 22.5,
       date: dayInMonth(18),
-      vendor: "Copy Center",
+      vendor: 'Copy Center',
     },
   ];
 
@@ -231,14 +231,14 @@ async function main() {
     data: {
       type: TransactionType.CONTRIBUTION,
       category: TransactionCategory.OFFERING,
-      description: "Oferta do culto jovem",
+      description: 'Oferta do culto jovem',
       cycleId: activeCycle.id,
       amount: 230,
       date: dayInMonth(5),
     },
   });
 
-  console.log("✅ Seed completed!");
+  console.log('✅ Seed completed!');
   console.log(`   ${members.length} membros`);
   console.log(
     `   2 ciclos (ativo: ${activeCycle.label}, anterior: ${prevCycle.label})`,

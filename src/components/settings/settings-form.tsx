@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { z } from 'zod';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -13,23 +13,23 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { updateSettings } from "@/lib/actions/settings";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { updateSettings } from '@/lib/actions/settings';
 
 const schema = z.object({
   churchName: z
     .string()
-    .min(2, "Nome da igreja deve ter pelo menos 2 caracteres"),
+    .min(2, 'Nome da igreja deve ter pelo menos 2 caracteres'),
   departmentName: z
     .string()
-    .min(2, "Nome do departamento deve ter pelo menos 2 caracteres"),
+    .min(2, 'Nome do departamento deve ter pelo menos 2 caracteres'),
   treasurerName: z
     .string()
-    .min(2, "Nome do tesoureiro deve ter pelo menos 2 caracteres"),
+    .min(2, 'Nome do tesoureiro deve ter pelo menos 2 caracteres'),
   memberContributionAmount: z
     .number()
-    .min(0, "Valor deve ser maior ou igual a zero"),
+    .min(0, 'Valor deve ser maior ou igual a zero'),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -47,9 +47,9 @@ export function SettingsForm({ defaultValues }: Props) {
   async function onSubmit(values: FormValues) {
     const result = await updateSettings(values);
     if (result.success) {
-      toast.success("Configurações salvas!");
+      toast.success('Configurações salvas!');
     } else {
-      toast.error(result.error ?? "Erro ao salvar configurações");
+      toast.error(result.error ?? 'Erro ao salvar configurações');
     }
   }
 
@@ -159,8 +159,8 @@ export function SettingsForm({ defaultValues }: Props) {
         <div className="flex justify-end">
           <Button type="submit" disabled={form.formState.isSubmitting}>
             {form.formState.isSubmitting
-              ? "Salvando..."
-              : "Salvar Configurações"}
+              ? 'Salvando...'
+              : 'Salvar Configurações'}
           </Button>
         </div>
       </form>

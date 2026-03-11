@@ -14,11 +14,11 @@
  * model files in the `model` directory!
  */
 
-import * as runtime from "@prisma/client/runtime/client";
-import type * as Prisma from "../models";
-import { type PrismaClient } from "./class";
+import * as runtime from '@prisma/client/runtime/client';
+import type * as Prisma from '../models';
+import { type PrismaClient } from './class';
 
-export type * from "../models";
+export type * from '../models';
 
 export type DMMF = typeof runtime.DMMF;
 
@@ -97,8 +97,8 @@ export type PrismaVersion = {
  * Query Engine version: 94a226be1cf2967af2541cca5529f0f7ba866919
  */
 export const prismaVersion: PrismaVersion = {
-  client: "7.4.2",
-  engine: "94a226be1cf2967af2541cca5529f0f7ba866919",
+  client: '7.4.2',
+  engine: '94a226be1cf2967af2541cca5529f0f7ba866919',
 };
 
 /**
@@ -180,9 +180,9 @@ export type Subset<T, U> = {
 export type SelectSubset<T, U> = {
   [key in keyof T]: key extends keyof U ? T[key] : never;
 } & (T extends SelectAndInclude
-  ? "Please either choose `select` or `include`."
+  ? 'Please either choose `select` or `include`.'
   : T extends SelectAndOmit
-    ? "Please either choose `select` or `omit`."
+    ? 'Please either choose `select` or `omit`.'
     : {});
 
 /**
@@ -365,13 +365,13 @@ export type GetScalarType<T, O> = O extends object
 
 type FieldPaths<
   T,
-  U = Omit<T, "_avg" | "_sum" | "_count" | "_min" | "_max">,
+  U = Omit<T, '_avg' | '_sum' | '_count' | '_min' | '_max'>,
 > = IsObject<T> extends True ? U : T;
 
 export type GetHavingFields<T> = {
   [K in keyof T]: Or<
-    Or<Extends<"OR", K>, Extends<"AND", K>>,
-    Extends<"NOT", K>
+    Or<Extends<'OR', K>, Extends<'AND', K>>,
+    Extends<'NOT', K>
   > extends True
     ? // infer is only needed to not hit TS limit
       // based on the brilliant idea of Pierre-Antoine Mills
@@ -415,11 +415,11 @@ type FieldRefInputType<Model, FieldType> = Model extends never
   : FieldRef<Model, FieldType>;
 
 export const ModelName = {
-  Member: "Member",
-  MonthlyCycle: "MonthlyCycle",
-  Contribution: "Contribution",
-  Transaction: "Transaction",
-  Settings: "Settings",
+  Member: 'Member',
+  MonthlyCycle: 'MonthlyCycle',
+  Contribution: 'Contribution',
+  Transaction: 'Transaction',
+  Settings: 'Settings',
 } as const;
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -429,7 +429,7 @@ export interface TypeMapCb<GlobalOmitOptions = {}>
     { extArgs: runtime.Types.Extensions.InternalArgs },
     runtime.Types.Utils.Record<string, any>
   > {
-  returns: TypeMap<this["params"]["extArgs"], GlobalOmitOptions>;
+  returns: TypeMap<this['params']['extArgs'], GlobalOmitOptions>;
 }
 
 export type TypeMap<
@@ -442,11 +442,11 @@ export type TypeMap<
   };
   meta: {
     modelProps:
-      | "member"
-      | "monthlyCycle"
-      | "contribution"
-      | "transaction"
-      | "settings";
+      | 'member'
+      | 'monthlyCycle'
+      | 'contribution'
+      | 'transaction'
+      | 'settings';
     txIsolationLevel: TransactionIsolationLevel;
   };
   model: {
@@ -860,100 +860,100 @@ export type TypeMap<
  */
 
 export const TransactionIsolationLevel = runtime.makeStrictEnum({
-  ReadUncommitted: "ReadUncommitted",
-  ReadCommitted: "ReadCommitted",
-  RepeatableRead: "RepeatableRead",
-  Serializable: "Serializable",
+  ReadUncommitted: 'ReadUncommitted',
+  ReadCommitted: 'ReadCommitted',
+  RepeatableRead: 'RepeatableRead',
+  Serializable: 'Serializable',
 } as const);
 
 export type TransactionIsolationLevel =
   (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel];
 
 export const MemberScalarFieldEnum = {
-  id: "id",
-  name: "name",
-  initials: "initials",
-  phone: "phone",
-  email: "email",
-  status: "status",
-  createdAt: "createdAt",
+  id: 'id',
+  name: 'name',
+  initials: 'initials',
+  phone: 'phone',
+  email: 'email',
+  status: 'status',
+  createdAt: 'createdAt',
 } as const;
 
 export type MemberScalarFieldEnum =
   (typeof MemberScalarFieldEnum)[keyof typeof MemberScalarFieldEnum];
 
 export const MonthlyCycleScalarFieldEnum = {
-  id: "id",
-  month: "month",
-  year: "year",
-  label: "label",
-  goalAmount: "goalAmount",
-  isActive: "isActive",
-  createdAt: "createdAt",
+  id: 'id',
+  month: 'month',
+  year: 'year',
+  label: 'label',
+  goalAmount: 'goalAmount',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
 } as const;
 
 export type MonthlyCycleScalarFieldEnum =
   (typeof MonthlyCycleScalarFieldEnum)[keyof typeof MonthlyCycleScalarFieldEnum];
 
 export const ContributionScalarFieldEnum = {
-  id: "id",
-  status: "status",
-  amount: "amount",
-  paidAt: "paidAt",
-  notes: "notes",
-  createdAt: "createdAt",
-  memberId: "memberId",
-  cycleId: "cycleId",
+  id: 'id',
+  status: 'status',
+  amount: 'amount',
+  paidAt: 'paidAt',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  memberId: 'memberId',
+  cycleId: 'cycleId',
 } as const;
 
 export type ContributionScalarFieldEnum =
   (typeof ContributionScalarFieldEnum)[keyof typeof ContributionScalarFieldEnum];
 
 export const TransactionScalarFieldEnum = {
-  id: "id",
-  type: "type",
-  category: "category",
-  description: "description",
-  vendorName: "vendorName",
-  amount: "amount",
-  date: "date",
-  createdAt: "createdAt",
-  memberId: "memberId",
-  cycleId: "cycleId",
+  id: 'id',
+  type: 'type',
+  category: 'category',
+  description: 'description',
+  vendorName: 'vendorName',
+  amount: 'amount',
+  date: 'date',
+  createdAt: 'createdAt',
+  memberId: 'memberId',
+  cycleId: 'cycleId',
 } as const;
 
 export type TransactionScalarFieldEnum =
   (typeof TransactionScalarFieldEnum)[keyof typeof TransactionScalarFieldEnum];
 
 export const SettingsScalarFieldEnum = {
-  id: "id",
-  churchName: "churchName",
-  departmentName: "departmentName",
-  treasurerName: "treasurerName",
-  memberContributionAmount: "memberContributionAmount",
-  updatedAt: "updatedAt",
+  id: 'id',
+  churchName: 'churchName',
+  departmentName: 'departmentName',
+  treasurerName: 'treasurerName',
+  memberContributionAmount: 'memberContributionAmount',
+  updatedAt: 'updatedAt',
 } as const;
 
 export type SettingsScalarFieldEnum =
   (typeof SettingsScalarFieldEnum)[keyof typeof SettingsScalarFieldEnum];
 
 export const SortOrder = {
-  asc: "asc",
-  desc: "desc",
+  asc: 'asc',
+  desc: 'desc',
 } as const;
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder];
 
 export const QueryMode = {
-  default: "default",
-  insensitive: "insensitive",
+  default: 'default',
+  insensitive: 'insensitive',
 } as const;
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode];
 
 export const NullsOrder = {
-  first: "first",
-  last: "last",
+  first: 'first',
+  last: 'last',
 } as const;
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder];
@@ -967,7 +967,7 @@ export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder];
  */
 export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<
   $PrismaModel,
-  "String"
+  'String'
 >;
 
 /**
@@ -975,7 +975,7 @@ export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<
  */
 export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<
   $PrismaModel,
-  "String[]"
+  'String[]'
 >;
 
 /**
@@ -983,7 +983,7 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<
  */
 export type EnumMemberStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
   $PrismaModel,
-  "MemberStatus"
+  'MemberStatus'
 >;
 
 /**
@@ -991,7 +991,7 @@ export type EnumMemberStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
  */
 export type ListEnumMemberStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
   $PrismaModel,
-  "MemberStatus[]"
+  'MemberStatus[]'
 >;
 
 /**
@@ -999,7 +999,7 @@ export type ListEnumMemberStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
  */
 export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<
   $PrismaModel,
-  "DateTime"
+  'DateTime'
 >;
 
 /**
@@ -1007,7 +1007,7 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<
   $PrismaModel,
-  "DateTime[]"
+  'DateTime[]'
 >;
 
 /**
@@ -1015,7 +1015,7 @@ export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<
  */
 export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<
   $PrismaModel,
-  "Int"
+  'Int'
 >;
 
 /**
@@ -1023,7 +1023,7 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<
   $PrismaModel,
-  "Int[]"
+  'Int[]'
 >;
 
 /**
@@ -1031,7 +1031,7 @@ export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<
  */
 export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<
   $PrismaModel,
-  "Decimal"
+  'Decimal'
 >;
 
 /**
@@ -1039,7 +1039,7 @@ export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<
  */
 export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<
   $PrismaModel,
-  "Decimal[]"
+  'Decimal[]'
 >;
 
 /**
@@ -1047,53 +1047,53 @@ export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<
  */
 export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<
   $PrismaModel,
-  "Boolean"
+  'Boolean'
 >;
 
 /**
  * Reference to a field of type 'ContributionStatus'
  */
 export type EnumContributionStatusFieldRefInput<$PrismaModel> =
-  FieldRefInputType<$PrismaModel, "ContributionStatus">;
+  FieldRefInputType<$PrismaModel, 'ContributionStatus'>;
 
 /**
  * Reference to a field of type 'ContributionStatus[]'
  */
 export type ListEnumContributionStatusFieldRefInput<$PrismaModel> =
-  FieldRefInputType<$PrismaModel, "ContributionStatus[]">;
+  FieldRefInputType<$PrismaModel, 'ContributionStatus[]'>;
 
 /**
  * Reference to a field of type 'TransactionType'
  */
 export type EnumTransactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<
   $PrismaModel,
-  "TransactionType"
+  'TransactionType'
 >;
 
 /**
  * Reference to a field of type 'TransactionType[]'
  */
 export type ListEnumTransactionTypeFieldRefInput<$PrismaModel> =
-  FieldRefInputType<$PrismaModel, "TransactionType[]">;
+  FieldRefInputType<$PrismaModel, 'TransactionType[]'>;
 
 /**
  * Reference to a field of type 'TransactionCategory'
  */
 export type EnumTransactionCategoryFieldRefInput<$PrismaModel> =
-  FieldRefInputType<$PrismaModel, "TransactionCategory">;
+  FieldRefInputType<$PrismaModel, 'TransactionCategory'>;
 
 /**
  * Reference to a field of type 'TransactionCategory[]'
  */
 export type ListEnumTransactionCategoryFieldRefInput<$PrismaModel> =
-  FieldRefInputType<$PrismaModel, "TransactionCategory[]">;
+  FieldRefInputType<$PrismaModel, 'TransactionCategory[]'>;
 
 /**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<
   $PrismaModel,
-  "Float"
+  'Float'
 >;
 
 /**
@@ -1101,7 +1101,7 @@ export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<
  */
 export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<
   $PrismaModel,
-  "Float[]"
+  'Float[]'
 >;
 
 /**
@@ -1113,12 +1113,12 @@ export type BatchPayload = {
 
 export const defineExtension = runtime.Extensions
   .defineExtension as unknown as runtime.Types.Extensions.ExtendsHook<
-  "define",
+  'define',
   TypeMapCb,
   runtime.Types.Extensions.DefaultArgs
 >;
 export type DefaultPrismaClient = PrismaClient;
-export type ErrorFormat = "pretty" | "colorless" | "minimal";
+export type ErrorFormat = 'pretty' | 'colorless' | 'minimal';
 export type PrismaClientOptions = (
   | {
       /**
@@ -1215,16 +1215,16 @@ export type GlobalOmitConfig = {
 };
 
 /* Types for Logging */
-export type LogLevel = "info" | "query" | "warn" | "error";
+export type LogLevel = 'info' | 'query' | 'warn' | 'error';
 export type LogDefinition = {
   level: LogLevel;
-  emit: "stdout" | "event";
+  emit: 'stdout' | 'event';
 };
 
 export type CheckIsLogLevel<T> = T extends LogLevel ? T : never;
 
 export type GetLogType<T> = CheckIsLogLevel<
-  T extends LogDefinition ? T["level"] : T
+  T extends LogDefinition ? T['level'] : T
 >;
 
 export type GetEvents<T extends any[]> = T extends Array<
@@ -1249,27 +1249,27 @@ export type LogEvent = {
 /* End Types for Logging */
 
 export type PrismaAction =
-  | "findUnique"
-  | "findUniqueOrThrow"
-  | "findMany"
-  | "findFirst"
-  | "findFirstOrThrow"
-  | "create"
-  | "createMany"
-  | "createManyAndReturn"
-  | "update"
-  | "updateMany"
-  | "updateManyAndReturn"
-  | "upsert"
-  | "delete"
-  | "deleteMany"
-  | "executeRaw"
-  | "queryRaw"
-  | "aggregate"
-  | "count"
-  | "runCommandRaw"
-  | "findRaw"
-  | "groupBy";
+  | 'findUnique'
+  | 'findUniqueOrThrow'
+  | 'findMany'
+  | 'findFirst'
+  | 'findFirstOrThrow'
+  | 'create'
+  | 'createMany'
+  | 'createManyAndReturn'
+  | 'update'
+  | 'updateMany'
+  | 'updateManyAndReturn'
+  | 'upsert'
+  | 'delete'
+  | 'deleteMany'
+  | 'executeRaw'
+  | 'queryRaw'
+  | 'aggregate'
+  | 'count'
+  | 'runCommandRaw'
+  | 'findRaw'
+  | 'groupBy';
 
 /**
  * `PrismaClient` proxy available in interactive transactions.

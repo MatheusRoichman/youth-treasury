@@ -14,10 +14,10 @@
  * model files in the `model` directory!
  */
 
-import * as runtime from "@prisma/client/runtime/index-browser";
+import * as runtime from '@prisma/client/runtime/index-browser';
 
-export type * from "../models";
-export type * from "./prismaNamespace";
+export type * from '../models';
+export type * from './prismaNamespace';
 
 export const Decimal = runtime.Decimal;
 
@@ -54,11 +54,11 @@ export const JsonNull = runtime.JsonNull;
 export const AnyNull = runtime.AnyNull;
 
 export const ModelName = {
-  Member: "Member",
-  MonthlyCycle: "MonthlyCycle",
-  Contribution: "Contribution",
-  Transaction: "Transaction",
-  Settings: "Settings",
+  Member: 'Member',
+  MonthlyCycle: 'MonthlyCycle',
+  Contribution: 'Contribution',
+  Transaction: 'Transaction',
+  Settings: 'Settings',
 } as const;
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -68,100 +68,100 @@ export type ModelName = (typeof ModelName)[keyof typeof ModelName];
  */
 
 export const TransactionIsolationLevel = runtime.makeStrictEnum({
-  ReadUncommitted: "ReadUncommitted",
-  ReadCommitted: "ReadCommitted",
-  RepeatableRead: "RepeatableRead",
-  Serializable: "Serializable",
+  ReadUncommitted: 'ReadUncommitted',
+  ReadCommitted: 'ReadCommitted',
+  RepeatableRead: 'RepeatableRead',
+  Serializable: 'Serializable',
 } as const);
 
 export type TransactionIsolationLevel =
   (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel];
 
 export const MemberScalarFieldEnum = {
-  id: "id",
-  name: "name",
-  initials: "initials",
-  phone: "phone",
-  email: "email",
-  status: "status",
-  createdAt: "createdAt",
+  id: 'id',
+  name: 'name',
+  initials: 'initials',
+  phone: 'phone',
+  email: 'email',
+  status: 'status',
+  createdAt: 'createdAt',
 } as const;
 
 export type MemberScalarFieldEnum =
   (typeof MemberScalarFieldEnum)[keyof typeof MemberScalarFieldEnum];
 
 export const MonthlyCycleScalarFieldEnum = {
-  id: "id",
-  month: "month",
-  year: "year",
-  label: "label",
-  goalAmount: "goalAmount",
-  isActive: "isActive",
-  createdAt: "createdAt",
+  id: 'id',
+  month: 'month',
+  year: 'year',
+  label: 'label',
+  goalAmount: 'goalAmount',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
 } as const;
 
 export type MonthlyCycleScalarFieldEnum =
   (typeof MonthlyCycleScalarFieldEnum)[keyof typeof MonthlyCycleScalarFieldEnum];
 
 export const ContributionScalarFieldEnum = {
-  id: "id",
-  status: "status",
-  amount: "amount",
-  paidAt: "paidAt",
-  notes: "notes",
-  createdAt: "createdAt",
-  memberId: "memberId",
-  cycleId: "cycleId",
+  id: 'id',
+  status: 'status',
+  amount: 'amount',
+  paidAt: 'paidAt',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  memberId: 'memberId',
+  cycleId: 'cycleId',
 } as const;
 
 export type ContributionScalarFieldEnum =
   (typeof ContributionScalarFieldEnum)[keyof typeof ContributionScalarFieldEnum];
 
 export const TransactionScalarFieldEnum = {
-  id: "id",
-  type: "type",
-  category: "category",
-  description: "description",
-  vendorName: "vendorName",
-  amount: "amount",
-  date: "date",
-  createdAt: "createdAt",
-  memberId: "memberId",
-  cycleId: "cycleId",
+  id: 'id',
+  type: 'type',
+  category: 'category',
+  description: 'description',
+  vendorName: 'vendorName',
+  amount: 'amount',
+  date: 'date',
+  createdAt: 'createdAt',
+  memberId: 'memberId',
+  cycleId: 'cycleId',
 } as const;
 
 export type TransactionScalarFieldEnum =
   (typeof TransactionScalarFieldEnum)[keyof typeof TransactionScalarFieldEnum];
 
 export const SettingsScalarFieldEnum = {
-  id: "id",
-  churchName: "churchName",
-  departmentName: "departmentName",
-  treasurerName: "treasurerName",
-  memberContributionAmount: "memberContributionAmount",
-  updatedAt: "updatedAt",
+  id: 'id',
+  churchName: 'churchName',
+  departmentName: 'departmentName',
+  treasurerName: 'treasurerName',
+  memberContributionAmount: 'memberContributionAmount',
+  updatedAt: 'updatedAt',
 } as const;
 
 export type SettingsScalarFieldEnum =
   (typeof SettingsScalarFieldEnum)[keyof typeof SettingsScalarFieldEnum];
 
 export const SortOrder = {
-  asc: "asc",
-  desc: "desc",
+  asc: 'asc',
+  desc: 'desc',
 } as const;
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder];
 
 export const QueryMode = {
-  default: "default",
-  insensitive: "insensitive",
+  default: 'default',
+  insensitive: 'insensitive',
 } as const;
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode];
 
 export const NullsOrder = {
-  first: "first",
-  last: "last",
+  first: 'first',
+  last: 'last',
 } as const;
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder];

@@ -7,9 +7,9 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/client";
-import type * as $Enums from "../enums";
-import type * as Prisma from "../internal/prismaNamespace";
+import type * as runtime from '@prisma/client/runtime/client';
+import type * as $Enums from '../enums';
+import type * as Prisma from '../internal/prismaNamespace';
 
 /**
  * Model Member
@@ -141,7 +141,7 @@ export type MemberAggregateArgs<
 };
 
 export type GetMemberAggregateType<T extends MemberAggregateArgs> = {
-  [P in keyof T & keyof AggregateMember]: P extends "_count" | "count"
+  [P in keyof T & keyof AggregateMember]: P extends '_count' | 'count'
     ? T[P] extends true
       ? number
       : Prisma.GetScalarType<T[P], AggregateMember[P]>
@@ -181,8 +181,8 @@ export type MemberGroupByOutputType = {
 type GetMemberGroupByPayload<T extends MemberGroupByArgs> =
   Prisma.PrismaPromise<
     Array<
-      Prisma.PickEnumerable<MemberGroupByOutputType, T["by"]> & {
-        [P in keyof T & keyof MemberGroupByOutputType]: P extends "_count"
+      Prisma.PickEnumerable<MemberGroupByOutputType, T['by']> & {
+        [P in keyof T & keyof MemberGroupByOutputType]: P extends '_count'
           ? T[P] extends boolean
             ? number
             : Prisma.GetScalarType<T[P], MemberGroupByOutputType[P]>
@@ -195,13 +195,13 @@ export type MemberWhereInput = {
   AND?: Prisma.MemberWhereInput | Prisma.MemberWhereInput[];
   OR?: Prisma.MemberWhereInput[];
   NOT?: Prisma.MemberWhereInput | Prisma.MemberWhereInput[];
-  id?: Prisma.StringFilter<"Member"> | string;
-  name?: Prisma.StringFilter<"Member"> | string;
-  initials?: Prisma.StringFilter<"Member"> | string;
-  phone?: Prisma.StringNullableFilter<"Member"> | string | null;
-  email?: Prisma.StringNullableFilter<"Member"> | string | null;
-  status?: Prisma.EnumMemberStatusFilter<"Member"> | $Enums.MemberStatus;
-  createdAt?: Prisma.DateTimeFilter<"Member"> | Date | string;
+  id?: Prisma.StringFilter<'Member'> | string;
+  name?: Prisma.StringFilter<'Member'> | string;
+  initials?: Prisma.StringFilter<'Member'> | string;
+  phone?: Prisma.StringNullableFilter<'Member'> | string | null;
+  email?: Prisma.StringNullableFilter<'Member'> | string | null;
+  status?: Prisma.EnumMemberStatusFilter<'Member'> | $Enums.MemberStatus;
+  createdAt?: Prisma.DateTimeFilter<'Member'> | Date | string;
   contributions?: Prisma.ContributionListRelationFilter;
   transactions?: Prisma.TransactionListRelationFilter;
 };
@@ -224,16 +224,16 @@ export type MemberWhereUniqueInput = Prisma.AtLeast<
     AND?: Prisma.MemberWhereInput | Prisma.MemberWhereInput[];
     OR?: Prisma.MemberWhereInput[];
     NOT?: Prisma.MemberWhereInput | Prisma.MemberWhereInput[];
-    name?: Prisma.StringFilter<"Member"> | string;
-    initials?: Prisma.StringFilter<"Member"> | string;
-    phone?: Prisma.StringNullableFilter<"Member"> | string | null;
-    email?: Prisma.StringNullableFilter<"Member"> | string | null;
-    status?: Prisma.EnumMemberStatusFilter<"Member"> | $Enums.MemberStatus;
-    createdAt?: Prisma.DateTimeFilter<"Member"> | Date | string;
+    name?: Prisma.StringFilter<'Member'> | string;
+    initials?: Prisma.StringFilter<'Member'> | string;
+    phone?: Prisma.StringNullableFilter<'Member'> | string | null;
+    email?: Prisma.StringNullableFilter<'Member'> | string | null;
+    status?: Prisma.EnumMemberStatusFilter<'Member'> | $Enums.MemberStatus;
+    createdAt?: Prisma.DateTimeFilter<'Member'> | Date | string;
     contributions?: Prisma.ContributionListRelationFilter;
     transactions?: Prisma.TransactionListRelationFilter;
   },
-  "id"
+  'id'
 >;
 
 export type MemberOrderByWithAggregationInput = {
@@ -257,15 +257,15 @@ export type MemberScalarWhereWithAggregatesInput = {
   NOT?:
     | Prisma.MemberScalarWhereWithAggregatesInput
     | Prisma.MemberScalarWhereWithAggregatesInput[];
-  id?: Prisma.StringWithAggregatesFilter<"Member"> | string;
-  name?: Prisma.StringWithAggregatesFilter<"Member"> | string;
-  initials?: Prisma.StringWithAggregatesFilter<"Member"> | string;
-  phone?: Prisma.StringNullableWithAggregatesFilter<"Member"> | string | null;
-  email?: Prisma.StringNullableWithAggregatesFilter<"Member"> | string | null;
+  id?: Prisma.StringWithAggregatesFilter<'Member'> | string;
+  name?: Prisma.StringWithAggregatesFilter<'Member'> | string;
+  initials?: Prisma.StringWithAggregatesFilter<'Member'> | string;
+  phone?: Prisma.StringNullableWithAggregatesFilter<'Member'> | string | null;
+  email?: Prisma.StringNullableWithAggregatesFilter<'Member'> | string | null;
   status?:
-    | Prisma.EnumMemberStatusWithAggregatesFilter<"Member">
+    | Prisma.EnumMemberStatusWithAggregatesFilter<'Member'>
     | $Enums.MemberStatus;
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Member"> | Date | string;
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<'Member'> | Date | string;
 };
 
 export type MemberCreateInput = {
@@ -682,7 +682,7 @@ export type MemberSelect<
     transactions?: boolean | Prisma.Member$transactionsArgs<ExtArgs>;
     _count?: boolean | Prisma.MemberCountOutputTypeDefaultArgs<ExtArgs>;
   },
-  ExtArgs["result"]["member"]
+  ExtArgs['result']['member']
 >;
 
 export type MemberSelectCreateManyAndReturn<
@@ -698,7 +698,7 @@ export type MemberSelectCreateManyAndReturn<
     status?: boolean;
     createdAt?: boolean;
   },
-  ExtArgs["result"]["member"]
+  ExtArgs['result']['member']
 >;
 
 export type MemberSelectUpdateManyAndReturn<
@@ -714,7 +714,7 @@ export type MemberSelectUpdateManyAndReturn<
     status?: boolean;
     createdAt?: boolean;
   },
-  ExtArgs["result"]["member"]
+  ExtArgs['result']['member']
 >;
 
 export type MemberSelectScalar = {
@@ -731,8 +731,8 @@ export type MemberOmit<
   ExtArgs extends
     runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetOmit<
-  "id" | "name" | "initials" | "phone" | "email" | "status" | "createdAt",
-  ExtArgs["result"]["member"]
+  'id' | 'name' | 'initials' | 'phone' | 'email' | 'status' | 'createdAt',
+  ExtArgs['result']['member']
 >;
 export type MemberInclude<
   ExtArgs extends
@@ -755,7 +755,7 @@ export type $MemberPayload<
   ExtArgs extends
     runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
-  name: "Member";
+  name: 'Member';
   objects: {
     contributions: Prisma.$ContributionPayload<ExtArgs>[];
     transactions: Prisma.$TransactionPayload<ExtArgs>[];
@@ -770,7 +770,7 @@ export type $MemberPayload<
       status: $Enums.MemberStatus;
       createdAt: Date;
     },
-    ExtArgs["result"]["member"]
+    ExtArgs['result']['member']
   >;
   composites: {};
 };
@@ -782,7 +782,7 @@ export type MemberGetPayload<
 export type MemberCountArgs<
   ExtArgs extends
     runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
-> = Omit<MemberFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+> = Omit<MemberFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
   select?: MemberCountAggregateInputType | true;
 };
 
@@ -792,8 +792,8 @@ export interface MemberDelegate<
   GlobalOmitOptions = {},
 > {
   [K: symbol]: {
-    types: Prisma.TypeMap<ExtArgs>["model"]["Member"];
-    meta: { name: "Member" };
+    types: Prisma.TypeMap<ExtArgs>['model']['Member'];
+    meta: { name: 'Member' };
   };
   /**
    * Find zero or one Member that matches the filter.
@@ -812,7 +812,7 @@ export interface MemberDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$MemberPayload<ExtArgs>,
       T,
-      "findUnique",
+      'findUnique',
       GlobalOmitOptions
     > | null,
     null,
@@ -838,7 +838,7 @@ export interface MemberDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$MemberPayload<ExtArgs>,
       T,
-      "findUniqueOrThrow",
+      'findUniqueOrThrow',
       GlobalOmitOptions
     >,
     never,
@@ -865,7 +865,7 @@ export interface MemberDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$MemberPayload<ExtArgs>,
       T,
-      "findFirst",
+      'findFirst',
       GlobalOmitOptions
     > | null,
     null,
@@ -893,7 +893,7 @@ export interface MemberDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$MemberPayload<ExtArgs>,
       T,
-      "findFirstOrThrow",
+      'findFirstOrThrow',
       GlobalOmitOptions
     >,
     never,
@@ -923,7 +923,7 @@ export interface MemberDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$MemberPayload<ExtArgs>,
       T,
-      "findMany",
+      'findMany',
       GlobalOmitOptions
     >
   >;
@@ -946,7 +946,7 @@ export interface MemberDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$MemberPayload<ExtArgs>,
       T,
-      "create",
+      'create',
       GlobalOmitOptions
     >,
     never,
@@ -998,7 +998,7 @@ export interface MemberDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$MemberPayload<ExtArgs>,
       T,
-      "createManyAndReturn",
+      'createManyAndReturn',
       GlobalOmitOptions
     >
   >;
@@ -1021,7 +1021,7 @@ export interface MemberDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$MemberPayload<ExtArgs>,
       T,
-      "delete",
+      'delete',
       GlobalOmitOptions
     >,
     never,
@@ -1050,7 +1050,7 @@ export interface MemberDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$MemberPayload<ExtArgs>,
       T,
-      "update",
+      'update',
       GlobalOmitOptions
     >,
     never,
@@ -1129,7 +1129,7 @@ export interface MemberDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$MemberPayload<ExtArgs>,
       T,
-      "updateManyAndReturn",
+      'updateManyAndReturn',
       GlobalOmitOptions
     >
   >;
@@ -1157,7 +1157,7 @@ export interface MemberDelegate<
     runtime.Types.Result.GetResult<
       Prisma.$MemberPayload<ExtArgs>,
       T,
-      "upsert",
+      'upsert',
       GlobalOmitOptions
     >,
     never,
@@ -1181,10 +1181,10 @@ export interface MemberDelegate<
   count<T extends MemberCountArgs>(
     args?: Prisma.Subset<T, MemberCountArgs>,
   ): Prisma.PrismaPromise<
-    T extends runtime.Types.Utils.Record<"select", any>
-      ? T["select"] extends true
+    T extends runtime.Types.Utils.Record<'select', any>
+      ? T['select'] extends true
         ? number
-        : Prisma.GetScalarType<T["select"], MemberCountAggregateOutputType>
+        : Prisma.GetScalarType<T['select'], MemberCountAggregateOutputType>
       : number
   >;
 
@@ -1237,20 +1237,20 @@ export interface MemberDelegate<
   groupBy<
     T extends MemberGroupByArgs,
     HasSelectOrTake extends Prisma.Or<
-      Prisma.Extends<"skip", Prisma.Keys<T>>,
-      Prisma.Extends<"take", Prisma.Keys<T>>
+      Prisma.Extends<'skip', Prisma.Keys<T>>,
+      Prisma.Extends<'take', Prisma.Keys<T>>
     >,
     OrderByArg extends Prisma.True extends HasSelectOrTake
-      ? { orderBy: MemberGroupByArgs["orderBy"] }
-      : { orderBy?: MemberGroupByArgs["orderBy"] },
+      ? { orderBy: MemberGroupByArgs['orderBy'] }
+      : { orderBy?: MemberGroupByArgs['orderBy'] },
     OrderFields extends Prisma.ExcludeUnderscoreKeys<
-      Prisma.Keys<Prisma.MaybeTupleToUnion<T["orderBy"]>>
+      Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>
     >,
-    ByFields extends Prisma.MaybeTupleToUnion<T["by"]>,
+    ByFields extends Prisma.MaybeTupleToUnion<T['by']>,
     ByValid extends Prisma.Has<ByFields, OrderFields>,
-    HavingFields extends Prisma.GetHavingFields<T["having"]>,
+    HavingFields extends Prisma.GetHavingFields<T['having']>,
     HavingValid extends Prisma.Has<ByFields, HavingFields>,
-    ByEmpty extends T["by"] extends never[] ? Prisma.True : Prisma.False,
+    ByEmpty extends T['by'] extends never[] ? Prisma.True : Prisma.False,
     InputErrors extends ByEmpty extends Prisma.True
       ? `Error: "by" must not be empty.`
       : HavingValid extends Prisma.False
@@ -1261,13 +1261,13 @@ export interface MemberDelegate<
                 ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
                 : [
                     Error,
-                    "Field ",
+                    'Field ',
                     P,
                     ` in "having" needs to be provided in "by"`,
                   ];
           }[HavingFields]
-        : "take" extends Prisma.Keys<T>
-          ? "orderBy" extends Prisma.Keys<T>
+        : 'take' extends Prisma.Keys<T>
+          ? 'orderBy' extends Prisma.Keys<T>
             ? ByValid extends Prisma.True
               ? {}
               : {
@@ -1276,8 +1276,8 @@ export interface MemberDelegate<
                     : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                 }[OrderFields]
             : 'Error: If you provide "take", you also need to provide "orderBy"'
-          : "skip" extends Prisma.Keys<T>
-            ? "orderBy" extends Prisma.Keys<T>
+          : 'skip' extends Prisma.Keys<T>
+            ? 'orderBy' extends Prisma.Keys<T>
               ? ByValid extends Prisma.True
                 ? {}
                 : {
@@ -1318,14 +1318,14 @@ export interface Prisma__MemberClient<
     runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > extends Prisma.PrismaPromise<T> {
-  readonly [Symbol.toStringTag]: "PrismaPromise";
+  readonly [Symbol.toStringTag]: 'PrismaPromise';
   contributions<T extends Prisma.Member$contributionsArgs<ExtArgs> = {}>(
     args?: Prisma.Subset<T, Prisma.Member$contributionsArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     | runtime.Types.Result.GetResult<
         Prisma.$ContributionPayload<ExtArgs>,
         T,
-        "findMany",
+        'findMany',
         GlobalOmitOptions
       >
     | Null
@@ -1336,7 +1336,7 @@ export interface Prisma__MemberClient<
     | runtime.Types.Result.GetResult<
         Prisma.$TransactionPayload<ExtArgs>,
         T,
-        "findMany",
+        'findMany',
         GlobalOmitOptions
       >
     | Null
@@ -1383,13 +1383,13 @@ export interface Prisma__MemberClient<
  * Fields of the Member model
  */
 export interface MemberFieldRefs {
-  readonly id: Prisma.FieldRef<"Member", "String">;
-  readonly name: Prisma.FieldRef<"Member", "String">;
-  readonly initials: Prisma.FieldRef<"Member", "String">;
-  readonly phone: Prisma.FieldRef<"Member", "String">;
-  readonly email: Prisma.FieldRef<"Member", "String">;
-  readonly status: Prisma.FieldRef<"Member", "MemberStatus">;
-  readonly createdAt: Prisma.FieldRef<"Member", "DateTime">;
+  readonly id: Prisma.FieldRef<'Member', 'String'>;
+  readonly name: Prisma.FieldRef<'Member', 'String'>;
+  readonly initials: Prisma.FieldRef<'Member', 'String'>;
+  readonly phone: Prisma.FieldRef<'Member', 'String'>;
+  readonly email: Prisma.FieldRef<'Member', 'String'>;
+  readonly status: Prisma.FieldRef<'Member', 'MemberStatus'>;
+  readonly createdAt: Prisma.FieldRef<'Member', 'DateTime'>;
 }
 
 // Custom InputTypes

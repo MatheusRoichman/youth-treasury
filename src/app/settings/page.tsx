@@ -1,6 +1,6 @@
-import { Settings } from "lucide-react";
-import { SettingsForm } from "@/components/settings/settings-form";
-import { getSettings } from "@/lib/db/settings";
+import { Settings } from 'lucide-react';
+import { SettingsForm } from '@/components/settings/settings-form';
+import { getSettings } from '@/lib/db/settings';
 
 export default async function SettingsPage() {
   const settings = await getSettings();

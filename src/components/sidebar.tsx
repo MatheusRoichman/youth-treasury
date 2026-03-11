@@ -1,17 +1,17 @@
-import { Building2, ChevronsUpDown, Settings } from "lucide-react";
-import Link from "next/link";
-import { NavLinks } from "@/components/nav-links";
-import { Separator } from "@/components/ui/separator";
-import { getSettings } from "@/lib/db/settings";
-import { hashColor } from "@/lib/utils";
+import { Building2, Settings } from 'lucide-react';
+import Link from 'next/link';
+import { NavLinks } from '@/components/nav-links';
+import { Separator } from '@/components/ui/separator';
+import { getSettings } from '@/lib/db/settings';
+import { hashColor } from '@/lib/utils';
 
 export async function Sidebar() {
   const settings = await getSettings();
   const initials = settings.treasurerName
-    .split(" ")
+    .split(' ')
     .map((p) => p[0])
     .slice(0, 2)
-    .join("");
+    .join('');
   const avatarColor = hashColor(settings.treasurerName);
 
   return (
