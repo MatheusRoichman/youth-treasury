@@ -3,7 +3,8 @@
     "allow": [
       "Bash(ls c:/Users/roich/dev/roichman/youth-treasury/.env*)",
       "Bash(bun run:*)",
-      "Bash(ls c:/Users/roich/dev/roichman/youth-treasury/src/generated/prisma/*.js)"
+      "Bash(ls c:/Users/roich/dev/roichman/youth-treasury/src/generated/prisma/*.js)",
+      "Bash(bunx shadcn@latest add badge button dialog dropdown-menu form input label progress select separator skeleton sonner table --overwrite)"
     ]
   }
 }
