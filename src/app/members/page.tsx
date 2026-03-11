@@ -1,7 +1,6 @@
 import { Users } from "lucide-react";
 import { MemberDialog } from "@/components/members/member-dialog";
 import { MembersTable } from "@/components/members/members-table";
-import { TopBar } from "@/components/top-bar";
 import { Button } from "@/components/ui/button";
 import { getMembers } from "@/lib/db/members";
 
@@ -14,8 +13,6 @@ export default async function MembersPage() {
 
   return (
     <div className="flex flex-col min-h-full">
-      <TopBar title="Membros" />
-
       <main className="flex-1 p-6 space-y-6 bg-gray-50">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">

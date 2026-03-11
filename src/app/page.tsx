@@ -1,6 +1,5 @@
 import { Info, TrendingDown, TrendingUp } from "lucide-react";
 import { RecentActivities } from "@/components/dashboard/recent-activities";
-import { TopBar } from "@/components/top-bar";
 import {
   getActiveCycle,
   getCurrentBalance,
@@ -46,8 +45,6 @@ export default async function DashboardPage() {
 
   return (
     <div className="flex flex-col min-h-full">
-      <TopBar title="Painel de Controle" />
-
       <main className="flex-1 p-6 space-y-5 bg-gray-50">
         {/* Balance hero card */}
         <div className="rounded-2xl bg-primary px-8 py-8 text-white shadow-lg">

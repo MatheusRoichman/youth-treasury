@@ -1,7 +1,6 @@
 import { CalendarDays } from "lucide-react";
 import { OpenMonthDialog } from "@/components/contributions/open-month-dialog";
 import { ContributionsTable } from "@/components/contributions/contributions-table";
-import { TopBar } from "@/components/top-bar";
 import { Badge } from "@/components/ui/badge";
 import { getActiveCycleWithContributions } from "@/lib/db/contributions";
 import { getSettings } from "@/lib/db/settings";
@@ -30,8 +29,6 @@ export default async function ContributionsPage() {
 
   return (
     <div className="flex flex-col min-h-full">
-      <TopBar title="Contribuições" />
-
       <main className="flex-1 p-6 space-y-6 bg-gray-50">
         {/* Page header */}
         <div className="flex items-start justify-between">
