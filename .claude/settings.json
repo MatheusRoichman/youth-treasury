@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls c:/Users/roich/dev/roichman/youth-treasury/.env*)",
+      "Bash(bun run:*)",
+      "Bash(ls c:/Users/roich/dev/roichman/youth-treasury/src/generated/prisma/*.js)"
+    ]
+  }
+}

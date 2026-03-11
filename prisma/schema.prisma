@@ -1,0 +1,111 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Member {
+  id        String       @id @default(uuid())
+  name      String
+  initials  String
+  phone     String?
+  email     String?
+  status    MemberStatus @default(ACTIVE)
+  createdAt DateTime     @default(now()) @map("created_at")
+
+  contributions Contribution[]
+  transactions  Transaction[]
+
+  @@map("members")
+}
+
+model MonthlyCycle {
+  id         String   @id @default(uuid())
+  month      Int
+  year       Int
+  label      String
+  goalAmount Decimal  @default(0) @db.Decimal(10, 2) @map("goal_amount")
+  isActive   Boolean  @default(false) @map("is_active")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  contributions Contribution[]
+  transactions  Transaction[]
+
+  @@unique([month, year])
+  @@map("monthly_cycles")
+}
+
+model Contribution {
+  id        String             @id @default(uuid())
+  status    ContributionStatus @default(PENDING)
+  amount    Decimal?           @db.Decimal(10, 2)
+  paidAt    DateTime?          @map("paid_at")
+  notes     String?
+  createdAt DateTime           @default(now()) @map("created_at")
+
+  memberId String       @map("member_id")
+  member   Member       @relation(fields: [memberId], references: [id])
+
+  cycleId String       @map("cycle_id")
+  cycle   MonthlyCycle @relation(fields: [cycleId], references: [id])
+
+  @@unique([memberId, cycleId])
+  @@map("contributions")
+}
+
+model Transaction {
+  id          String              @id @default(uuid())
+  type        TransactionType
+  category    TransactionCategory
+  description String
+  vendorName  String?             @map("vendor_name")
+  amount      Decimal             @db.Decimal(10, 2)
+  date        DateTime            @db.Date
+  createdAt   DateTime            @default(now()) @map("created_at")
+
+  memberId String? @map("member_id")
+  member   Member? @relation(fields: [memberId], references: [id])
+
+  cycleId String?       @map("cycle_id")
+  cycle   MonthlyCycle? @relation(fields: [cycleId], references: [id])
+
+  @@map("transactions")
+}
+
+model Settings {
+  id                       String   @id @default("singleton")
+  churchName               String   @default("Igreja Youth")
+  departmentName           String   @default("Departamento de Jovens")
+  treasurerName            String   @default("Tesoureiro")
+  memberContributionAmount Decimal  @default(0) @db.Decimal(10, 2) @map("member_contribution_amount")
+  updatedAt                DateTime @updatedAt @map("updated_at")
+
+  @@map("settings")
+}
+
+enum MemberStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum ContributionStatus {
+  PENDING
+  PAID
+  EXEMPT
+}
+
+enum TransactionType {
+  CONTRIBUTION
+  EXPENSE
+}
+
+enum TransactionCategory {
+  MONTHLY_FEE
+  OFFERING
+  EXPENSE
+  OTHER
+}
