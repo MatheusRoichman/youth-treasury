@@ -17,14 +17,17 @@ export async function getCurrentBalance() {
   return totalIn - totalOut;
 }
 
-export async function getMonthlySummary(cycleId: string) {
+export async function getMonthSummary(year: number, month: number) {
+  const start = new Date(year, month - 1, 1);
+  const end = new Date(year, month, 1);
+
   const [inAmount, outAmount] = await Promise.all([
     prisma.transaction.aggregate({
-      where: { cycleId, type: 'CONTRIBUTION' },
+      where: { date: { gte: start, lt: end }, type: 'CONTRIBUTION' },
       _sum: { amount: true },
     }),
     prisma.transaction.aggregate({
-      where: { cycleId, type: 'EXPENSE' },
+      where: { date: { gte: start, lt: end }, type: 'EXPENSE' },
       _sum: { amount: true },
     }),
   ]);
@@ -39,21 +42,6 @@ export async function getRecentTransactions(limit = 10) {
   return prisma.transaction.findMany({
     orderBy: { date: 'desc' },
     take: limit,
-    include: { member: true },
-  });
-}
-
-export async function getActiveCycle() {
-  return prisma.monthlyCycle.findFirst({ where: { isActive: true } });
-}
-
-export async function getPreviousCycle(
-  currentMonth: number,
-  currentYear: number,
-) {
-  const prevMonth = currentMonth === 1 ? 12 : currentMonth - 1;
-  const prevYear = currentMonth === 1 ? currentYear - 1 : currentYear;
-  return prisma.monthlyCycle.findUnique({
-    where: { month_year: { month: prevMonth, year: prevYear } },
+    include: { member: true, campaign: { select: { id: true, name: true } } },
   });
 }

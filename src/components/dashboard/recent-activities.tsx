@@ -43,10 +43,10 @@ export function RecentActivities({ initialData }: Props) {
       <div className="flex items-center justify-between px-6 py-4">
         <h2 className="font-semibold text-gray-900">Atividades Recentes</h2>
         <Link
-          href="/contributions"
+          href="/campaigns"
           className="text-sm font-medium text-primary hover:underline"
         >
-          Ver tudo
+          Ver campanhas
         </Link>
       </div>
 
@@ -56,6 +56,9 @@ export function RecentActivities({ initialData }: Props) {
           <tr className="border-t border-b bg-gray-50">
             <th className="px-6 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-gray-400">
               Membro / Descrição
+            </th>
+            <th className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-gray-400">
+              Campanha
             </th>
             <th className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-gray-400">
               Tipo
@@ -95,6 +98,18 @@ export function RecentActivities({ initialData }: Props) {
                 </div>
               </td>
               <td className="px-4 py-3">
+                {tx.campaign ? (
+                  <Link
+                    href={`/campaigns/${tx.campaign.id}`}
+                    className="text-xs text-primary hover:underline truncate max-w-[120px] block"
+                  >
+                    {tx.campaign.name}
+                  </Link>
+                ) : (
+                  <span className="text-xs text-gray-400">—</span>
+                )}
+              </td>
+              <td className="px-4 py-3">
                 <Badge
                   variant={tx.type === 'CONTRIBUTION' ? 'success' : 'danger'}
                 >
@@ -117,7 +132,7 @@ export function RecentActivities({ initialData }: Props) {
           {transactions.length === 0 && (
             <tr>
               <td
-                colSpan={4}
+                colSpan={5}
                 className="py-10 text-center text-sm text-gray-400"
               >
                 Nenhuma atividade recente

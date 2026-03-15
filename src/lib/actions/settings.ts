@@ -11,12 +11,6 @@ const settingsSchema = z.object({
   departmentName: z
     .string()
     .min(2, 'Nome do departamento deve ter pelo menos 2 caracteres'),
-  treasurerName: z
-    .string()
-    .min(2, 'Nome do tesoureiro deve ter pelo menos 2 caracteres'),
-  memberContributionAmount: z
-    .number()
-    .min(0, 'Valor deve ser maior ou igual a zero'),
 });
 
 export async function updateSettings(formData: unknown) {

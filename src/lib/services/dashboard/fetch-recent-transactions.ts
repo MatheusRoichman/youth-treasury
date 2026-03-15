@@ -9,6 +9,7 @@ export interface TransactionDTO {
   createdAt: string;
   member: { id: string; name: string; initials: string } | null;
   vendorName: string | null;
+  campaign: { id: string; name: string } | null;
 }
 
 export async function fetchRecentTransactions(): Promise<TransactionDTO[]> {

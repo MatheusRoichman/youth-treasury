@@ -22,8 +22,6 @@ export default async function SettingsPage() {
           defaultValues={{
             churchName: settings.churchName,
             departmentName: settings.departmentName,
-            treasurerName: settings.treasurerName,
-            memberContributionAmount: Number(settings.memberContributionAmount),
           }}
         />
       </main>

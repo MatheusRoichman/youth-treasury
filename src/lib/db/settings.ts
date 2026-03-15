@@ -7,8 +7,6 @@ export async function getSettings() {
       id: 'singleton',
       churchName: 'Igreja Youth',
       departmentName: 'Departamento de Jovens',
-      treasurerName: 'Tesoureiro',
-      memberContributionAmount: 50,
     },
     update: {},
   });

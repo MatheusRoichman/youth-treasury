@@ -1,38 +1,33 @@
 import { Info, TrendingDown, TrendingUp } from 'lucide-react';
 import { RecentActivities } from '@/components/dashboard/recent-activities';
 import {
-  getActiveCycle,
   getCurrentBalance,
-  getMonthlySummary,
-  getPreviousCycle,
+  getMonthSummary,
   getRecentTransactions,
 } from '@/lib/db/dashboard';
 import { formatCurrency } from '@/lib/utils';
 
 export default async function DashboardPage() {
-  const [balance, activeCycle, recentTransactions] = await Promise.all([
+  const now = new Date();
+  const month = now.getMonth() + 1;
+  const year = now.getFullYear();
+  const prevMonth = month === 1 ? 12 : month - 1;
+  const prevYear = month === 1 ? year - 1 : year;
+
+  const [balance, summary, prevSummary, recentTransactions] = await Promise.all([
     getCurrentBalance(),
-    getActiveCycle(),
+    getMonthSummary(year, month),
+    getMonthSummary(prevYear, prevMonth),
     getRecentTransactions(10),
   ]);
 
-  const summary = activeCycle
-    ? await getMonthlySummary(activeCycle.id)
-    : { totalIn: 0, totalOut: 0 };
-
-  const prevCycle = activeCycle
-    ? await getPreviousCycle(activeCycle.month, activeCycle.year)
-    : null;
-
-  const prevSummary = prevCycle ? await getMonthlySummary(prevCycle.id) : null;
-
   const inChange =
-    prevSummary && prevSummary.totalIn > 0
+    prevSummary.totalIn > 0
       ? ((summary.totalIn - prevSummary.totalIn) / prevSummary.totalIn) * 100
       : null;
 
   const outChange =
-    prevSummary && prevSummary.totalOut > 0
+    prevSummary.totalOut > 0
       ? ((summary.totalOut - prevSummary.totalOut) / prevSummary.totalOut) * 100
       : null;
 
@@ -41,6 +36,7 @@ export default async function DashboardPage() {
     amount: tx.amount.toString(),
     date: tx.date.toISOString(),
     createdAt: tx.createdAt.toISOString(),
+    campaign: tx.campaign ?? null,
   }));
 
   return (

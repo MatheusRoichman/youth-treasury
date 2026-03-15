@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -24,12 +23,6 @@ const schema = z.object({
   departmentName: z
     .string()
     .min(2, 'Nome do departamento deve ter pelo menos 2 caracteres'),
-  treasurerName: z
-    .string()
-    .min(2, 'Nome do tesoureiro deve ter pelo menos 2 caracteres'),
-  memberContributionAmount: z
-    .number()
-    .min(0, 'Valor deve ser maior ou igual a zero'),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -90,66 +83,6 @@ export function SettingsForm({ defaultValues }: Props) {
                 <FormControl>
                   <Input placeholder="Ex: Departamento de Jovens" {...field} />
                 </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        {/* Treasurer */}
-        <div className="rounded-xl border bg-white p-6 shadow-sm space-y-5">
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900">Tesoureiro</h3>
-            <p className="text-xs text-gray-400 mt-0.5">
-              Responsável pela gestão financeira
-            </p>
-          </div>
-
-          <FormField
-            control={form.control}
-            name="treasurerName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Nome do Tesoureiro</FormLabel>
-                <FormControl>
-                  <Input placeholder="Nome completo" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        {/* Contributions */}
-        <div className="rounded-xl border bg-white p-6 shadow-sm space-y-5">
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900">
-              Contribuições
-            </h3>
-            <p className="text-xs text-gray-400 mt-0.5">
-              Padrões aplicados ao abrir novos meses
-            </p>
-          </div>
-
-          <FormField
-            control={form.control}
-            name="memberContributionAmount"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Mensalidade Padrão (R$)</FormLabel>
-                <FormControl>
-                  <Input
-                    type="number"
-                    min={0}
-                    step={0.01}
-                    placeholder="50.00"
-                    {...field}
-                    onChange={(e) => field.onChange(e.target.valueAsNumber)}
-                  />
-                </FormControl>
-                <FormDescription>
-                  Valor sugerido ao criar um novo mês de contribuições.
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}

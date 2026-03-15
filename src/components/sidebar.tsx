@@ -3,16 +3,9 @@ import Link from 'next/link';
 import { NavLinks } from '@/components/nav-links';
 import { Separator } from '@/components/ui/separator';
 import { getSettings } from '@/lib/db/settings';
-import { hashColor } from '@/lib/utils';
 
 export async function Sidebar() {
   const settings = await getSettings();
-  const initials = settings.treasurerName
-    .split(' ')
-    .map((p) => p[0])
-    .slice(0, 2)
-    .join('');
-  const avatarColor = hashColor(settings.treasurerName);
 
   return (
     <aside className="flex h-screen w-64 shrink-0 flex-col border-r bg-white">
@@ -52,22 +45,8 @@ export async function Sidebar() {
 
       <Separator />
 
-      {/* Treasurer + Settings */}
-      <div className="px-4 py-4 space-y-1">
-        <div className="flex items-center gap-3 rounded-lg px-2 py-2">
-          <span
-            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white"
-            style={{ backgroundColor: avatarColor }}
-          >
-            {initials}
-          </span>
-          <div className="min-w-0">
-            <p className="truncate text-sm font-medium text-gray-900">
-              {settings.treasurerName}
-            </p>
-            <p className="text-xs text-gray-400">Configurações</p>
-          </div>
-        </div>
+      {/* Settings */}
+      <div className="px-4 py-4">
         <Link
           href="/settings"
           className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-900"
