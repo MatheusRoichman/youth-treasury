@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -25,6 +26,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { createMember, updateMember } from '@/lib/actions/members';
+import { memberKeys } from '@/lib/queries/members';
 
 const schema = z.object({
   name: z.string().min(2, 'Nome deve ter pelo menos 2 caracteres'),
@@ -48,6 +50,7 @@ interface Props {
 }
 
 export function MemberDialog({ member, trigger, onSuccess }: Props) {
+  const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
 
   const form = useForm<FormValues>({
@@ -78,6 +81,7 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
       toast.success(
         member ? 'Membro atualizado!' : 'Membro criado com sucesso!',
       );
+      queryClient.invalidateQueries({ queryKey: memberKeys.all });
       setOpen(false);
       onSuccess?.();
     } else {

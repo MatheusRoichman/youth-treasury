@@ -80,3 +80,16 @@ export async function deactivateMember(id: string) {
     return { success: false, error: 'Erro ao desativar membro' };
   }
 }
+
+export async function reactivateMember(id: string) {
+  try {
+    await prisma.member.update({
+      where: { id },
+      data: { status: 'ACTIVE' },
+    });
+    revalidatePath('/members');
+    return { success: true };
+  } catch {
+    return { success: false, error: 'Erro ao reativar membro' };
+  }
+}
