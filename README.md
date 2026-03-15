@@ -11,8 +11,8 @@ Sistema de gestão financeira para o departamento de jovens da igreja. Permite a
 - **Contribuições por membro** com suporte a pagamentos parciais, múltiplos pagamentos e isenções com motivo registrado
 - **Transações** — registro completo de entradas e saídas, vinculadas ou não a campanhas, incluindo doações externas e anônimas
 - **Membros** — cadastro, edição e controle de status dos jovens do departamento
-- **Análises** — visão financeira completa com gráficos de desempenho, adimplência, isenções e categorias de receita
-- **Autenticação** via Supabase Auth — acesso restrito, sem cadastro público
+- **Análises (em breve)** — visão financeira completa com gráficos de desempenho, adimplência, isenções e categorias de receita
+- **Autenticação** via Supabase Auth (em breve) — acesso restrito, sem cadastro público
 
 ---
 
@@ -118,7 +118,7 @@ Para que o login funcione sem etapa de confirmação:
   /login              → Página de autenticação
   /(dashboard)
     /                 → Painel de controle
-    /analytics        → Página de análises
+    /analytics        → Página de análises (em breve)
     /campaigns        → Lista de campanhas
     /campaigns/[id]   → Detalhe de campanha
     /transactions     → Histórico de transações
