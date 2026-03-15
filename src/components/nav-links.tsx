@@ -1,14 +1,15 @@
 'use client';
 
-import { BarChart3, CreditCard, Users } from 'lucide-react';
+import { ArrowLeftRight, BarChart3, Megaphone, Users } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 
 const navLinks = [
   { href: '/', label: 'Visão Geral', icon: BarChart3 },
+  { href: '/campaigns', label: 'Campanhas', icon: Megaphone },
+  { href: '/transactions', label: 'Transações', icon: ArrowLeftRight },
   { href: '/members', label: 'Membros', icon: Users },
-  { href: '/contributions', label: 'Contribuições', icon: CreditCard },
 ];
 
 export function NavLinks() {
