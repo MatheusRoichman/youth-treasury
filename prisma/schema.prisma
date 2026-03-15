@@ -8,83 +8,36 @@ datasource db {
   provider = "postgresql"
 }
 
+// ─────────────────────────────────────────
+// SETTINGS
+// Singleton row for department display info
+// ─────────────────────────────────────────
+model Settings {
+  id             String   @id @default("singleton")
+  churchName     String   @map("church_name")
+  departmentName String   @map("department_name")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  @@map("settings")
+}
+
+// ─────────────────────────────────────────
+// MEMBERS
+// Registered youth department members
+// ─────────────────────────────────────────
 model Member {
   id        String       @id @default(uuid())
   name      String
-  initials  String
+  initials  String // derived from name on insert (first + last word initials)
   phone     String?
   email     String?
   status    MemberStatus @default(ACTIVE)
   createdAt DateTime     @default(now()) @map("created_at")
 
-  contributions Contribution[]
-  transactions  Transaction[]
+  campaignMembers CampaignMember[]
+  transactions    Transaction[]
 
   @@map("members")
-}
-
-model MonthlyCycle {
-  id         String   @id @default(uuid())
-  month      Int
-  year       Int
-  label      String
-  goalAmount Decimal  @default(0) @db.Decimal(10, 2) @map("goal_amount")
-  isActive   Boolean  @default(false) @map("is_active")
-  createdAt  DateTime @default(now()) @map("created_at")
-
-  contributions Contribution[]
-  transactions  Transaction[]
-
-  @@unique([month, year])
-  @@map("monthly_cycles")
-}
-
-model Contribution {
-  id        String             @id @default(uuid())
-  status    ContributionStatus @default(PENDING)
-  amount    Decimal?           @db.Decimal(10, 2)
-  paidAt    DateTime?          @map("paid_at")
-  notes     String?
-  createdAt DateTime           @default(now()) @map("created_at")
-
-  memberId String       @map("member_id")
-  member   Member       @relation(fields: [memberId], references: [id])
-
-  cycleId String       @map("cycle_id")
-  cycle   MonthlyCycle @relation(fields: [cycleId], references: [id])
-
-  @@unique([memberId, cycleId])
-  @@map("contributions")
-}
-
-model Transaction {
-  id          String              @id @default(uuid())
-  type        TransactionType
-  category    TransactionCategory
-  description String
-  vendorName  String?             @map("vendor_name")
-  amount      Decimal             @db.Decimal(10, 2)
-  date        DateTime            @db.Date
-  createdAt   DateTime            @default(now()) @map("created_at")
-
-  memberId String? @map("member_id")
-  member   Member? @relation(fields: [memberId], references: [id])
-
-  cycleId String?       @map("cycle_id")
-  cycle   MonthlyCycle? @relation(fields: [cycleId], references: [id])
-
-  @@map("transactions")
-}
-
-model Settings {
-  id                       String   @id @default("singleton")
-  churchName               String   @default("Igreja Youth")
-  departmentName           String   @default("Departamento de Jovens")
-  treasurerName            String   @default("Tesoureiro")
-  memberContributionAmount Decimal  @default(0) @db.Decimal(10, 2) @map("member_contribution_amount")
-  updatedAt                DateTime @updatedAt @map("updated_at")
-
-  @@map("settings")
 }
 
 enum MemberStatus {
@@ -92,10 +45,99 @@ enum MemberStatus {
   INACTIVE
 }
 
-enum ContributionStatus {
-  PENDING
-  PAID
-  EXEMPT
+// ─────────────────────────────────────────
+// CAMPAIGNS
+// Any fundraising effort — monthly fee or
+// general fundraiser
+// ─────────────────────────────────────────
+model Campaign {
+  id         String         @id @default(uuid())
+  name       String
+  type       CampaignType
+  goalAmount Decimal        @map("goal_amount") @db.Decimal(10, 2)
+  startDate  DateTime       @map("start_date") @db.Date
+  endDate    DateTime?      @map("end_date") @db.Date
+  status     CampaignStatus @default(ACTIVE)
+  createdAt  DateTime       @default(now()) @map("created_at")
+
+  campaignMembers CampaignMember[]
+  transactions    Transaction[]
+
+  @@map("campaigns")
+}
+
+enum CampaignType {
+  MONTHLY_FEE
+  FUNDRAISER
+}
+
+enum CampaignStatus {
+  ACTIVE
+  CLOSED
+  ARCHIVED
+}
+
+// ─────────────────────────────────────────
+// CAMPAIGN MEMBERS
+// Assignment of a member to a campaign.
+// Required before a member can contribute
+// to a campaign.
+//
+// Status is derived at query time:
+//   paidAmount = SUM(transactions for member+campaign)
+//   EXEMPT     → isExempt = true
+//   PENDING    → paidAmount = 0
+//   PARTIAL    → 0 < paidAmount < expectedAmount
+//   PAID       → paidAmount >= expectedAmount
+// ─────────────────────────────────────────
+model CampaignMember {
+  id                String             @id @default(uuid())
+  expectedAmount    Decimal            @map("expected_amount") @db.Decimal(10, 2)
+  isExempt          Boolean            @default(false) @map("is_exempt")
+  exemptionReason   String?            @map("exemption_reason")
+  exemptionCategory ExemptionCategory? @map("exemption_category")
+  notes             String?
+  createdAt         DateTime           @default(now()) @map("created_at")
+
+  campaignId String   @map("campaign_id")
+  campaign   Campaign @relation(fields: [campaignId], references: [id])
+
+  memberId String @map("member_id")
+  member   Member @relation(fields: [memberId], references: [id])
+
+  @@unique([campaignId, memberId])
+  @@map("campaign_members")
+}
+
+// ─────────────────────────────────────────
+// TRANSACTIONS
+// Single source of truth for all amounts.
+// Every money movement is a row here.
+//
+// Member contribution:  memberId set, donorName null
+// External donation:    memberId null, donorName set
+// Expense:              memberId null, vendorName set
+//
+// campaignId is optional for all types.
+// When null, transaction composes general balance only.
+// ─────────────────────────────────────────
+model Transaction {
+  id          String              @id @default(uuid())
+  type        TransactionType
+  category    TransactionCategory @default(OTHER)
+  description String
+  amount      Decimal             @db.Decimal(10, 2)
+  date        DateTime            @db.Date
+  memberId    String?             @map("member_id")
+  donorName   String?             @map("donor_name")
+  vendorName  String?             @map("vendor_name")
+  campaignId  String?             @map("campaign_id")
+  createdAt   DateTime            @default(now()) @map("created_at")
+
+  member   Member?   @relation(fields: [memberId], references: [id])
+  campaign Campaign? @relation(fields: [campaignId], references: [id])
+
+  @@map("transactions")
 }
 
 enum TransactionType {
@@ -103,9 +145,17 @@ enum TransactionType {
   EXPENSE
 }
 
+enum ExemptionCategory {
+  FINANCIAL_HARDSHIP
+  HEALTH
+  TRAVEL
+  UNEMPLOYMENT
+  OTHER
+}
+
 enum TransactionCategory {
-  MONTHLY_FEE
-  OFFERING
-  EXPENSE
+  MONTHLY_FEE // paired with a CampaignMember row in a MONTHLY_FEE campaign
+  OFFERING // oferta especial
+  EXPENSE // any outgoing payment
   OTHER
 }
