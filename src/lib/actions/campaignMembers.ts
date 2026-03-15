@@ -2,10 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
-import {
-  addMemberToCampaign,
-  setMemberExempt,
-} from '@/lib/db/campaignMembers';
+import { addMemberToCampaign, setMemberExempt } from '@/lib/db/campaignMembers';
 
 export async function addMemberToCampaignAction(
   campaignId: string,

@@ -39,7 +39,9 @@ const monthlyFeeSchema = z.object({
   name: z.string().min(2, 'Nome deve ter pelo menos 2 caracteres'),
   startDate: z.string().min(1, 'Data de início obrigatória'),
   endDate: z.string().optional(),
-  expectedAmountPerMember: z.number().positive('Valor por membro deve ser positivo'),
+  expectedAmountPerMember: z
+    .number()
+    .positive('Valor por membro deve ser positivo'),
   memberIds: z.array(z.string()).min(1, 'Selecione ao menos um membro'),
 });
 
@@ -303,7 +305,9 @@ export function AddCampaignDialog({ trigger, activeMembers }: Props) {
                   onChange={(e) => setStartDate(e.target.value)}
                 />
                 {errors.startDate && (
-                  <p className="mt-1 text-xs text-red-500">{errors.startDate}</p>
+                  <p className="mt-1 text-xs text-red-500">
+                    {errors.startDate}
+                  </p>
                 )}
               </div>
               <div>
@@ -441,7 +445,9 @@ export function AddCampaignDialog({ trigger, activeMembers }: Props) {
                   onChange={(e) => setStartDate(e.target.value)}
                 />
                 {errors.startDate && (
-                  <p className="mt-1 text-xs text-red-500">{errors.startDate}</p>
+                  <p className="mt-1 text-xs text-red-500">
+                    {errors.startDate}
+                  </p>
                 )}
               </div>
               <div>
@@ -520,11 +526,7 @@ export function AddCampaignDialog({ trigger, activeMembers }: Props) {
             Cancelar
           </Button>
           {step === 2 && (
-            <Button
-              type="button"
-              onClick={handleSubmit}
-              disabled={submitting}
-            >
+            <Button type="button" onClick={handleSubmit} disabled={submitting}>
               {submitting ? 'Criando...' : 'Criar Campanha'}
             </Button>
           )}

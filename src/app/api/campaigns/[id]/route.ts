@@ -56,7 +56,11 @@ export async function GET(
       donorName: tx.donorName,
       vendorName: tx.vendorName,
       member: tx.member
-        ? { id: tx.member.id, name: tx.member.name, initials: tx.member.initials }
+        ? {
+            id: tx.member.id,
+            name: tx.member.name,
+            initials: tx.member.initials,
+          }
         : null,
     })),
   };

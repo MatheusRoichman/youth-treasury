@@ -1,8 +1,9 @@
 'use client';
 
+import { useMemo, useState } from 'react';
+
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { MoreHorizontal, Search } from 'lucide-react';
-import { useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import {
   EXEMPTION_CATEGORY_LABELS,
@@ -158,9 +159,7 @@ export function CampaignMembersTable({
             return (
               <TableRow
                 key={cm.id}
-                className={
-                  filterMemberId === cm.memberId ? 'bg-primary/5' : ''
-                }
+                className={filterMemberId === cm.memberId ? 'bg-primary/5' : ''}
               >
                 <TableCell>
                   <div className="flex items-center gap-3">
@@ -196,8 +195,9 @@ export function CampaignMembersTable({
                         <TooltipContent className="max-w-64 space-y-1">
                           {cm.exemptionCategory && (
                             <p className="font-semibold">
-                              {EXEMPTION_CATEGORY_LABELS[cm.exemptionCategory] ??
-                                cm.exemptionCategory}
+                              {EXEMPTION_CATEGORY_LABELS[
+                                cm.exemptionCategory
+                              ] ?? cm.exemptionCategory}
                             </p>
                           )}
                           {cm.exemptionReason && (
@@ -232,9 +232,7 @@ export function CampaignMembersTable({
                         }}
                         expectedAmount={expected}
                         paidAmount={cm.paidAmount}
-                        trigger={
-                          <Button size="sm">Registrar Pagamento</Button>
-                        }
+                        trigger={<Button size="sm">Registrar Pagamento</Button>}
                       />
                       <ExemptMemberDialog
                         trigger={
@@ -274,7 +272,11 @@ export function CampaignMembersTable({
                     <AlertDialog>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="icon" className="h-8 w-8">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-8 w-8"
+                          >
                             <MoreHorizontal className="h-4 w-4" />
                           </Button>
                         </DropdownMenuTrigger>
@@ -293,8 +295,8 @@ export function CampaignMembersTable({
                           <AlertDialogTitle>Remover isenção?</AlertDialogTitle>
                           <AlertDialogDescription>
                             A isenção de <strong>{cm.member.name}</strong> será
-                            removida e o status voltará a Pendente. Esta ação pode
-                            ser revertida isentando o membro novamente.
+                            removida e o status voltará a Pendente. Esta ação
+                            pode ser revertida isentando o membro novamente.
                           </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>

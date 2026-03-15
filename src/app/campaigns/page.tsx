@@ -42,10 +42,7 @@ export default async function CampaignsPage() {
     startDate: c.startDate.toISOString(),
     endDate: c.endDate?.toISOString() ?? null,
     createdAt: c.createdAt.toISOString(),
-    totalRaised: c.transactions.reduce(
-      (sum, tx) => sum + Number(tx.amount),
-      0,
-    ),
+    totalRaised: c.transactions.reduce((sum, tx) => sum + Number(tx.amount), 0),
   }));
 
   const active = campaigns.filter((c) => c.status === 'ACTIVE');
@@ -87,7 +84,9 @@ export default async function CampaignsPage() {
           {active.length === 0 ? (
             <div className="flex flex-col items-center justify-center rounded-xl border bg-white py-14 text-center shadow-sm">
               <Megaphone className="mb-4 h-10 w-10 text-gray-300" />
-              <p className="font-semibold text-gray-600">Nenhuma campanha ativa</p>
+              <p className="font-semibold text-gray-600">
+                Nenhuma campanha ativa
+              </p>
               <p className="mt-1 text-sm text-gray-400">
                 Crie uma nova campanha para começar.
               </p>
@@ -142,7 +141,9 @@ function CampaignCard({
     <div className="flex flex-col rounded-xl border bg-white p-5 shadow-sm space-y-4">
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
-          <p className="font-semibold text-gray-900 truncate">{campaign.name}</p>
+          <p className="font-semibold text-gray-900 truncate">
+            {campaign.name}
+          </p>
           <div className="mt-1.5 flex items-center gap-2">
             <Badge
               variant={TYPE_BADGE_VARIANTS[campaign.type]}

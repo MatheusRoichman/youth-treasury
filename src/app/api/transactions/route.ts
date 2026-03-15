@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server';
-import type { TransactionCategory, TransactionType } from '@/generated/prisma/client';
+import type {
+  TransactionCategory,
+  TransactionType,
+} from '@/generated/prisma/client';
 import { getTransactions } from '@/lib/db/transactions';
 
 export async function GET(req: Request) {
@@ -39,7 +42,11 @@ export async function GET(req: Request) {
       vendorName: tx.vendorName,
       campaignId: tx.campaignId,
       member: tx.member
-        ? { id: tx.member.id, name: tx.member.name, initials: tx.member.initials }
+        ? {
+            id: tx.member.id,
+            name: tx.member.name,
+            initials: tx.member.initials,
+          }
         : null,
       campaign: tx.campaign
         ? { id: tx.campaign.id, name: tx.campaign.name, type: tx.campaign.type }

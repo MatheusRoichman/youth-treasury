@@ -6,7 +6,9 @@ export async function addMemberToCampaign(
   memberId: string,
   expectedAmount: number,
 ) {
-  const campaign = await prisma.campaign.findUnique({ where: { id: campaignId } });
+  const campaign = await prisma.campaign.findUnique({
+    where: { id: campaignId },
+  });
   if (!campaign) throw new Error('Campanha não encontrada');
   if (campaign.type !== 'FUNDRAISER') {
     throw new Error(
@@ -31,7 +33,8 @@ export async function setMemberExempt(
       ? {
           isExempt: true,
           exemptionReason: exemptionData?.reason ?? null,
-          exemptionCategory: (exemptionData?.category as ExemptionCategory) ?? null,
+          exemptionCategory:
+            (exemptionData?.category as ExemptionCategory) ?? null,
         }
       : {
           isExempt: false,
@@ -73,7 +76,8 @@ export async function getCampaignMembersWithDerivedStatus(campaignId: string) {
   const paidByMember: Record<string, number> = {};
   for (const tx of transactions) {
     if (tx.memberId) {
-      paidByMember[tx.memberId] = (paidByMember[tx.memberId] ?? 0) + Number(tx.amount);
+      paidByMember[tx.memberId] =
+        (paidByMember[tx.memberId] ?? 0) + Number(tx.amount);
     }
   }
 

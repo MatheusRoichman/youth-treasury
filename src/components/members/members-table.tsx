@@ -48,7 +48,9 @@ interface Props {
 
 export function MembersTable({ initialMembers }: Props) {
   const queryClient = useQueryClient();
-  const [confirmDeactivateId, setConfirmDeactivateId] = useState<string | null>(null);
+  const [confirmDeactivateId, setConfirmDeactivateId] = useState<string | null>(
+    null,
+  );
 
   const { data: members = initialMembers, isLoading } = useQuery<MemberDTO[]>({
     queryKey: memberKeys.list(),
@@ -146,7 +148,9 @@ export function MembersTable({ initialMembers }: Props) {
                       <MemberDialog
                         member={member}
                         trigger={
-                          <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                          <DropdownMenuItem
+                            onSelect={(e) => e.preventDefault()}
+                          >
                             Editar
                           </DropdownMenuItem>
                         }
@@ -176,7 +180,10 @@ export function MembersTable({ initialMembers }: Props) {
             ))}
             {sortedMembers.length === 0 && (
               <TableRow>
-                <TableCell colSpan={5} className="py-8 text-center text-gray-400">
+                <TableCell
+                  colSpan={5}
+                  className="py-8 text-center text-gray-400"
+                >
                   Nenhum membro cadastrado
                 </TableCell>
               </TableRow>

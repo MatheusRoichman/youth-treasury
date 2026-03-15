@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 
-import { UserPlus } from 'lucide-react';
 import { useQueryClient } from '@tanstack/react-query';
+import { UserPlus } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import {

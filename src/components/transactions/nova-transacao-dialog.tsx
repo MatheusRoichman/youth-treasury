@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 
-import { Plus } from 'lucide-react';
 import { useQueryClient } from '@tanstack/react-query';
+import { Plus } from 'lucide-react';
 import { toast } from 'sonner';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -127,8 +127,14 @@ export function NovaTransacaoDialog({ activeMembers, activeCampaigns }: Props) {
         description: description.trim(),
         amount: Number(amount),
         date,
-        memberId: txType === 'CONTRIBUTION' && source === 'member' ? memberId || undefined : undefined,
-        donorName: txType === 'CONTRIBUTION' && source === 'external' ? donorName || undefined : undefined,
+        memberId:
+          txType === 'CONTRIBUTION' && source === 'member'
+            ? memberId || undefined
+            : undefined,
+        donorName:
+          txType === 'CONTRIBUTION' && source === 'external'
+            ? donorName || undefined
+            : undefined,
         vendorName: txType === 'EXPENSE' ? vendorName || undefined : undefined,
         campaignId: campaignId || undefined,
       });
@@ -175,7 +181,10 @@ export function NovaTransacaoDialog({ activeMembers, activeCampaigns }: Props) {
           <div className="flex rounded-lg border overflow-hidden">
             <button
               type="button"
-              onClick={() => { setTxType('CONTRIBUTION'); setCategory(''); }}
+              onClick={() => {
+                setTxType('CONTRIBUTION');
+                setCategory('');
+              }}
               className={`flex-1 py-2 text-sm font-medium transition-colors ${
                 txType === 'CONTRIBUTION'
                   ? 'bg-primary text-white'
@@ -186,7 +195,11 @@ export function NovaTransacaoDialog({ activeMembers, activeCampaigns }: Props) {
             </button>
             <button
               type="button"
-              onClick={() => { setTxType('EXPENSE'); setSource('member'); setCategory('EXPENSE'); }}
+              onClick={() => {
+                setTxType('EXPENSE');
+                setSource('member');
+                setCategory('EXPENSE');
+              }}
               className={`flex-1 py-2 text-sm font-medium transition-colors ${
                 txType === 'EXPENSE'
                   ? 'bg-primary text-white'
@@ -204,7 +217,10 @@ export function NovaTransacaoDialog({ activeMembers, activeCampaigns }: Props) {
                 <input
                   type="radio"
                   checked={source === 'member'}
-                  onChange={() => { setSource('member'); setDonorName(''); }}
+                  onChange={() => {
+                    setSource('member');
+                    setDonorName('');
+                  }}
                   className="accent-primary"
                 />
                 Membro
@@ -213,7 +229,10 @@ export function NovaTransacaoDialog({ activeMembers, activeCampaigns }: Props) {
                 <input
                   type="radio"
                   checked={source === 'external'}
-                  onChange={() => { setSource('external'); setMemberId(''); }}
+                  onChange={() => {
+                    setSource('external');
+                    setMemberId('');
+                  }}
                   className="accent-primary"
                 />
                 Doação Externa
@@ -282,10 +301,7 @@ export function NovaTransacaoDialog({ activeMembers, activeCampaigns }: Props) {
                   <SelectItem key={c.id} value={c.id}>
                     <span className="flex items-center gap-2">
                       {c.name}
-                      <Badge
-                        variant="outline"
-                        className="text-xs ml-1"
-                      >
+                      <Badge variant="outline" className="text-xs ml-1">
                         {CAMPAIGN_TYPE_LABELS[c.type] ?? c.type}
                       </Badge>
                     </span>

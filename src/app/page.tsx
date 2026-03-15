@@ -14,12 +14,14 @@ export default async function DashboardPage() {
   const prevMonth = month === 1 ? 12 : month - 1;
   const prevYear = month === 1 ? year - 1 : year;
 
-  const [balance, summary, prevSummary, recentTransactions] = await Promise.all([
-    getCurrentBalance(),
-    getMonthSummary(year, month),
-    getMonthSummary(prevYear, prevMonth),
-    getRecentTransactions(10),
-  ]);
+  const [balance, summary, prevSummary, recentTransactions] = await Promise.all(
+    [
+      getCurrentBalance(),
+      getMonthSummary(year, month),
+      getMonthSummary(prevYear, prevMonth),
+      getRecentTransactions(10),
+    ],
+  );
 
   const inChange =
     prevSummary.totalIn > 0

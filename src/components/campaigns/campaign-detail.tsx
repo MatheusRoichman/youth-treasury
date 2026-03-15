@@ -27,8 +27,8 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { updateCampaignStatusAction } from '@/lib/actions/campaigns';
 import { campaignKeys } from '@/lib/queries/campaigns';
 import {
-  fetchCampaignDetail,
   type CampaignDetailDTO,
+  fetchCampaignDetail,
 } from '@/lib/services/campaigns/fetch-campaign-detail';
 import { formatCurrency, formatDate } from '@/lib/utils';
 
@@ -67,7 +67,8 @@ export function CampaignDetail({ initialData, availableMembers }: Props) {
   const { data: campaign = initialData, isLoading } =
     useQuery<CampaignDetailDTO>({
       queryKey: campaignKeys.detail(initialData.id),
-      queryFn: () => fetchCampaignDetail(initialData.id) as Promise<CampaignDetailDTO>,
+      queryFn: () =>
+        fetchCampaignDetail(initialData.id) as Promise<CampaignDetailDTO>,
       initialData,
     });
 
@@ -88,7 +89,8 @@ export function CampaignDetail({ initialData, availableMembers }: Props) {
   });
 
   const goal = Number(campaign.goalAmount);
-  const progress = goal > 0 ? Math.min(100, (campaign.totalRaised / goal) * 100) : 0;
+  const progress =
+    goal > 0 ? Math.min(100, (campaign.totalRaised / goal) * 100) : 0;
 
   if (isLoading && !initialData) {
     return (
@@ -107,7 +109,9 @@ export function CampaignDetail({ initialData, availableMembers }: Props) {
       <div className="flex items-start justify-between gap-4">
         <div>
           <div className="flex items-center gap-3 flex-wrap">
-            <h2 className="text-2xl font-bold text-gray-900">{campaign.name}</h2>
+            <h2 className="text-2xl font-bold text-gray-900">
+              {campaign.name}
+            </h2>
             <Badge
               className={
                 campaign.type === 'FUNDRAISER'

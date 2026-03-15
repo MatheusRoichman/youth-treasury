@@ -106,7 +106,9 @@ export function RegisterPaymentDialog({
             </div>
             <div className="flex justify-between">
               <span className="text-gray-500">Valor Esperado</span>
-              <span className="font-medium">{formatCurrency(expectedAmount)}</span>
+              <span className="font-medium">
+                {formatCurrency(expectedAmount)}
+              </span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-500">Já Pago</span>

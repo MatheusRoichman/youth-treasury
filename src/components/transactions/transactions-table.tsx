@@ -2,8 +2,9 @@
 
 import { useMemo, useState } from 'react';
 
-import { ChevronLeft, ChevronRight, ShoppingCart } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
+import { ChevronLeft, ChevronRight, ShoppingCart } from 'lucide-react';
+import { MemberAvatar } from '@/components/member-avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -23,18 +24,12 @@ import {
 } from '@/lib/services/transactions/fetch-transactions';
 import { formatCurrency, formatDate } from '@/lib/utils';
 import { NovaTransacaoDialog } from './nova-transacao-dialog';
-import { MemberAvatar } from '@/components/member-avatar';
 
 const CATEGORY_LABELS: Record<string, string> = {
   MONTHLY_FEE: 'Mensalidade',
   OFFERING: 'Oferta',
   EXPENSE: 'Despesa',
   OTHER: 'Outro',
-};
-
-const CAMPAIGN_TYPE_LABELS: Record<string, string> = {
-  MONTHLY_FEE: 'Mensalidade',
-  FUNDRAISER: 'Arrecadação',
 };
 
 interface ActiveMember {
@@ -94,9 +89,16 @@ export function TransactionsTable({
   const { data, isLoading } = useQuery<TransactionListResult>({
     queryKey: transactionKeys.list(filters),
     queryFn: () => fetchTransactions(filters),
-    initialData: page === 1 && !type && !category && !campaignId && !dateStart && !dateEnd && !search
-      ? initialData
-      : undefined,
+    initialData:
+      page === 1 &&
+      !type &&
+      !category &&
+      !campaignId &&
+      !dateStart &&
+      !dateEnd &&
+      !search
+        ? initialData
+        : undefined,
     placeholderData: (prev) => prev,
   });
 
@@ -116,7 +118,14 @@ export function TransactionsTable({
     setSearchInput('');
   }
 
-  const hasFilters = !!(type || category || campaignId || dateStart || dateEnd || search);
+  const hasFilters = !!(
+    type ||
+    category ||
+    campaignId ||
+    dateStart ||
+    dateEnd ||
+    search
+  );
 
   return (
     <div className="space-y-4">
@@ -142,7 +151,10 @@ export function TransactionsTable({
             <p className="text-xs font-medium text-gray-500">Tipo</p>
             <Select
               value={type || '__all__'}
-              onValueChange={(v) => { setType(v === '__all__' ? '' : v); setPage(1); }}
+              onValueChange={(v) => {
+                setType(v === '__all__' ? '' : v);
+                setPage(1);
+              }}
             >
               <SelectTrigger className="w-full">
                 <SelectValue />
@@ -160,7 +172,10 @@ export function TransactionsTable({
             <p className="text-xs font-medium text-gray-500">Categoria</p>
             <Select
               value={category || '__all__'}
-              onValueChange={(v) => { setCategory(v === '__all__' ? '' : v); setPage(1); }}
+              onValueChange={(v) => {
+                setCategory(v === '__all__' ? '' : v);
+                setPage(1);
+              }}
             >
               <SelectTrigger className="w-full">
                 <SelectValue />
@@ -181,7 +196,10 @@ export function TransactionsTable({
             <p className="text-xs font-medium text-gray-500">Campanha</p>
             <Select
               value={campaignId || '__all__'}
-              onValueChange={(v) => { setCampaignId(v === '__all__' ? '' : v); setPage(1); }}
+              onValueChange={(v) => {
+                setCampaignId(v === '__all__' ? '' : v);
+                setPage(1);
+              }}
             >
               <SelectTrigger className="w-full">
                 <SelectValue />
@@ -203,7 +221,10 @@ export function TransactionsTable({
             <Input
               type="date"
               value={dateStart}
-              onChange={(e) => { setDateStart(e.target.value); setPage(1); }}
+              onChange={(e) => {
+                setDateStart(e.target.value);
+                setPage(1);
+              }}
             />
           </div>
 
@@ -213,13 +234,18 @@ export function TransactionsTable({
             <Input
               type="date"
               value={dateEnd}
-              onChange={(e) => { setDateEnd(e.target.value); setPage(1); }}
+              onChange={(e) => {
+                setDateEnd(e.target.value);
+                setPage(1);
+              }}
             />
           </div>
 
           {/* Search */}
           <div className="space-y-1">
-            <p className="text-xs font-medium text-gray-500">Membro / Doador / Fornecedor</p>
+            <p className="text-xs font-medium text-gray-500">
+              Membro / Doador / Fornecedor
+            </p>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -231,7 +257,10 @@ export function TransactionsTable({
                 placeholder="Buscar..."
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
-                onBlur={() => { setSearch(searchInput); setPage(1); }}
+                onBlur={() => {
+                  setSearch(searchInput);
+                  setPage(1);
+                }}
               />
             </form>
           </div>

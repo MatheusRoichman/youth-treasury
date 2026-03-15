@@ -91,7 +91,9 @@ export function CampaignTransactionsTable({
                     <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gray-100">
                       <ShoppingCart className="h-3 w-3 text-gray-400" />
                     </span>
-                    <span className="text-sm text-gray-600">{tx.vendorName}</span>
+                    <span className="text-sm text-gray-600">
+                      {tx.vendorName}
+                    </span>
                   </div>
                 ) : (
                   <span className="text-xs text-gray-400">—</span>
