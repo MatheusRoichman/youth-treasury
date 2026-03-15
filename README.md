@@ -60,7 +60,7 @@ Crie um arquivo `.env.local` na raiz do projeto:
 ```env
 # Supabase
 NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=sua_anon_key
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sua_PUBLISHABLE_key
 
 # Banco de dados (usado pelo Prisma)
 DATABASE_URL=postgresql://postgres:[senha]@db.[projeto].supabase.co:5432/postgres
