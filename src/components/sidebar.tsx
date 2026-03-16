@@ -1,4 +1,4 @@
-import { Building2, Settings, UserCircle } from 'lucide-react'
+import { Church, Settings, UserCircle } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { NavLinks } from '@/components/nav-links'
@@ -38,7 +38,7 @@ export async function Sidebar() {
       {/* App header */}
       <div className="flex items-center gap-3 px-5 py-5">
         <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-          <Building2 className="h-5 w-5 text-white" />
+          <Church className="h-5 w-5 text-white" />
         </div>
         <div>
           <p className="text-sm font-bold leading-tight text-gray-900">
@@ -54,7 +54,7 @@ export async function Sidebar() {
       <div className="px-3 py-3">
         <div className="flex items-center gap-3 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2.5">
           <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-primary/10">
-            <Building2 className="h-4 w-4 text-primary" />
+            <Church className="h-4 w-4 text-primary" />
           </div>
           <div className="min-w-0 flex-1">
             <p className="truncate text-sm font-semibold leading-tight text-gray-900">
