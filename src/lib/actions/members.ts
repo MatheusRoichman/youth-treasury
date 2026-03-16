@@ -58,7 +58,6 @@ export async function updateMember(id: string, formData: unknown) {
         name: parsed.data.name,
         initials: deriveInitials(parsed.data.name),
         phone: parsed.data.phone || null,
-        email: parsed.data.email || null,
       },
     });
     revalidatePath('/members');

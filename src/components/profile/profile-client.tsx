@@ -1,6 +1,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -17,7 +18,6 @@ import { hashColor } from '@/lib/utils'
 
 const infoSchema = z.object({
   fullName: z.string().min(3, 'Nome deve ter pelo menos 3 caracteres'),
-  email: z.string().min(1, 'E-mail é obrigatório').email('E-mail inválido'),
 })
 
 const passwordSchema = z
@@ -79,14 +79,13 @@ export function ProfileClient({
     formState: { errors: infoErrors, isSubmitting: infoSubmitting },
   } = useForm<InfoFormData>({
     resolver: zodResolver(infoSchema),
-    defaultValues: { fullName: initialFullName, email: initialEmail },
+    defaultValues: { fullName: initialFullName },
   })
 
   async function onInfoSubmit(data: InfoFormData) {
     setInfoError(null)
     const supabase = createClient()
     const { error } = await supabase.auth.updateUser({
-      email: data.email,
       data: { full_name: data.fullName },
     })
     if (error) {
@@ -194,10 +193,11 @@ export function ProfileClient({
           {/* Avatar with loading overlay */}
           <div className="relative shrink-0">
             {avatarUrl ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
+              <Image
                 src={avatarUrl}
                 alt={displayName}
+                width={96}
+                height={96}
                 className="h-24 w-24 rounded-full object-cover"
               />
             ) : (
@@ -287,22 +287,11 @@ export function ProfileClient({
           </div>
 
           <div className="space-y-1.5">
-            <Label htmlFor="email">E-mail</Label>
-            <Input
-              id="email"
-              type="email"
-              autoComplete="email"
-              {...regInfo('email')}
-            />
-            {infoErrors.email && (
-              <p className="text-xs text-red-500">{infoErrors.email.message}</p>
-            )}
+            <Label>E-mail</Label>
+            <p className="rounded-md border bg-gray-50 px-3 py-2 text-sm text-gray-600">
+              {initialEmail}
+            </p>
           </div>
-
-          <p className="text-xs text-gray-400">
-            Ao alterar o e-mail, você receberá uma confirmação no novo endereço
-            antes da alteração ser efetivada.
-          </p>
 
           {infoError && (
             <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600">
