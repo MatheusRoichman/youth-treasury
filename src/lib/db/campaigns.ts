@@ -29,7 +29,7 @@ export async function getActiveCampaigns() {
 }
 
 export async function getCampaignById(id: string) {
-  return prisma.campaign.findUnique({
+  const campaign = await prisma.campaign.findUnique({
     where: { id },
     include: {
       campaignMembers: {
@@ -37,11 +37,21 @@ export async function getCampaignById(id: string) {
         orderBy: { member: { name: 'asc' } },
       },
       transactions: {
-        orderBy: { date: 'desc' },
+        orderBy: [{ date: 'desc' }, { createdAt: 'desc' }],
         include: { member: true },
       },
     },
   });
+
+  if (!campaign) return null;
+
+  const campaignBalance = campaign.transactions.reduce((sum, tx) => {
+    if (tx.type === 'CONTRIBUTION') return sum + Number(tx.amount);
+    if (tx.type === 'EXPENSE') return sum - Number(tx.amount);
+    return sum;
+  }, 0);
+
+  return { ...campaign, campaignBalance };
 }
 
 export async function getActiveMonthlyCampaign() {

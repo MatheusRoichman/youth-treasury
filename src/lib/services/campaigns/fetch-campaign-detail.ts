@@ -41,6 +41,7 @@ export interface CampaignDetailDTO {
   campaignMembers: CampaignMemberDTO[];
   transactions: CampaignTransactionDTO[];
   totalRaised: number;
+  campaignBalance: number;
 }
 
 export async function fetchCampaignDetail(

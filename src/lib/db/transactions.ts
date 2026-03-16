@@ -69,7 +69,7 @@ export async function getTransactions(options?: {
   const [rows, total] = await Promise.all([
     prisma.transaction.findMany({
       where,
-      orderBy: { date: 'desc' },
+      orderBy: [{ date: 'desc' }, { createdAt: 'desc' }],
       skip,
       take: limit,
       include: {

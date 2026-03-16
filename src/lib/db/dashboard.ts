@@ -40,7 +40,7 @@ export async function getMonthSummary(year: number, month: number) {
 
 export async function getRecentTransactions(limit = 10) {
   return prisma.transaction.findMany({
-    orderBy: { date: 'desc' },
+    orderBy: [{ date: 'desc' }, { createdAt: 'desc' }],
     take: limit,
     include: { member: true, campaign: { select: { id: true, name: true } } },
   });

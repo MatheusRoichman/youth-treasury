@@ -38,6 +38,7 @@ export default async function CampaignDetailPage({ params }: Props) {
     status: campaign.status,
     createdAt: campaign.createdAt.toISOString(),
     totalRaised,
+    campaignBalance: campaign.campaignBalance,
     campaignMembers: membersWithStatus.map((cm) => ({
       id: cm.id,
       memberId: cm.memberId,

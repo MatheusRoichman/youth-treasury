@@ -26,6 +26,7 @@ export async function GET(
     status: campaign.status,
     createdAt: campaign.createdAt.toISOString(),
     totalRaised,
+    campaignBalance: campaign.campaignBalance,
     campaignMembers: membersWithStatus.map((cm) => ({
       id: cm.id,
       memberId: cm.memberId,

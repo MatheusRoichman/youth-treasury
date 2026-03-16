@@ -23,7 +23,7 @@ import {
   type TransactionListResult,
 } from '@/lib/services/transactions/fetch-transactions';
 import { formatCurrency, formatDate } from '@/lib/utils';
-import { NovaTransacaoDialog } from './nova-transacao-dialog';
+import { NewTransactionDialog } from './new-transaction-dialog';
 
 const CATEGORY_LABELS: Record<string, string> = {
   MONTHLY_FEE: 'Mensalidade',
@@ -137,7 +137,7 @@ export function TransactionsTable({
             Histórico completo de entradas e saídas
           </p>
         </div>
-        <NovaTransacaoDialog
+        <NewTransactionDialog
           activeMembers={activeMembers}
           activeCampaigns={activeCampaigns}
         />

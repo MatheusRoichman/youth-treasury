@@ -54,17 +54,9 @@ const createTransactionSchema = z
         (v) => v === Math.round(v * 100) / 100,
         'Valor pode ter no máximo 2 casas decimais',
       ),
-    date: z
-      .string()
-      .min(1, 'Data obrigatória')
-      .refine((d) => {
-        const parsed = new Date(d);
-        if (Number.isNaN(parsed.getTime())) return false;
-        const tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        tomorrow.setHours(23, 59, 59, 999);
-        return parsed <= tomorrow;
-      }, 'Data não pode ser mais de 1 dia no futuro'),
+    date: z.coerce.date().max(new Date(), {
+      message: 'A data não pode ser no futuro',
+    }),
     memberId: z.string().optional().or(z.literal('')),
     donorName: z.string().optional().or(z.literal('')),
     vendorName: z.string().optional().or(z.literal('')),

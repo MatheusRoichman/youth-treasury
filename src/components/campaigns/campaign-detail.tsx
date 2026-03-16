@@ -178,7 +178,7 @@ export function CampaignDetail({ initialData, availableMembers }: Props) {
       </div>
 
       {/* Progress card */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <div className="rounded-xl border bg-white p-5 shadow-sm">
           <p className="text-xs font-semibold uppercase tracking-wide text-gray-400">
             Total Arrecadado
@@ -217,6 +217,20 @@ export function CampaignDetail({ initialData, availableMembers }: Props) {
             <span>0%</span>
             <span>META</span>
           </div>
+        </div>
+
+        <div className="rounded-xl border bg-white p-5 shadow-sm">
+          <p className="text-xs font-semibold uppercase tracking-wide text-gray-400">
+            Saldo da Campanha
+          </p>
+          <p
+            className={`mt-2 text-2xl font-bold ${campaign.campaignBalance >= 0 ? 'text-green-600' : 'text-red-500'}`}
+          >
+            {formatCurrency(campaign.campaignBalance)}
+          </p>
+          <p className="mt-1 text-xs text-gray-400">
+            Contribuições menos despesas
+          </p>
         </div>
       </div>
 

@@ -1,5 +1,6 @@
 import { Info, TrendingDown, TrendingUp } from 'lucide-react';
 import { RecentActivities } from '@/components/dashboard/recent-activities';
+import { getBalanceBreakdown } from '@/lib/db/analytics';
 import {
   getCurrentBalance,
   getMonthSummary,
@@ -14,14 +15,14 @@ export default async function DashboardPage() {
   const prevMonth = month === 1 ? 12 : month - 1;
   const prevYear = month === 1 ? year - 1 : year;
 
-  const [balance, summary, prevSummary, recentTransactions] = await Promise.all(
-    [
+  const [balance, summary, prevSummary, recentTransactions, breakdown] =
+    await Promise.all([
       getCurrentBalance(),
       getMonthSummary(year, month),
       getMonthSummary(prevYear, prevMonth),
       getRecentTransactions(10),
-    ],
-  );
+      getBalanceBreakdown(),
+    ]);
 
   const inChange =
     prevSummary.totalIn > 0
@@ -57,6 +58,10 @@ export default async function DashboardPage() {
           </p>
           <p className="mt-3 text-sm opacity-60">
             Disponível em caixa para atividades do departamento
+          </p>
+          <p className="mt-2 text-xs opacity-50">
+            {formatCurrency(breakdown.campaignBalance)} de campanhas ·{' '}
+            {formatCurrency(breakdown.generalBalance)} no caixa geral
           </p>
         </div>
 
