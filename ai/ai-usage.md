@@ -129,7 +129,7 @@ Business rules to enforce: [list from BUSINESS_RULES.md].
 
 ```
 Node.js 18+
-Next.js 14 App Router
+Next.js App Router
 Prisma 7
 @supabase/ssr for auth
 Vercel deployment
