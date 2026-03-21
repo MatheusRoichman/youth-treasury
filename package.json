@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "postinstall": "prisma generate",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "biome check",
-    "format": "biome format --write"
+    "format": "biome format --write",
+    "env:pull": "vercel env pull .env.local"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -29,6 +31,7 @@
     "axios": "^1.13.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "dotenv": "^17.3.1",
     "lucide-react": "^0.577.0",
     "next": "16.1.6",

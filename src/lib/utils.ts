@@ -1,4 +1,6 @@
 import { type ClassValue, clsx } from 'clsx';
+import { format, parseISO } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
@@ -14,19 +16,15 @@ export function formatCurrency(value: number | string): string {
 }
 
 export function formatDate(date: Date | string): string {
-  const d = typeof date === 'string' ? new Date(date) : date;
-  return new Intl.DateTimeFormat('pt-BR', {
-    day: '2-digit',
-    month: 'short',
-    year: 'numeric',
-  }).format(d);
+  const d = typeof date === 'string' ? parseISO(date) : date;
+  return format(d, 'dd MMM yyyy', { locale: ptBR });
 }
 
 export function hashColor(name: string): string {
-  let hash = 0;
+  let charCodeSum = 0;
   for (let i = 0; i < name.length; i++) {
-    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    charCodeSum += name.charCodeAt(i);
   }
-  const hue = Math.abs(hash) % 360;
-  return `hsl(${hue}, 65%, 45%)`;
+  const hue = charCodeSum % 360;
+  return `hsl(${hue}, 60%, 50%)`;
 }
