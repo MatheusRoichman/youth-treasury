@@ -6,6 +6,7 @@ export interface MemberDTO {
   initials: string;
   phone: string | null;
   email: string | null;
+  birthDate: string | null;
   status: 'ACTIVE' | 'INACTIVE';
   createdAt: string;
 }

@@ -8,6 +8,7 @@ const memberSchema = z.object({
   name: z.string().min(2, 'Nome deve ter pelo menos 2 caracteres'),
   phone: z.string().optional(),
   email: z.string().email('E-mail inválido').optional().or(z.literal('')),
+  birthDate: z.string().optional().or(z.literal('')),
 });
 
 function deriveInitials(name: string): string {
@@ -32,6 +33,7 @@ export async function createMember(formData: unknown) {
         initials: deriveInitials(parsed.data.name),
         phone: parsed.data.phone || null,
         email: parsed.data.email || null,
+        birthDate: parsed.data.birthDate ? new Date(parsed.data.birthDate) : null,
         status: 'ACTIVE',
       },
     });
@@ -58,6 +60,8 @@ export async function updateMember(id: string, formData: unknown) {
         name: parsed.data.name,
         initials: deriveInitials(parsed.data.name),
         phone: parsed.data.phone || null,
+        email: parsed.data.email || null,
+        birthDate: parsed.data.birthDate ? new Date(parsed.data.birthDate) : null,
       },
     });
     revalidatePath('/members');
