@@ -41,6 +41,7 @@ import {
   fetchMembers,
   type MemberDTO,
 } from '@/lib/services/members/fetch-members';
+import { formatPhone } from '@/lib/utils';
 
 interface Props {
   initialMembers: MemberDTO[];
@@ -126,7 +127,7 @@ export function MembersTable({ initialMembers }: Props) {
                   </div>
                 </TableCell>
                 <TableCell className="text-sm text-gray-500">
-                  {member.phone ?? '—'}
+                  {member.phone ? formatPhone(member.phone) : '—'}
                 </TableCell>
                 <TableCell className="text-sm text-gray-500">
                   {member.email ?? '—'}
