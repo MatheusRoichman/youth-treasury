@@ -1,24 +1,25 @@
-'use client'
+'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import Image from 'next/image'
-import { useRouter } from 'next/navigation'
-import { useRef, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
-import { z } from 'zod'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Separator } from '@/components/ui/separator'
-import { createClient } from '@/lib/supabase/client'
-import { hashColor } from '@/lib/utils'
+import { useRef, useState } from 'react';
+
+import { zodResolver } from '@hookform/resolvers/zod';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { z } from 'zod';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Separator } from '@/components/ui/separator';
+import { createClient } from '@/lib/supabase/client';
+import { hashColor } from '@/lib/utils';
 
 // ─── Schemas ────────────────────────────────────────────────────────────────
 
 const infoSchema = z.object({
   fullName: z.string().min(3, 'Nome deve ter pelo menos 3 caracteres'),
-})
+});
 
 const passwordSchema = z
   .object({
@@ -28,18 +29,18 @@ const passwordSchema = z
   .refine((d) => d.newPassword === d.confirmPassword, {
     message: 'As senhas não coincidem',
     path: ['confirmPassword'],
-  })
+  });
 
-type InfoFormData = z.infer<typeof infoSchema>
-type PasswordFormData = z.infer<typeof passwordSchema>
+type InfoFormData = z.infer<typeof infoSchema>;
+type PasswordFormData = z.infer<typeof passwordSchema>;
 
 // ─── Props ───────────────────────────────────────────────────────────────────
 
 interface ProfileClientProps {
-  userId: string
-  initialEmail: string
-  initialFullName: string
-  initialAvatarUrl: string
+  userId: string;
+  initialEmail: string;
+  initialFullName: string;
+  initialAvatarUrl: string;
 }
 
 // ─── Component ───────────────────────────────────────────────────────────────
@@ -50,17 +51,17 @@ export function ProfileClient({
   initialFullName,
   initialAvatarUrl,
 }: ProfileClientProps) {
-  const router = useRouter()
-  const fileInputRef = useRef<HTMLInputElement>(null)
+  const router = useRouter();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const [avatarUrl, setAvatarUrl] = useState(initialAvatarUrl)
-  const [avatarUploading, setAvatarUploading] = useState(false)
-  const [avatarError, setAvatarError] = useState<string | null>(null)
+  const [avatarUrl, setAvatarUrl] = useState(initialAvatarUrl);
+  const [avatarUploading, setAvatarUploading] = useState(false);
+  const [avatarError, setAvatarError] = useState<string | null>(null);
 
-  const [infoError, setInfoError] = useState<string | null>(null)
-  const [passwordError, setPasswordError] = useState<string | null>(null)
+  const [infoError, setInfoError] = useState<string | null>(null);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
 
-  const displayName = initialFullName || initialEmail || 'Usuário'
+  const displayName = initialFullName || initialEmail || 'Usuário';
   const initials = initialFullName
     ? initialFullName
         .split(' ')
@@ -68,8 +69,8 @@ export function ProfileClient({
         .map((w) => w[0])
         .join('')
         .toUpperCase()
-    : (initialEmail?.[0] ?? 'U').toUpperCase()
-  const avatarBg = hashColor(displayName)
+    : (initialEmail?.[0] ?? 'U').toUpperCase();
+  const avatarBg = hashColor(displayName);
 
   // ── Info form ──────────────────────────────────────────────────────────────
 
@@ -80,20 +81,20 @@ export function ProfileClient({
   } = useForm<InfoFormData>({
     resolver: zodResolver(infoSchema),
     defaultValues: { fullName: initialFullName },
-  })
+  });
 
   async function onInfoSubmit(data: InfoFormData) {
-    setInfoError(null)
-    const supabase = createClient()
+    setInfoError(null);
+    const supabase = createClient();
     const { error } = await supabase.auth.updateUser({
       data: { full_name: data.fullName },
-    })
+    });
     if (error) {
-      setInfoError(error.message)
-      return
+      setInfoError(error.message);
+      return;
     }
-    toast.success('Informações atualizadas com sucesso')
-    router.refresh()
+    toast.success('Informações atualizadas com sucesso');
+    router.refresh();
   }
 
   // ── Password form ──────────────────────────────────────────────────────────
@@ -107,76 +108,76 @@ export function ProfileClient({
   } = useForm<PasswordFormData>({
     resolver: zodResolver(passwordSchema),
     defaultValues: { newPassword: '', confirmPassword: '' },
-  })
+  });
 
-  const pwdValues = watchPwd()
-  const pwdEmpty = !pwdValues.newPassword && !pwdValues.confirmPassword
+  const pwdValues = watchPwd();
+  const pwdEmpty = !pwdValues.newPassword && !pwdValues.confirmPassword;
 
   async function onPasswordSubmit(data: PasswordFormData) {
-    setPasswordError(null)
-    const supabase = createClient()
+    setPasswordError(null);
+    const supabase = createClient();
     const { error } = await supabase.auth.updateUser({
       password: data.newPassword,
-    })
+    });
     if (error) {
-      setPasswordError(error.message)
-      return
+      setPasswordError(error.message);
+      return;
     }
-    toast.success('Senha alterada com sucesso')
-    resetPwd()
+    toast.success('Senha alterada com sucesso');
+    resetPwd();
   }
 
   // ── Avatar upload ──────────────────────────────────────────────────────────
 
   async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0]
-    if (!file) return
+    const file = e.target.files?.[0];
+    if (!file) return;
 
-    setAvatarError(null)
+    setAvatarError(null);
 
-    const allowed = ['image/jpeg', 'image/png', 'image/webp']
+    const allowed = ['image/jpeg', 'image/png', 'image/webp'];
     if (!allowed.includes(file.type)) {
-      setAvatarError('Formato inválido. Use JPEG, PNG ou WebP.')
-      return
+      setAvatarError('Formato inválido. Use JPEG, PNG ou WebP.');
+      return;
     }
     if (file.size > 2 * 1024 * 1024) {
-      setAvatarError('A imagem deve ter no máximo 2 MB.')
-      return
+      setAvatarError('A imagem deve ter no máximo 2 MB.');
+      return;
     }
 
-    setAvatarUploading(true)
+    setAvatarUploading(true);
     try {
-      const supabase = createClient()
+      const supabase = createClient();
 
       const { error: uploadError } = await supabase.storage
         .from('avatars')
-        .upload(userId, file, { upsert: true, contentType: file.type })
+        .upload(userId, file, { upsert: true, contentType: file.type });
 
-      if (uploadError) throw uploadError
+      if (uploadError) throw uploadError;
 
       const { data: urlData } = supabase.storage
         .from('avatars')
-        .getPublicUrl(userId)
+        .getPublicUrl(userId);
 
       // Bust cache by appending timestamp
-      const publicUrl = `${urlData.publicUrl}?t=${Date.now()}`
+      const publicUrl = `${urlData.publicUrl}?t=${Date.now()}`;
 
       const { error: updateError } = await supabase.auth.updateUser({
         data: { avatar_url: publicUrl },
-      })
-      if (updateError) throw updateError
+      });
+      if (updateError) throw updateError;
 
-      setAvatarUrl(publicUrl)
-      toast.success('Foto atualizada com sucesso')
-      router.refresh()
+      setAvatarUrl(publicUrl);
+      toast.success('Foto atualizada com sucesso');
+      router.refresh();
     } catch (err) {
       setAvatarError(
         err instanceof Error ? err.message : 'Erro ao fazer upload da foto.',
-      )
+      );
     } finally {
-      setAvatarUploading(false)
+      setAvatarUploading(false);
       // Reset input so the same file can be re-uploaded if needed
-      if (fileInputRef.current) fileInputRef.current.value = ''
+      if (fileInputRef.current) fileInputRef.current.value = '';
     }
   }
 
@@ -359,5 +360,5 @@ export function ProfileClient({
         </form>
       </div>
     </div>
-  )
+  );
 }

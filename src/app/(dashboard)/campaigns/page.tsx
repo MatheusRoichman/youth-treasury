@@ -178,9 +178,7 @@ function CampaignCard({
 
       <div className="text-xs text-gray-400 space-y-0.5">
         <p>Início: {formatDate(campaign.startDate)}</p>
-        {campaign.endDate && (
-          <p>Fim: {formatDate(campaign.endDate)}</p>
-        )}
+        {campaign.endDate && <p>Fim: {formatDate(campaign.endDate)}</p>}
       </div>
 
       <Link

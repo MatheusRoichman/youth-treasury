@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "biome check",
-    "format": "biome format --write"
+    "format": "biome format --write",
+    "env:pull": "vercel env pull .env.local"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

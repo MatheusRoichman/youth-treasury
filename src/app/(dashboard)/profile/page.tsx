@@ -24,18 +24,18 @@
  *   USING (bucket_id = 'avatars');
  */
 
-import { redirect } from 'next/navigation'
-import { ProfileClient } from '@/components/profile/profile-client'
-import { createClient } from '@/lib/supabase/server'
+import { redirect } from 'next/navigation';
+import { ProfileClient } from '@/components/profile/profile-client';
+import { createClient } from '@/lib/supabase/server';
 
 export default async function ProfilePage() {
-  const supabase = await createClient()
+  const supabase = await createClient();
   const {
     data: { user },
-  } = await supabase.auth.getUser()
+  } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect('/login')
+    redirect('/login');
   }
 
   return (
@@ -50,5 +50,5 @@ export default async function ProfilePage() {
         />
       </div>
     </main>
-  )
+  );
 }
