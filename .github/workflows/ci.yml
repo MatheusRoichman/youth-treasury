@@ -6,7 +6,7 @@ on:
 
 jobs:
   ci:
-    name: Lint, Types & Build
+    name: Lint, Formatting & Types
     runs-on: ubuntu-latest
 
     steps:
@@ -22,4 +22,3 @@ jobs:
 
       - name: Type check
         run: bunx tsc --noEmit
-
