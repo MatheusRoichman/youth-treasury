@@ -105,6 +105,7 @@ export function MembersTable({ initialMembers }: Props) {
               <TableHead>Nome</TableHead>
               <TableHead>Telefone</TableHead>
               <TableHead>E-mail</TableHead>
+              <TableHead>Nascimento</TableHead>
               <TableHead>Status</TableHead>
               <TableHead className="text-right">Ações</TableHead>
             </TableRow>
@@ -129,6 +130,17 @@ export function MembersTable({ initialMembers }: Props) {
                 </TableCell>
                 <TableCell className="text-sm text-gray-500">
                   {member.email ?? '—'}
+                </TableCell>
+                <TableCell className="text-sm text-gray-500">
+                  {member.birthDate
+                    ? new Date(
+                        member.birthDate + 'T12:00:00',
+                      ).toLocaleDateString('pt-BR', {
+                        day: '2-digit',
+                        month: 'short',
+                        year: 'numeric',
+                      })
+                    : '—'}
                 </TableCell>
                 <TableCell>
                   <Badge
@@ -181,7 +193,7 @@ export function MembersTable({ initialMembers }: Props) {
             {sortedMembers.length === 0 && (
               <TableRow>
                 <TableCell
-                  colSpan={5}
+                  colSpan={6}
                   className="py-8 text-center text-gray-400"
                 >
                   Nenhum membro cadastrado

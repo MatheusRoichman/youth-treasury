@@ -23,10 +23,10 @@ export function formatDate(date: Date | string): string {
 }
 
 export function hashColor(name: string): string {
-  let hash = 0;
+  let charCodeSum = 0;
   for (let i = 0; i < name.length; i++) {
-    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    charCodeSum += name.charCodeAt(i);
   }
-  const hue = Math.abs(hash) % 360;
-  return `hsl(${hue}, 65%, 45%)`;
+  const hue = charCodeSum % 360;
+  return `hsl(${hue}, 60%, 50%)`;
 }

@@ -32,6 +32,7 @@ const schema = z.object({
   name: z.string().min(2, 'Nome deve ter pelo menos 2 caracteres'),
   phone: z.string().optional(),
   email: z.string().email('E-mail inválido').optional().or(z.literal('')),
+  birthDate: z.string().optional().or(z.literal('')),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -41,6 +42,7 @@ interface Member {
   name: string;
   phone: string | null;
   email: string | null;
+  birthDate: string | null;
 }
 
 interface Props {
@@ -59,6 +61,7 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
       name: member?.name ?? '',
       phone: member?.phone ?? '',
       email: member?.email ?? '',
+      birthDate: member?.birthDate ?? '',
     },
   });
 
@@ -68,6 +71,7 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
         name: member?.name ?? '',
         phone: member?.phone ?? '',
         email: member?.email ?? '',
+        birthDate: member?.birthDate ?? '',
       });
     }
   }, [open, member, form]);
@@ -134,6 +138,23 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
                     <Input
                       type="email"
                       placeholder="email@exemplo.com"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="birthDate"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Data de Nascimento</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="date"
+                      max={new Date().toISOString().split('T')[0]}
                       {...field}
                     />
                   </FormControl>

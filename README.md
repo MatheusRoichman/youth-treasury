@@ -20,7 +20,7 @@ Sistema de gestão financeira para o departamento de jovens da igreja. Permite a
 
 | Camada | Tecnologia |
 |---|---|
-| Framework | Next.js 14 (App Router) |
+| Framework | Next.js (App Router) |
 | Banco de dados | PostgreSQL via Supabase |
 | ORM | Prisma |
 | Autenticação | Supabase Auth |
