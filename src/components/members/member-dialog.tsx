@@ -27,6 +27,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { createMember, updateMember } from '@/lib/actions/members';
 import { memberKeys } from '@/lib/queries/members';
+import { formatPhone } from '@/lib/utils';
 
 const schema = z.object({
   name: z.string().min(2, 'Nome deve ter pelo menos 2 caracteres'),
@@ -59,7 +60,7 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
     resolver: zodResolver(schema),
     defaultValues: {
       name: member?.name ?? '',
-      phone: member?.phone ?? '',
+      phone: member?.phone ? formatPhone(member.phone) : '',
       email: member?.email ?? '',
       birthDate: member?.birthDate ?? '',
     },
@@ -69,7 +70,7 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
     if (open) {
       form.reset({
         name: member?.name ?? '',
-        phone: member?.phone ?? '',
+        phone: member?.phone ? formatPhone(member.phone) : '',
         email: member?.email ?? '',
         birthDate: member?.birthDate ?? '',
       });
@@ -77,9 +78,13 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
   }, [open, member, form]);
 
   async function onSubmit(values: FormValues) {
+    const payload = {
+      ...values,
+      phone: values.phone?.replace(/\D/g, '') || undefined,
+    };
     const result = member
-      ? await updateMember(member.id, values)
-      : await createMember(values);
+      ? await updateMember(member.id, payload)
+      : await createMember(payload);
 
     if (result.success) {
       toast.success(
@@ -122,7 +127,14 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
                 <FormItem>
                   <FormLabel>Telefone</FormLabel>
                   <FormControl>
-                    <Input placeholder="(11) 99999-9999" {...field} />
+                    <Input
+                      placeholder="(11) 99999-9999"
+                      inputMode="numeric"
+                      {...field}
+                      onChange={(e) =>
+                        field.onChange(formatPhone(e.target.value))
+                      }
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
