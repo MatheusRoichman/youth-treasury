@@ -39,8 +39,8 @@ export default async function CampaignsPage() {
   const campaigns = campaignsRaw.map((c) => ({
     ...c,
     goalAmount: Number(c.goalAmount),
-    startDate: c.startDate.toISOString(),
-    endDate: c.endDate?.toISOString() ?? null,
+    startDate: c.startDate.toISOString().split('T')[0],
+    endDate: c.endDate?.toISOString().split('T')[0] ?? null,
     createdAt: c.createdAt.toISOString(),
     totalRaised: c.transactions.reduce((sum, tx) => sum + Number(tx.amount), 0),
   }));
@@ -177,10 +177,8 @@ function CampaignCard({
       </div>
 
       <div className="text-xs text-gray-400 space-y-0.5">
-        <p>Início: {formatDate(new Date(campaign.startDate))}</p>
-        {campaign.endDate && (
-          <p>Fim: {formatDate(new Date(campaign.endDate))}</p>
-        )}
+        <p>Início: {formatDate(campaign.startDate)}</p>
+        {campaign.endDate && <p>Fim: {formatDate(campaign.endDate)}</p>}
       </div>
 
       <Link

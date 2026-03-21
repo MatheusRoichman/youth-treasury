@@ -126,9 +126,8 @@ export function CampaignDetail({ initialData, availableMembers }: Props) {
             </Badge>
           </div>
           <p className="mt-1 text-sm text-gray-400">
-            Início: {formatDate(new Date(campaign.startDate))}
-            {campaign.endDate &&
-              ` · Fim: ${formatDate(new Date(campaign.endDate))}`}
+            Início: {formatDate(campaign.startDate)}
+            {campaign.endDate && ` · Fim: ${formatDate(campaign.endDate)}`}
           </p>
         </div>
 

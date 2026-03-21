@@ -1,16 +1,16 @@
-'use client'
+'use client';
 
-import { LogOut } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
+import { LogOut } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { createClient } from '@/lib/supabase/client';
 
 export function SidebarSignOut() {
-  const router = useRouter()
+  const router = useRouter();
 
   async function handleSignOut() {
-    const supabase = createClient()
-    await supabase.auth.signOut()
-    router.push('/login')
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    router.push('/login');
   }
 
   return (
@@ -22,5 +22,5 @@ export function SidebarSignOut() {
       <LogOut className="h-4 w-4 shrink-0" />
       Sair
     </button>
-  )
+  );
 }

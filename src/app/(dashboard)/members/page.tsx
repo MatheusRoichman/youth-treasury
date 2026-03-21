@@ -8,6 +8,7 @@ export default async function MembersPage() {
   const membersRaw = await getMembers();
   const members = membersRaw.map((m) => ({
     ...m,
+    birthDate: m.birthDate?.toISOString().split('T')[0] ?? null,
     createdAt: m.createdAt.toISOString(),
   }));
 
