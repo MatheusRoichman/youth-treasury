@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "biome check",
+    "db:generate": "prisma generate",
     "format": "biome format --write",
     "env:pull": "vercel env pull .env.local"
   },
