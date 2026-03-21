@@ -33,7 +33,9 @@ export async function createMember(formData: unknown) {
         initials: deriveInitials(parsed.data.name),
         phone: parsed.data.phone || null,
         email: parsed.data.email || null,
-        birthDate: parsed.data.birthDate ? new Date(parsed.data.birthDate) : null,
+        birthDate: parsed.data.birthDate
+          ? new Date(parsed.data.birthDate)
+          : null,
         status: 'ACTIVE',
       },
     });
@@ -61,7 +63,9 @@ export async function updateMember(id: string, formData: unknown) {
         initials: deriveInitials(parsed.data.name),
         phone: parsed.data.phone || null,
         email: parsed.data.email || null,
-        birthDate: parsed.data.birthDate ? new Date(parsed.data.birthDate) : null,
+        birthDate: parsed.data.birthDate
+          ? new Date(parsed.data.birthDate)
+          : null,
       },
     });
     revalidatePath('/members');

@@ -62,7 +62,10 @@ type ContribSource = 'member' | 'external';
 
 const today = new Date().toISOString().slice(0, 10);
 
-export function NewTransactionDialog({ activeMembers, activeCampaigns }: Props) {
+export function NewTransactionDialog({
+  activeMembers,
+  activeCampaigns,
+}: Props) {
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);

@@ -134,7 +134,7 @@ export function MembersTable({ initialMembers }: Props) {
                 <TableCell className="text-sm text-gray-500">
                   {member.birthDate
                     ? new Date(
-                        member.birthDate + 'T12:00:00',
+                        `${member.birthDate}T12:00:00`,
                       ).toLocaleDateString('pt-BR', {
                         day: '2-digit',
                         month: 'short',

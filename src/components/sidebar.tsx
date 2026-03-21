@@ -1,26 +1,26 @@
-import { Church, Settings, UserCircle } from 'lucide-react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { NavLinks } from '@/components/nav-links'
-import { SidebarSignOut } from '@/components/sidebar-sign-out'
-import { Separator } from '@/components/ui/separator'
-import { getSettings } from '@/lib/db/settings'
-import { createClient } from '@/lib/supabase/server'
-import { hashColor } from '@/lib/utils'
+import { Church, Settings, UserCircle } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { NavLinks } from '@/components/nav-links';
+import { SidebarSignOut } from '@/components/sidebar-sign-out';
+import { Separator } from '@/components/ui/separator';
+import { getSettings } from '@/lib/db/settings';
+import { createClient } from '@/lib/supabase/server';
+import { hashColor } from '@/lib/utils';
 
 export async function Sidebar() {
   const [settings, supabase] = await Promise.all([
     getSettings(),
     createClient(),
-  ])
+  ]);
 
   const {
     data: { user },
-  } = await supabase.auth.getUser()
+  } = await supabase.auth.getUser();
 
-  const fullName = user?.user_metadata?.full_name as string | undefined
-  const avatarUrl = user?.user_metadata?.avatar_url as string | undefined
-  const displayName = fullName ?? user?.email ?? 'Usuário'
+  const fullName = user?.user_metadata?.full_name as string | undefined;
+  const avatarUrl = user?.user_metadata?.avatar_url as string | undefined;
+  const displayName = fullName ?? user?.email ?? 'Usuário';
 
   const initials = fullName
     ? fullName
@@ -29,15 +29,21 @@ export async function Sidebar() {
         .map((w: string) => w[0])
         .join('')
         .toUpperCase()
-    : (user?.email?.[0] ?? 'U').toUpperCase()
+    : (user?.email?.[0] ?? 'U').toUpperCase();
 
-  const avatarBg = hashColor(displayName)
+  const avatarBg = hashColor(displayName);
 
   return (
     <aside className="flex h-screen w-64 shrink-0 flex-col border-r bg-white">
       {/* App header */}
       <div className="flex items-center gap-3 px-5 py-5">
-        <Image src="/img/logo.webp" alt="Logo" width={36} height={36} className="h-9 w-9 rounded-lg object-cover" />
+        <Image
+          src="/img/logo.webp"
+          alt="Logo"
+          width={36}
+          height={36}
+          className="h-9 w-9 rounded-lg object-cover"
+        />
         <div>
           <p className="text-sm font-bold leading-tight text-gray-900">
             Tesouraria Jovem
@@ -120,5 +126,5 @@ export async function Sidebar() {
         <SidebarSignOut />
       </div>
     </aside>
-  )
+  );
 }
