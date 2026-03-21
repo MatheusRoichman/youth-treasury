@@ -35,7 +35,7 @@ export async function GET(req: Request) {
       category: tx.category,
       description: tx.description,
       amount: tx.amount.toString(),
-      date: tx.date.toISOString(),
+      date: tx.date.toISOString().split('T')[0],
       createdAt: tx.createdAt.toISOString(),
       memberId: tx.memberId,
       donorName: tx.donorName,

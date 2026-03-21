@@ -37,7 +37,7 @@ export default async function DashboardPage() {
   const serializedTransactions = recentTransactions.map((tx) => ({
     ...tx,
     amount: tx.amount.toString(),
-    date: tx.date.toISOString(),
+    date: tx.date.toISOString().split('T')[0],
     createdAt: tx.createdAt.toISOString(),
     campaign: tx.campaign ?? null,
   }));
