@@ -9,7 +9,7 @@ export async function GET() {
     type: tx.type,
     description: tx.description,
     amount: tx.amount.toString(),
-    date: tx.date.toISOString(),
+    date: tx.date.toISOString().split('T')[0],
     createdAt: tx.createdAt.toISOString(),
     member: tx.member
       ? { id: tx.member.id, name: tx.member.name, initials: tx.member.initials }

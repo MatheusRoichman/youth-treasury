@@ -398,7 +398,7 @@ export function TransactionsTable({
 
                   {/* Date */}
                   <td className="px-4 py-3 text-sm text-gray-400">
-                    {formatDate(new Date(tx.date))}
+                    {formatDate(tx.date)}
                   </td>
 
                   {/* Amount */}
