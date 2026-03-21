@@ -21,22 +21,82 @@ function deriveInitials(name: string): string {
   return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
 }
 
-const MEMBERS = [
-  'Ana Carolina Silva',
-  'Bruno Henrique Oliveira',
-  'Carla Fernanda Santos',
-  'Diego Augusto Lima',
-  'Eduarda Cristina Pereira',
-  'Felipe Rodrigues Alves',
-  'Gabriela Moura Costa',
-  'Henrique José Barbosa',
-  'Isabela Nascimento Ferreira',
-  'João Paulo Ribeiro',
-  'Larissa Beatriz Carvalho',
-  'Marcelo Andrade Souza',
-  'Natália Gomes Martins',
-  'Pedro Lucas Araújo',
-  'Rafaela Cristina Mendes',
+const MEMBERS: { name: string; phone: string; birthDate: Date }[] = [
+  {
+    name: 'Ana Carolina Silva',
+    phone: '11991234501',
+    birthDate: new Date('2001-03-15'),
+  },
+  {
+    name: 'Bruno Henrique Oliveira',
+    phone: '11982345602',
+    birthDate: new Date('1999-07-22'),
+  },
+  {
+    name: 'Carla Fernanda Santos',
+    phone: '11973456703',
+    birthDate: new Date('2003-11-08'),
+  },
+  {
+    name: 'Diego Augusto Lima',
+    phone: '11964567804',
+    birthDate: new Date('1998-05-30'),
+  },
+  {
+    name: 'Eduarda Cristina Pereira',
+    phone: '11955678905',
+    birthDate: new Date('2002-09-14'),
+  },
+  {
+    name: 'Felipe Rodrigues Alves',
+    phone: '11946789006',
+    birthDate: new Date('2000-01-27'),
+  },
+  {
+    name: 'Gabriela Moura Costa',
+    phone: '11937890107',
+    birthDate: new Date('2004-06-03'),
+  },
+  {
+    name: 'Henrique José Barbosa',
+    phone: '11928901208',
+    birthDate: new Date('1997-12-19'),
+  },
+  {
+    name: 'Isabela Nascimento Ferreira',
+    phone: '11919012309',
+    birthDate: new Date('2001-08-11'),
+  },
+  {
+    name: 'João Paulo Ribeiro',
+    phone: '11910123400',
+    birthDate: new Date('1999-04-25'),
+  },
+  {
+    name: 'Larissa Beatriz Carvalho',
+    phone: '11991234510',
+    birthDate: new Date('2003-02-07'),
+  },
+  {
+    name: 'Marcelo Andrade Souza',
+    phone: '11982345611',
+    birthDate: new Date('2000-10-16'),
+  },
+  {
+    name: 'Natália Gomes Martins',
+    phone: '11973456712',
+    birthDate: new Date('2002-07-29'),
+  },
+  {
+    name: 'Pedro Lucas Araújo',
+    phone: '11964567813',
+    birthDate: new Date('1998-03-04'),
+  },
+  {
+    name: 'Rafaela Cristina Mendes',
+    phone: '11955678914',
+    birthDate: new Date('2005-01-20'),
+  },
 ];
 
 const monthNames = [
@@ -72,13 +132,14 @@ async function main() {
   });
 
   const members = await Promise.all(
-    MEMBERS.map((name) =>
+    MEMBERS.map(({ name, phone, birthDate }) =>
       prisma.member.create({
         data: {
           name,
           initials: deriveInitials(name),
           status: 'ACTIVE',
-          phone: `(11) 9${String(Math.floor(Math.random() * 90000000) + 10000000)}`,
+          phone,
+          birthDate,
           email: `${name.split(' ')[0].toLowerCase()}.${name.split(' ')[name.split(' ').length - 1].toLowerCase()}@email.com`,
         },
       }),
