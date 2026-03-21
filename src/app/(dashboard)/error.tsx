@@ -17,9 +17,7 @@ export default function DashboardError({
           <AlertTriangle className="h-7 w-7 text-red-500" />
         </div>
         <div className="space-y-1">
-          <h1 className="text-xl font-bold text-gray-900">
-            Algo deu errado
-          </h1>
+          <h1 className="text-xl font-bold text-gray-900">Algo deu errado</h1>
           <p className="text-sm text-gray-500">
             Ocorreu um erro inesperado. Tente novamente ou entre em contato com
             o suporte.
