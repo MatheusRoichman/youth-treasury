@@ -31,6 +31,7 @@ model Member {
   initials  String // derived from name on insert (first + last word initials)
   phone     String?
   email     String?
+  birthDate DateTime?    @map("birth_date") @db.Date
   status    MemberStatus @default(ACTIVE)
   createdAt DateTime     @default(now()) @map("created_at")
 
