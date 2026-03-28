@@ -156,11 +156,10 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
                     type="button"
                     className="text-muted-foreground hover:text-foreground text-xs underline"
                     onClick={() => {
-                      form.setValue('birthDay', '', { shouldValidate: true });
-                      form.setValue('birthMonth', undefined, {
-                        shouldValidate: true,
-                      });
-                      form.setValue('birthYear', '', { shouldValidate: true });
+                      form.setValue('birthDay', '');
+                      form.setValue('birthMonth', '');
+                      form.setValue('birthYear', '');
+                      form.clearErrors(['birthDay', 'birthMonth', 'birthYear']);
                     }}
                   >
                     Limpar
@@ -192,9 +191,8 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
                   render={({ field }) => (
                     <FormItem>
                       <Select
-                        key={birthMonth || 'empty'}
                         onValueChange={field.onChange}
-                        value={field.value || undefined}
+                        value={field.value}
                       >
                         <FormControl>
                           <SelectTrigger className="w-full">
