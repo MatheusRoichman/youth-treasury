@@ -145,7 +145,24 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
               )}
             />
             <div className="space-y-2">
-              <FormLabel>Data de Nascimento</FormLabel>
+              <div className="flex items-center justify-between">
+                <FormLabel>Data de Nascimento</FormLabel>
+                {(form.watch('birthDay') ||
+                  form.watch('birthMonth') ||
+                  form.watch('birthYear')) && (
+                  <button
+                    type="button"
+                    className="text-muted-foreground hover:text-foreground text-xs underline"
+                    onClick={() => {
+                      form.setValue('birthDay', '');
+                      form.setValue('birthMonth', undefined);
+                      form.setValue('birthYear', '');
+                    }}
+                  >
+                    Limpar
+                  </button>
+                )}
+              </div>
               <div className="grid grid-cols-3 gap-2">
                 <FormField
                   control={form.control}
@@ -172,7 +189,7 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
                     <FormItem>
                       <Select
                         onValueChange={field.onChange}
-                        value={field.value}
+                        value={field.value || undefined}
                       >
                         <FormControl>
                           <SelectTrigger className="w-full">
