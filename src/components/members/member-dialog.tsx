@@ -276,7 +276,7 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
                         value={field.value}
                       >
                         <FormControl>
-                          <SelectTrigger>
+                          <SelectTrigger className="w-full">
                             <SelectValue placeholder="Mês" />
                           </SelectTrigger>
                         </FormControl>
