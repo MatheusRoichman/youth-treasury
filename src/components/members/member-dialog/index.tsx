@@ -156,9 +156,11 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
                     type="button"
                     className="text-muted-foreground hover:text-foreground text-xs underline"
                     onClick={() => {
-                      form.setValue('birthDay', '');
-                      form.setValue('birthMonth', undefined);
-                      form.setValue('birthYear', '');
+                      form.setValue('birthDay', '', { shouldValidate: true });
+                      form.setValue('birthMonth', undefined, {
+                        shouldValidate: true,
+                      });
+                      form.setValue('birthYear', '', { shouldValidate: true });
                     }}
                   >
                     Limpar
