@@ -46,6 +46,7 @@ interface Props {
 export function MemberDialog({ member, trigger, onSuccess }: Props) {
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
+  const [birthMonthKey, setBirthMonthKey] = useState(0);
 
   const form = useForm({
     resolver: zodResolver(schema),
@@ -55,6 +56,7 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
   useEffect(() => {
     if (open) {
       form.reset(memberDefaultValues(member));
+      setBirthMonthKey((k) => k + 1);
     }
   }, [open, member, form]);
 
@@ -84,6 +86,10 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
       toast.error(result.error ?? 'Erro ao salvar membro');
     }
   }
+
+  const birthDay = form.watch('birthDay');
+  const birthMonth = form.watch('birthMonth');
+  const birthYear = form.watch('birthYear');
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -147,9 +153,7 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <FormLabel>Data de Nascimento</FormLabel>
-                {(form.watch('birthDay') ||
-                  form.watch('birthMonth') ||
-                  form.watch('birthYear')) && (
+                {(birthDay || birthMonth || birthYear) && (
                   <button
                     type="button"
                     className="text-muted-foreground hover:text-foreground text-xs underline"
@@ -157,6 +161,7 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
                       form.setValue('birthDay', '');
                       form.setValue('birthMonth', undefined);
                       form.setValue('birthYear', '');
+                      setBirthMonthKey((k) => k + 1);
                     }}
                   >
                     Limpar
@@ -188,6 +193,7 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
                   render={({ field }) => (
                     <FormItem>
                       <Select
+                        key={birthMonthKey}
                         onValueChange={field.onChange}
                         value={field.value || undefined}
                       >
