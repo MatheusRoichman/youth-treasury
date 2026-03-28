@@ -8,7 +8,23 @@ const memberSchema = z.object({
   name: z.string().min(2, 'Nome deve ter pelo menos 2 caracteres'),
   phone: z.string().optional(),
   email: z.string().email('E-mail inválido').optional().or(z.literal('')),
-  birthDate: z.string().optional().or(z.literal('')),
+  birthDate: z
+    .string()
+    .optional()
+    .or(z.literal(''))
+    .refine((val) => {
+      if (!val) return true;
+      const [yearStr, monthStr, dayStr] = val.split('-');
+      const year = Number(yearStr);
+      const month = Number(monthStr);
+      const day = Number(dayStr);
+      const date = new Date(year, month - 1, day);
+      return (
+        date.getFullYear() === year &&
+        date.getMonth() === month - 1 &&
+        date.getDate() === day
+      );
+    }, 'Data de nascimento inválida'),
 });
 
 function deriveInitials(name: string): string {

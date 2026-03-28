@@ -83,6 +83,22 @@ const schema = z
       return year >= 1900 && year <= new Date().getFullYear();
     },
     { message: 'Ano inválido', path: ['birthYear'] },
+  )
+  .refine(
+    (data) => {
+      if (!data.birthDay || !data.birthMonth) return true;
+      const day = Number(data.birthDay);
+      const month = Number(data.birthMonth);
+      // Use a leap year as default so Feb 29 is accepted when year is omitted
+      const year = data.birthYear ? Number(data.birthYear) : 2000;
+      const date = new Date(year, month - 1, day);
+      return (
+        date.getFullYear() === year &&
+        date.getMonth() === month - 1 &&
+        date.getDate() === day
+      );
+    },
+    { message: 'Data inválida para o mês informado', path: ['birthDay'] },
   );
 
 type FormValues = z.infer<typeof schema>;
