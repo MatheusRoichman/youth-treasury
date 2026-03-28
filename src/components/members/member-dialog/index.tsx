@@ -85,6 +85,10 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
     }
   }
 
+  const birthDay = form.watch('birthDay');
+  const birthMonth = form.watch('birthMonth');
+  const birthYear = form.watch('birthYear');
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
@@ -145,7 +149,23 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
               )}
             />
             <div className="space-y-2">
-              <FormLabel>Data de Nascimento</FormLabel>
+              <div className="flex items-center justify-between">
+                <FormLabel>Data de Nascimento</FormLabel>
+                {(birthDay || birthMonth || birthYear) && (
+                  <button
+                    type="button"
+                    className="text-muted-foreground hover:text-foreground text-xs underline"
+                    onClick={() => {
+                      form.setValue('birthDay', '');
+                      form.setValue('birthMonth', '');
+                      form.setValue('birthYear', '');
+                      form.clearErrors(['birthDay', 'birthMonth', 'birthYear']);
+                    }}
+                  >
+                    Limpar
+                  </button>
+                )}
+              </div>
               <div className="grid grid-cols-3 gap-2">
                 <FormField
                   control={form.control}
