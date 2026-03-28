@@ -46,7 +46,6 @@ interface Props {
 export function MemberDialog({ member, trigger, onSuccess }: Props) {
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
-  const [birthMonthKey, setBirthMonthKey] = useState(0);
 
   const form = useForm({
     resolver: zodResolver(schema),
@@ -56,7 +55,6 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
   useEffect(() => {
     if (open) {
       form.reset(memberDefaultValues(member));
-      setBirthMonthKey((k) => k + 1);
     }
   }, [open, member, form]);
 
@@ -161,7 +159,6 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
                       form.setValue('birthDay', '');
                       form.setValue('birthMonth', undefined);
                       form.setValue('birthYear', '');
-                      setBirthMonthKey((k) => k + 1);
                     }}
                   >
                     Limpar
@@ -193,7 +190,7 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
                   render={({ field }) => (
                     <FormItem>
                       <Select
-                        key={birthMonthKey}
+                        key={birthMonth || 'empty'}
                         onValueChange={field.onChange}
                         value={field.value || undefined}
                       >
