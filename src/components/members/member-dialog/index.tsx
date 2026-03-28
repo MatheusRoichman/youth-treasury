@@ -6,7 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -35,108 +34,8 @@ import {
 import { createMember, updateMember } from '@/lib/actions/members';
 import { memberKeys } from '@/lib/queries/members';
 import { formatPhone } from '@/lib/utils';
-
-const MONTHS = [
-  'Janeiro',
-  'Fevereiro',
-  'Março',
-  'Abril',
-  'Maio',
-  'Junho',
-  'Julho',
-  'Agosto',
-  'Setembro',
-  'Outubro',
-  'Novembro',
-  'Dezembro',
-];
-
-const schema = z
-  .object({
-    name: z.string().min(2, 'Nome deve ter pelo menos 2 caracteres'),
-    phone: z.string().optional(),
-    email: z.string().email('E-mail inválido').optional().or(z.literal('')),
-    birthDay: z.string().optional(),
-    birthMonth: z.string().optional(),
-    birthYear: z.string().optional(),
-  })
-  .refine(
-    (data) => {
-      const hasDay = !!data.birthDay;
-      const hasMonth = !!data.birthMonth;
-      const hasYear = !!data.birthYear;
-      if (hasYear && (!hasDay || !hasMonth)) return false;
-      return hasDay === hasMonth;
-    },
-    { message: 'Informe dia e mês', path: ['birthDay'] },
-  )
-  .refine(
-    (data) => {
-      if (!data.birthDay) return true;
-      const day = Number(data.birthDay);
-      return day >= 1 && day <= 31;
-    },
-    { message: 'Dia inválido', path: ['birthDay'] },
-  )
-  .refine(
-    (data) => {
-      if (!data.birthYear) return true;
-      const year = Number(data.birthYear);
-      return year >= 1900 && year <= new Date().getFullYear();
-    },
-    { message: 'Ano inválido', path: ['birthYear'] },
-  )
-  .refine(
-    (data) => {
-      if (!data.birthDay || !data.birthMonth) return true;
-      const day = Number(data.birthDay);
-      const month = Number(data.birthMonth);
-      // Use a leap year as default so Feb 29 is accepted when year is omitted
-      const year = data.birthYear ? Number(data.birthYear) : 2000;
-      const date = new Date(year, month - 1, day);
-      return (
-        date.getFullYear() === year &&
-        date.getMonth() === month - 1 &&
-        date.getDate() === day
-      );
-    },
-    { message: 'Data inválida para o mês informado', path: ['birthDay'] },
-  );
-
-type FormValues = z.infer<typeof schema>;
-
-function parseBirthDate(birthDate: string | null) {
-  if (!birthDate) return { birthDay: '', birthMonth: '', birthYear: '' };
-  const [yearStr, monthStr, dayStr] = birthDate.split('-');
-  return {
-    birthDay: dayStr ? String(Number(dayStr)) : '',
-    birthMonth: monthStr ? String(Number(monthStr)) : '',
-    birthYear: yearStr && yearStr !== '1900' ? yearStr : '',
-  };
-}
-
-function combineBirthDate(day: string, month: string, year: string): string {
-  if (!day || !month) return '';
-  const y = year || '1900';
-  return `${y}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
-}
-
-interface Member {
-  id: string;
-  name: string;
-  phone: string | null;
-  email: string | null;
-  birthDate: string | null;
-}
-
-function memberDefaultValues(member?: Member): FormValues {
-  return {
-    name: member?.name ?? '',
-    phone: member?.phone ? formatPhone(member.phone) : '',
-    email: member?.email ?? '',
-    ...parseBirthDate(member?.birthDate ?? null),
-  };
-}
+import { type FormValues, MONTHS, schema } from './schema';
+import { combineBirthDate, type Member, memberDefaultValues } from './utils';
 
 interface Props {
   member?: Member;
@@ -148,7 +47,7 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
 
-  const form = useForm<FormValues>({
+  const form = useForm({
     resolver: zodResolver(schema),
     defaultValues: memberDefaultValues(member),
   });
