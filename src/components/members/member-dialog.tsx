@@ -25,18 +25,73 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { createMember, updateMember } from '@/lib/actions/members';
 import { memberKeys } from '@/lib/queries/members';
 import { formatPhone } from '@/lib/utils';
 
-const schema = z.object({
-  name: z.string().min(2, 'Nome deve ter pelo menos 2 caracteres'),
-  phone: z.string().optional(),
-  email: z.string().email('E-mail inválido').optional().or(z.literal('')),
-  birthDate: z.string().optional().or(z.literal('')),
-});
+const MONTHS = [
+  'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+  'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro',
+];
+
+const schema = z
+  .object({
+    name: z.string().min(2, 'Nome deve ter pelo menos 2 caracteres'),
+    phone: z.string().optional(),
+    email: z.string().email('E-mail inválido').optional().or(z.literal('')),
+    birthDay: z.string().optional(),
+    birthMonth: z.string().optional(),
+    birthYear: z.string().optional(),
+  })
+  .refine(
+    (data) => {
+      const hasDay = !!data.birthDay;
+      const hasMonth = !!data.birthMonth;
+      return hasDay === hasMonth;
+    },
+    { message: 'Informe dia e mês', path: ['birthDay'] },
+  )
+  .refine(
+    (data) => {
+      if (!data.birthDay) return true;
+      const day = Number(data.birthDay);
+      return day >= 1 && day <= 31;
+    },
+    { message: 'Dia inválido', path: ['birthDay'] },
+  )
+  .refine(
+    (data) => {
+      if (!data.birthYear) return true;
+      const year = Number(data.birthYear);
+      return year >= 1900 && year <= new Date().getFullYear();
+    },
+    { message: 'Ano inválido', path: ['birthYear'] },
+  );
 
 type FormValues = z.infer<typeof schema>;
+
+function parseBirthDate(birthDate: string | null) {
+  if (!birthDate) return { birthDay: '', birthMonth: '', birthYear: '' };
+  const [yearStr, monthStr, dayStr] = birthDate.split('-');
+  return {
+    birthDay: dayStr ? String(Number(dayStr)) : '',
+    birthMonth: monthStr ? String(Number(monthStr)) : '',
+    birthYear: yearStr && yearStr !== '1900' ? yearStr : '',
+  };
+}
+
+function combineBirthDate(day: string, month: string, year: string): string {
+  if (!day || !month) return '';
+  const y = year || '1900';
+  return `${y}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+}
 
 interface Member {
   id: string;
@@ -44,6 +99,15 @@ interface Member {
   phone: string | null;
   email: string | null;
   birthDate: string | null;
+}
+
+function memberDefaultValues(member?: Member): FormValues {
+  return {
+    name: member?.name ?? '',
+    phone: member?.phone ? formatPhone(member.phone) : '',
+    email: member?.email ?? '',
+    ...parseBirthDate(member?.birthDate ?? null),
+  };
 }
 
 interface Props {
@@ -58,29 +122,25 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
 
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: {
-      name: member?.name ?? '',
-      phone: member?.phone ? formatPhone(member.phone) : '',
-      email: member?.email ?? '',
-      birthDate: member?.birthDate ?? '',
-    },
+    defaultValues: memberDefaultValues(member),
   });
 
   useEffect(() => {
     if (open) {
-      form.reset({
-        name: member?.name ?? '',
-        phone: member?.phone ? formatPhone(member.phone) : '',
-        email: member?.email ?? '',
-        birthDate: member?.birthDate ?? '',
-      });
+      form.reset(memberDefaultValues(member));
     }
   }, [open, member, form]);
 
   async function onSubmit(values: FormValues) {
     const payload = {
-      ...values,
+      name: values.name,
       phone: values.phone?.replace(/\D/g, '') || undefined,
+      email: values.email,
+      birthDate: combineBirthDate(
+        values.birthDay ?? '',
+        values.birthMonth ?? '',
+        values.birthYear ?? '',
+      ),
     };
     const result = member
       ? await updateMember(member.id, payload)
@@ -157,23 +217,73 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="birthDate"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Data de Nascimento</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="date"
-                      max={new Date().toISOString().split('T')[0]}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="space-y-2">
+              <FormLabel>Data de Nascimento</FormLabel>
+              <div className="grid grid-cols-3 gap-2">
+                <FormField
+                  control={form.control}
+                  name="birthDay"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          placeholder="Dia"
+                          min={1}
+                          max={31}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="birthMonth"
+                  render={({ field }) => (
+                    <FormItem>
+                      <Select
+                        onValueChange={field.onChange}
+                        value={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Mês" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {MONTHS.map((month, i) => (
+                            <SelectItem key={month} value={String(i + 1)}>
+                              {month}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="birthYear"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          placeholder="Ano (opcional)"
+                          min={1900}
+                          max={new Date().getFullYear()}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
             <DialogFooter>
               <Button
                 type="button"
