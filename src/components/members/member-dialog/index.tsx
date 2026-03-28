@@ -6,7 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -25,26 +24,18 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { createMember, updateMember } from '@/lib/actions/members';
 import { memberKeys } from '@/lib/queries/members';
 import { formatPhone } from '@/lib/utils';
-
-const schema = z.object({
-  name: z.string().min(2, 'Nome deve ter pelo menos 2 caracteres'),
-  phone: z.string().optional(),
-  email: z.string().email('E-mail inválido').optional().or(z.literal('')),
-  birthDate: z.string().optional().or(z.literal('')),
-});
-
-type FormValues = z.infer<typeof schema>;
-
-interface Member {
-  id: string;
-  name: string;
-  phone: string | null;
-  email: string | null;
-  birthDate: string | null;
-}
+import { type FormValues, MONTHS, schema } from './schema';
+import { combineBirthDate, type Member, memberDefaultValues } from './utils';
 
 interface Props {
   member?: Member;
@@ -56,31 +47,27 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
 
-  const form = useForm<FormValues>({
+  const form = useForm({
     resolver: zodResolver(schema),
-    defaultValues: {
-      name: member?.name ?? '',
-      phone: member?.phone ? formatPhone(member.phone) : '',
-      email: member?.email ?? '',
-      birthDate: member?.birthDate ?? '',
-    },
+    defaultValues: memberDefaultValues(member),
   });
 
   useEffect(() => {
     if (open) {
-      form.reset({
-        name: member?.name ?? '',
-        phone: member?.phone ? formatPhone(member.phone) : '',
-        email: member?.email ?? '',
-        birthDate: member?.birthDate ?? '',
-      });
+      form.reset(memberDefaultValues(member));
     }
   }, [open, member, form]);
 
   async function onSubmit(values: FormValues) {
     const payload = {
-      ...values,
+      name: values.name,
       phone: values.phone?.replace(/\D/g, '') || undefined,
+      email: values.email,
+      birthDate: combineBirthDate(
+        values.birthDay ?? '',
+        values.birthMonth ?? '',
+        values.birthYear ?? '',
+      ),
     };
     const result = member
       ? await updateMember(member.id, payload)
@@ -157,23 +144,73 @@ export function MemberDialog({ member, trigger, onSuccess }: Props) {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="birthDate"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Data de Nascimento</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="date"
-                      max={new Date().toISOString().split('T')[0]}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="space-y-2">
+              <FormLabel>Data de Nascimento</FormLabel>
+              <div className="grid grid-cols-3 gap-2">
+                <FormField
+                  control={form.control}
+                  name="birthDay"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          placeholder="Dia"
+                          min={1}
+                          max={31}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="birthMonth"
+                  render={({ field }) => (
+                    <FormItem>
+                      <Select
+                        onValueChange={field.onChange}
+                        value={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Mês" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {MONTHS.map((month, i) => (
+                            <SelectItem key={month} value={String(i + 1)}>
+                              {month}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="birthYear"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          placeholder="Ano (opcional)"
+                          min={1900}
+                          max={new Date().getFullYear()}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
             <DialogFooter>
               <Button
                 type="button"

@@ -134,13 +134,20 @@ export function MembersTable({ initialMembers }: Props) {
                 </TableCell>
                 <TableCell className="text-sm text-gray-500">
                   {member.birthDate
-                    ? new Date(
-                        `${member.birthDate}T12:00:00`,
-                      ).toLocaleDateString('pt-BR', {
-                        day: '2-digit',
-                        month: 'short',
-                        year: 'numeric',
-                      })
+                    ? (() => {
+                        const [y, m, dd] = member.birthDate
+                          .split('-')
+                          .map(Number);
+                        const hasYear = y !== 1900;
+                        // Use local-time constructor with a safe year to avoid
+                        // historical timezone offsets corrupting the date
+                        const d = new Date(hasYear ? y : 2000, m - 1, dd);
+                        return d.toLocaleDateString('pt-BR', {
+                          day: '2-digit',
+                          month: 'short',
+                          ...(hasYear && { year: 'numeric' }),
+                        });
+                      })()
                     : '—'}
                 </TableCell>
                 <TableCell>
