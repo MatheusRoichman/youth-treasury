@@ -134,13 +134,15 @@ export function MembersTable({ initialMembers }: Props) {
                 </TableCell>
                 <TableCell className="text-sm text-gray-500">
                   {member.birthDate
-                    ? new Date(
-                        `${member.birthDate}T12:00:00`,
-                      ).toLocaleDateString('pt-BR', {
-                        day: '2-digit',
-                        month: 'short',
-                        year: 'numeric',
-                      })
+                    ? (() => {
+                        const d = new Date(`${member.birthDate}T12:00:00`);
+                        const hasYear = d.getFullYear() !== 1900;
+                        return d.toLocaleDateString('pt-BR', {
+                          day: '2-digit',
+                          month: 'short',
+                          ...(hasYear && { year: 'numeric' }),
+                        });
+                      })()
                     : '—'}
                 </TableCell>
                 <TableCell>
