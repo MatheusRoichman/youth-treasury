@@ -64,6 +64,8 @@ const schema = z
     (data) => {
       const hasDay = !!data.birthDay;
       const hasMonth = !!data.birthMonth;
+      const hasYear = !!data.birthYear;
+      if (hasYear && (!hasDay || !hasMonth)) return false;
       return hasDay === hasMonth;
     },
     { message: 'Informe dia e mês', path: ['birthDay'] },
