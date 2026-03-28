@@ -18,9 +18,11 @@ const memberSchema = z.object({
       const year = Number(yearStr);
       const month = Number(monthStr);
       const day = Number(dayStr);
-      const date = new Date(year, month - 1, day);
+      // 1900 is the sentinel for "no year" and is not a leap year — use 2000 for the overflow check
+      const checkYear = year === 1900 ? 2000 : year;
+      const date = new Date(checkYear, month - 1, day);
       return (
-        date.getFullYear() === year &&
+        date.getFullYear() === checkYear &&
         date.getMonth() === month - 1 &&
         date.getDate() === day
       );
